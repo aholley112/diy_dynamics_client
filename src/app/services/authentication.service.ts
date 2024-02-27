@@ -10,29 +10,38 @@ import { environment } from '../../environments/environment';
 })
 export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) { }
-login (username:string, password:string) {
-  return this.http.post<{token:string}>(`${environment.apiUrl}/login`,
-  {
-    username,
-    password
-  })
-}
-setToken(token: string) {
-  localStorage.setItem('token', token)
-}
 
-getToken() {
-  return localStorage.getItem('token')
-}
+  login(username: string, password: string) {
+    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, {
+      username,
+      password
+    });
+  }
 
-isLoggedIn() {
-  return !!localStorage.getItem('token')
-}
+  signup(firstName: string, lastName: string, email: string, password: string) {
+    // Adjust the URL and the body as necessary for your backend implementation
+    return this.http.post<{message: string, user: any}>(`${environment.apiUrl}/signup`, {
+      firstName,
+      lastName,
+      email,
+      password
+    });
+  }
 
-logout() {
-  localStorage.removeItem('token')
-  this.router.navigate(['/login'])
-}
-}
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
 
+  isLoggedIn() {
+    return !!this.getToken();
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+}
