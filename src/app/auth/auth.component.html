@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="auth-form">
+    <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
+    <p *ngIf="isSignInMode">Log in to continue.</p>
+    <p *ngIf="!isSignInMode">Sign up to start your DIY journey.</p>
+
+    <!-- Auth Form -->
+    <form [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
+      <!-- Input fields for sign up mode -->
+      <div *ngIf="!isSignInMode">
+        <div class="form-group">
+          <!--First Name-->
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" formControlName="firstName" class="form-control" />
+          <!--Error message for first name-->
+          <div *ngIf="authForm.get('firstName')?.invalid && (authForm.get('firstName')?.dirty || authForm.get('firstName')?.touched)" class="alert alert-danger">
+            <div *ngIf="authForm.get('firstName')?.errors?.['required']">First name is required.</div>
+          </div>
+        </div>
+        <!--Last Name-->
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+          <!--Error message for last name-->
+          <div *ngIf="authForm.get('lastName')?.invalid && (authForm.get('lastName')?.dirty || authForm.get('lastName')?.touched)" class="alert alert-danger">
+            <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
+          </div>
+        </div>
+        <!--Email. THERE IS AN ERROR HERE. NEED TO COME BACK TO RESOLVE SCSS ISSUE -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control" />
+          <!--Error message for email-->
+          <div *ngIf="authForm.get('email')?.invalid && (authForm.get('email')?.dirty || authForm.get('email')?.touched)" class="alert alert-danger">
+            <div *ngIf="authForm.get('email')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="authForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Input fields for both sign up and log in form -->
+      <div class="form-group">
+        <!--Username-->
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" />
+        <!--Error message for username-->
+        <div *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.dirty || authForm.get('username')?.touched)" class="alert alert-danger">
+          <div *ngIf="authForm.get('username')?.errors?.['required']">Username is required.</div>
+        </div>
+      </div>
+      <!--Password-->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" />
+        <!--Error message for password-->
+        <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.dirty || authForm.get('password')?.touched)" class="alert alert-danger">
+          <div *ngIf="authForm.get('password')?.errors?.['required']">Password is required.</div>
+          <div *ngIf="authForm.get('password')?.errors?.['minLength']">Password must be at least 6 characters long.</div>
+        </div>
+      </div>
+
+      <!-- Buttons for both sign up and log in form -->
+      <div class="form-actions">
+        <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
+          {{ isSignInMode ? 'Sign Up' : 'Log In' }}
+        </button>
+        <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">
+          {{ isSignInMode ? 'Log In' : 'Sign Up' }}
+        </button>
+      </div>
+    </form>
+    <p class="alert alert-danger mt-3" *ngIf="errorMsg">{{ errorMsg }}</p>
+    <p class="alert alert-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
+  </div>
+</div>

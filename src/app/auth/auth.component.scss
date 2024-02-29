@@ -1,0 +1,79 @@
+.auth-form {
+max-width: 400px;
+margin: 0 auto;
+padding: 20px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+border: 1px solid #ddd;
+text-align: center;
+
+@media (max-width: 768px) {
+  padding: 10px;
+  margin: 20px;
+}
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+color: #34495e;
+}
+
+input[type="text"],
+input[type="username"],
+input[type="password"] {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-sizing: border-box;
+}
+
+button {
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.3s;
+color: #ffffff;
+margin-top: 10px;
+}
+
+button.btn-primary {
+  background-color: #3498db;
+}
+
+button.btn-primary:hover {
+  background-color: darken(#3498db, 10%);
+}
+
+button.btn-secondary {
+  background-color: #95a5a6;
+}
+
+btn-secondary:hover {
+  background-color: darken(#95a5a6, 10%);
+}
+
+.alert {
+margin-top: 20px;
+border-radius: 5px;
+padding: 10px;
+
+}
+.alert.alert-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.alert.alert-success {
+  background-color: #2ecc71;
+  color: white;
+}
+
