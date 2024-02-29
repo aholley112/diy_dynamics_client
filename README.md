@@ -1,6 +1,6 @@
 # DIY_Dynamics_Client
 
-The DIY Dynamics Frontend Client is an Angular based application seamlessly integrates with the DIY_Dynamics_API to deliver a DIY project management platform. It provides a user friendly interface for the user to easily search for, create, and manage their DIY projects. The scope of the front-end includes features such as user authentication, project creation, materials and tools management, and a dynamic categorization system. 
+The DIY Dynamics Frontend Client is an Angular based application that seamlessly integrates with the DIY_Dynamics_API to deliver a DIY project management platform. It provides a user friendly interface for the user to easily search for, create, and manage their DIY projects. The scope of the front-end includes features such as user authentication, project creation, materials and tools management, and a dynamic categorization system. 
 
 # Architecture
 
