@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [ ReactiveFormsModule, CommonModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -77,7 +77,7 @@ export class AuthComponent implements OnInit {
       }
     });
   } else {
-    // Extract form values 
+    // Extract form values
     const { firstName, lastName, email, username, password } = this.authForm.value;
     this.authService.signup(firstName, lastName, email, username, password).subscribe({
       next: (res) => {
