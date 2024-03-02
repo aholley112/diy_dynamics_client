@@ -1,27 +1,22 @@
-# DiyDynamicsClient
+# DIY_Dynamics_Client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+The DIY Dynamics Frontend Client is an Angular based application that seamlessly integrates with the DIY_Dynamics_API to deliver a DIY project management platform. It provides a user friendly interface for the user to easily search for, create, and manage their DIY projects. The scope of the front-end includes features such as user authentication, project creation, materials and tools management, and a dynamic categorization system. 
 
-## Development server
+# Architecture
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The front end DIY_Dynamics_Client offers a responsive and interactive user interface. It integrates user authentication, project management capabilities for crafting and organizing DIY projects, and a materials and tools interface for resource management. The architecture is modular, with components for UI encapsulation, services for data handling, and routing for seamless navigation. 
 
-## Code scaffolding
+# Set Up
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Prerequisites TODO
+- Installing TODO
+- Usage TODO
 
-## Build
+# Packages
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- TODO
 
-## Running unit tests
+# Backend API
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The backend DIY_Dynamics_API repository is located at: https://github.com/aholley112/diy_dynamics_api
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
