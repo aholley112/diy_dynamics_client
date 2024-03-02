@@ -12,7 +12,7 @@ export const noAuthGuard: CanActivateFn = () => {
 
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationService } from './core/services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
