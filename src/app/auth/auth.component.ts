@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
