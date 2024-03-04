@@ -13,7 +13,25 @@ export const routes: Routes = [
     loadComponent: () => import('./landing-page/landing-page.component').then(m => m.LandingPageComponent),
     /*canActivate: [AuthGuard] // Apply AuthGuard to protect the landing page route and ensure only authenticated users can access it*/
   },
+
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+   // canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'projects',
+    loadComponent: () => import('./projects/projects.component').then(m => m.ProjectsComponent),
+  },
+
+  {
+    path: 'categories',
+    loadComponent: () => import('./categories/categories.component').then(m => m.CategoriesComponent),
+  },
+
   { path: '', redirectTo: 'landing-page', pathMatch: 'full' },
-  // Catch-all route to handle undefined routes, redirect to landing page or auth as preferred
-  { path: '**', redirectTo: 'landing-page' }
+
+  { path: '**', redirectTo: 'home' }
+
 ];
