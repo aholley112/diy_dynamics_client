@@ -1,42 +1,58 @@
-<div class="home">
-  <!-- Top Navigation Bar -->
-  <nav class="top-nav">
-    <div class="logo">DIY Dynamics</div>
-    <div class="search-bar">
-      <input type="text" [(ngModel)]="searchText" placeholder="Search for categories...">
-      <button (click)="searchCategories()">Search</button>
+<app-navbar (search)="handleSearch($event)"></app-navbar>
+ <!-- Search Results -->
+ <div *ngIf="searchResults.length > 0" class="overlay">
+  <div class="search-results-container">
+    <button class="close-btn" (click)="clearSearchResults()">✖</button>
+    <h2>Search Results</h2>
+    <div *ngFor="let category of searchResults" class="search-result">
+      <h3>{{ category.category_name }}</h3>
+      <p>{{ category.description }}</p>
     </div>
-    <div class="user-controls">
-      <button (click)="goToLogin()">Login</button>
-      <button (click)="goToProfile()">Profile</button>
-      <button (click)="goToSavedProjects()">Saved Projects</button>
-    </div>
-  </nav>
-
+  </div>
+</div>
   <!-- Content Area -->
   <div class="content-area">
-    <!-- Browse All Categories Button -->
-    <div class="browse-btn-container">
-      <button (click)="goToCategories()">Browse All Categories</button>
-    </div>
+<!-- Introduction Text -->
+<div class="intro-section">
+  <h1>DIY Dynamics</h1>
+  <p class="intro-text">
+    Explore a world of projects. From crafting and woodworking to children's activities, discover a universe of possibilities. Whether you're looking to manage projects or just find inspiration, you've come to the right place.
+  </p>
+  <p class="detailed-text">
+    Dive into categories like Children's Crafts, Home Decor or Improvement, Gardening, Science Experiments, and much more. Each project comes with step-by-step guides to bring your project to life. It's your one-stop shop for all things DIY.
+  </p>
+</div>
 
-    <!-- Search Results -->
-    <div *ngIf="searchResults.length > 0" class="search-results">
-      <h2>Search Results</h2>
-      <div class="category-list">
-        <div *ngFor="let category of searchResults" class="category-card">
-          <h3>{{ category.category_name }}</h3>
-          <p>{{ category.description }}</p>
-        </div>
+<!-- Bootstrap Carousel for Features -->
+<div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="feature-box">
+        <h2>Discover</h2>
+        <p>Find projects and ideas that inspire you from various categories like arts and home improvement.</p>
       </div>
     </div>
+    <div class="carousel-item">
+      <div class="feature-box">
+        <h2>Collaborate</h2>
+        <p>Join forces with fellow DIY enthusiasts to bring complex projects to life by sharing ideas.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="feature-box">
+        <h2>Inspire</h2>
+        <p>Share your completed projects and creative insights to inspire others and become a part of the DIY community.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Categories & Projects Grid -->
-    <div class="grid-container">
+    <!-- <div class="grid-container">
       <div *ngFor="let project of featuredProjects" class="grid-item">
         <h3>{{ project.title }}</h3>
         <p>{{ project.description }}</p>
       </div>
     </div>
-      </div>
-    </div>
+      </div> -->
+

@@ -1,0 +1,22 @@
+<div class="home">
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="logo">DIY Dynamics</div>
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <div class="input-wrapper">
+      <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search for categories...">
+      <button *ngIf="searchText" class="clear-btn" (click)="clearSearch()">✖</button>
+      </div>
+      <button (click)="searchCategories()">Search</button>
+    </div>
+    <!-- Browse All Categories Button -->
+    <div class="browse-btn-container">
+      <button (click)="goToCategories()">Browse All Categories</button>
+    </div>
+    <div class="user-controls">
+      <button (click)="goToLogin()">Login</button>
+      <button (click)="goToProfile()">Profile</button>
+    </div>
+  </nav>
+
