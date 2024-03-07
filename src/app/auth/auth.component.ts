@@ -1,8 +1,8 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,83 +13,113 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AuthComponent implements OnInit {
+  authForm!: FormGroup;
   isSignInMode = true;
-  authForm: FormGroup;
-  isError: boolean = false;
-  errorMsg: string | null = null;
-  successMessage: string | null = null;
+  errorMsg: string = '';
+  successMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-    // Create the form group with the FormBuilder and Validators
+  ngOnInit() {
+    this.initializeForm();
+    this.route.queryParams.subscribe(params => {
+      const mode = params['action'];
+      this.isSignInMode = mode !== 'sign-up';
+      this.adjustFormValidators();
+    });
+  }
+
+  initializeForm() {
     this.authForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [''],
+      lastName: [''],
+      email: [''],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  // Lifecycle hook to set up initial component state
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const action = params['action'];
-      this.isSignInMode = action !== 'sign-up';
-      this.authForm.reset();
-      this.errorMsg = null;
-      this.successMessage = null;
-    });
+  adjustFormValidators() {
+    const controls = this.authForm.controls;
+    if (!this.isSignInMode) {
+      controls['firstName'].setValidators([Validators.required]);
+      controls['lastName'].setValidators([Validators.required]);
+      controls['email'].setValidators([Validators.required, Validators.email]);
+    } else {
+      controls['firstName'].clearValidators();
+      controls['lastName'].clearValidators();
+      controls['email'].clearValidators();
+    }
+    controls['firstName'].updateValueAndValidity();
+    controls['lastName'].updateValueAndValidity();
+    controls['email'].updateValueAndValidity();
   }
 
-  // Method to toggle between sign-in and sign-up modes
-  toggleAuthMode(): void {
-    const newMode = this.isSignInMode ? 'sign-up' : 'log-in';
-    this.router.navigate(['/auth'], { queryParams: { action: newMode } });
+  toggleAuthMode() {
     this.isSignInMode = !this.isSignInMode;
+    this.adjustFormValidators();
   }
 
-  // Method to handle form submission
-  onAuthSubmit(): void {
-  if (!this.authForm.valid) {
-    this.errorMsg = "Please fill out the form correctly.";
-    return;
+  onAuthSubmit() {
+    console.log('onAuthSubmit called');
+    if (this.authForm.invalid) {
+      this.errorMsg = 'Form is invalid. Please check your input.';
+      console.log('Form controls validity:');
+      Object.keys(this.authForm.controls).forEach(key => {
+        console.log(key, this.authForm.controls[key].valid);
+      });
+      return;
+    }
+
+    const { firstName, lastName, email, username, password } = this.authForm.value;
+
+    if (this.isSignInMode) {
+      this.login(username, password);
+    } else {
+      this.signup(firstName, lastName, email, username, password);
+    }
   }
 
-  // Handles sign-in and sign-up logic based on the mode
-  if (this.isSignInMode) {
-    const { username, password } = this.authForm.value;
+  login(username: string, password: string) {
     this.authService.login(username, password).subscribe({
       next: (res) => {
+        console.log('Login successful:', res);
         this.authService.setToken(res.token);
-        this.router.navigate(['/']);
-        this.errorMsg = null;
-        this.successMessage = "Login successful!";
+        this.router.navigate(['/home']);
       },
-      error: (error) => {
-        this.isError = true;
-        this.errorMsg = "Log in failed. Please try again.";
-      }
-    });
-  } else {
-    // Extract form values
-    const { firstName, lastName, email, username, password } = this.authForm.value;
-    this.authService.signup(firstName, lastName, email, username, password).subscribe({
-      next: (res) => {
-        this.successMessage = "Signup successful. Please log in.";
-        this.toggleAuthMode();
-        this.errorMsg = null;
-      },
-      error: (error) => {
-        this.isError = true;
-        this.errorMsg = "Signup failed. Please try again.";
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.errorMsg = 'Failed to login. Please check your credentials.';
       }
     });
   }
-}
+
+  signup(firstName: string, lastName: string, email: string, username: string, password: string) {
+    this.authService.signup(firstName, lastName, email, username, password).subscribe({
+      next: (res) => {
+        console.log('Signup successful:', res);
+        this.successMessage = 'Signup successful! Please log in with your new credentials.';
+
+        // Switch to login mode.
+        this.isSignInMode = true;
+
+        this.errorMsg = '';
+
+        this.authForm.patchValue({
+          username: username,
+          password: ''
+        });
+
+      },
+      error: (err) => {
+        console.error('Signup failed:', err);
+        this.errorMsg = 'Failed to sign up. Please try again.';
+      }
+    });
+  }
 }

@@ -63,7 +63,7 @@
         <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
           {{ isSignInMode ? 'Sign Up' : 'Log In' }}
         </button>
-        <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">
+        <button class="btn btn-primary" type="submit">
           {{ isSignInMode ? 'Log In' : 'Sign Up' }}
         </button>
       </div>
