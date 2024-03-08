@@ -1,0 +1,12 @@
+<app-navbar></app-navbar> 
+<div class="profile-page" *ngIf="profile">
+  <div class="profile-header">
+    <p><strong>Name:</strong> {{ profile.user.firstName }} {{ profile.user.lastName }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+  </div>
+
+  <!-- <div class="profile-bio">
+    <h3>Bio</h3>
+    <p>{{ profile.bio }}</p>
+  </div> -->
+</div>

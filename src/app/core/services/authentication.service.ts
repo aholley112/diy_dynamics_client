@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { Profile } from '../../shared/models/profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +40,22 @@ export class AuthenticationService {
   }
 
   // Method to check if the user is logged in
-  isLoggedIn() {
-    return !!this.getToken();
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+  getCurrentUserId(): number | null {
+    // Assuming the user ID is stored in local storage after login
+    const userId = localStorage.getItem('userId');
+    return userId ? parseInt(userId, 10) : null;
   }
 
   // Method to log out the user. Need to implement in HTML
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+  getProfile(): Observable<Profile> {
+    return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
 }
