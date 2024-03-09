@@ -1,0 +1,11 @@
+<div class="projects-grid">
+  <div *ngFor="let project of projects" class="project-card" (click)="viewProject(project.id)">
+    <!-- <img src="{{ project.photoUrl }}" alt="Project Image" class="project-image"> -->
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+  </div>
+</div>
+
+<ng-template #noProjects>
+  <p>No projects found for this category.</p>
+</ng-template>
