@@ -3,6 +3,8 @@ import { CategoryService } from '../core/services/category.service';
 import { Category } from '../shared/models/category.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Project } from '../shared/models/project.model';
+import { ProjectService } from '../core/services/project.service';
 
 @Component({
   selector: 'app-categories',
@@ -30,7 +32,7 @@ export class CategoriesComponent implements OnInit {
       }
     );
   }
-  selectCategory(category: Category): void {
-    this.router.navigate(['/categories', category.id]);
+  selectCategory(categoryId: number): void {
+    this.router.navigate(['/category-projects', categoryId]);
   }
 }
