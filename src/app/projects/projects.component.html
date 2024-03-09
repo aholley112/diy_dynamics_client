@@ -1,18 +1,11 @@
-<!-- <div class="projects">
-  <h2>Projects</h2>
+<div *ngIf="projects.length > 0; else noProjects">
   <div *ngFor="let project of projects" class="project-card">
-    <div class="project-info">
-      <h3>{{ project.title }}</h3>
-      <p>{{ project.description }}</p>
-      <button (click)="viewProject(project.id)">Learn More</button>
-    Toggle Favorite Button -->
-    <!--  <button (click)="toggleFavorite(project.id)" class="favorite-toggle-btn">
-        {{ project.isFavoriteProject ? 'Remove from Favorites' : 'Add to Favorites' }}
-      </button>
-    </div>
-   Optional: Visual indication for favorites -->
-   <!-- <div *ngIf="project.isFavoriteProject" class="favorite-indicator">
-      ★
-    </div>
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    <!-- Add more details as needed -->
   </div>
-</div> -->
+</div>
+
+<ng-template #noProjects>
+  <p>No projects found.</p>
+</ng-template>
