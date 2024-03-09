@@ -1,0 +1,14 @@
+<div class="project-details-container">
+  <div class="project-details">
+<div *ngIf="project" class="project-detail">
+  <h2>{{ project.title }}</h2>
+  <!-- <img src="{{ project.photoUrl }}" alt="Project Image"> -->
+  <p><strong>Description:</strong> {{ project.description }}</p>
+  <p><strong>Instructions:</strong> {{ project.instructions }}</p>
+  <p><strong>Estimated Time to Completion:</strong> {{ project.estimatedTimeToCompletion }}</p>
+</div>
+<ng-template #loading>
+  <p>Loading project details...</p>
+</ng-template>
+  </div>
+</div>
