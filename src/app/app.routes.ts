@@ -27,6 +27,21 @@ export const routes: Routes = [
       // canActivate: [AuthGuard]
     },
 
+    {
+      path: 'category-projects/:id',
+      loadComponent: () => import('./category-projects/category-projects.component').then(m => m.CategoryProjectsComponent),
+    },
+
+    {
+      path: 'projects',
+      loadComponent: () => import('./projects/projects.component').then(m => m.ProjectsComponent),
+    },
+
+    {
+      path: 'project-detail/:id',
+      loadComponent: () => import('./project-detail/project-detail.component').then(m => m.ProjectDetailComponent),
+    },
+
  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', redirectTo: 'home' }
 
