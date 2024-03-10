@@ -17,6 +17,7 @@ export class AuthComponent implements OnInit {
   isSignInMode = true;
   errorMsg: string = '';
   successMessage: string = '';
+  formSubmitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +67,7 @@ export class AuthComponent implements OnInit {
   }
 
   onAuthSubmit() {
-    console.log('onAuthSubmit called');
+    this.formSubmitted = true;
     if (this.authForm.invalid) {
       this.errorMsg = 'Form is invalid. Please check your input.';
       console.log('Form controls validity:');
