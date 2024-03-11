@@ -27,14 +27,17 @@ export class AuthComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Initialize the form
     this.initializeForm();
     this.route.queryParams.subscribe(params => {
       const mode = params['action'];
+      // Setting the authentication mode based on the query parameter
       this.isSignInMode = mode !== 'sign-up';
       this.adjustFormValidators();
     });
   }
 
+  // Initializing the fom with default values and validators
   initializeForm() {
     this.authForm = this.fb.group({
       firstName: [''],
@@ -45,6 +48,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
+// Adjusting the form validators based on the authentication mode
   adjustFormValidators() {
     const controls = this.authForm.controls;
     if (!this.isSignInMode) {
@@ -61,24 +65,23 @@ export class AuthComponent implements OnInit {
     controls['email'].updateValueAndValidity();
   }
 
+  // Toggling the authentication mode
   toggleAuthMode() {
     this.isSignInMode = !this.isSignInMode;
     this.adjustFormValidators();
   }
 
+  // Handling the form submission
   onAuthSubmit() {
     this.formSubmitted = true;
     if (this.authForm.invalid) {
       this.errorMsg = 'Form is invalid. Please check your input.';
-      console.log('Form controls validity:');
-      Object.keys(this.authForm.controls).forEach(key => {
-        console.log(key, this.authForm.controls[key].valid);
-      });
       return;
     }
 
     const { firstName, lastName, email, username, password } = this.authForm.value;
 
+    // Performing the login or signup based on the authentication mode
     if (this.isSignInMode) {
       this.login(username, password);
     } else {
@@ -86,24 +89,23 @@ export class AuthComponent implements OnInit {
     }
   }
 
+  // Logging in
   login(username: string, password: string) {
     this.authService.login(username, password).subscribe({
       next: (res) => {
-        console.log('Login successful:', res);
         this.authService.setToken(res.token);
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.error('Login failed:', err);
         this.errorMsg = 'Failed to login. Please check your credentials.';
       }
     });
   }
 
+  // Signing up
   signup(firstName: string, lastName: string, email: string, username: string, password: string) {
     this.authService.signup(firstName, lastName, email, username, password).subscribe({
       next: (res) => {
-        console.log('Signup successful:', res);
         this.successMessage = 'Signup successful! Please log in with your new credentials.';
 
         // Switch to login mode.

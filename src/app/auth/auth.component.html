@@ -26,13 +26,12 @@
             <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
           </div>
         </div>
-        <!--Email. THERE IS AN ERROR HERE. NEED TO COME BACK TO RESOLVE SCSS ISSUE -->
+        <!--Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" formControlName="email" class="form-control" />
           <!--Error message for email-->
           <div *ngIf="authForm.get('email')?.invalid && (authForm.get('email')?.touched || formSubmitted) && authForm.get('email')?.errors?.['email']" class="alert alert-danger">
-
             <div *ngIf="authForm.get('email')?.errors?.['required']">Email is required.</div>
             <div *ngIf="authForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
           </div>

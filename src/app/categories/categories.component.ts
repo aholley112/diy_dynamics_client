@@ -3,8 +3,6 @@ import { CategoryService } from '../core/services/category.service';
 import { Category } from '../shared/models/category.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Project } from '../shared/models/project.model';
-import { ProjectService } from '../core/services/project.service';
 
 @Component({
   selector: 'app-categories',
@@ -14,14 +12,17 @@ import { ProjectService } from '../core/services/project.service';
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
+  // The list of categories to be displayed
   categories: Category[] = [];
 
   constructor(private categoryService: CategoryService, private router: Router) {}
 
+  // Fetch the categories when the component is initialized
   ngOnInit(): void {
     this.loadCategories();
   }
 
+  // Fetch the categories from the API
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(
       (data) => {
@@ -32,6 +33,7 @@ export class CategoriesComponent implements OnInit {
       }
     );
   }
+  // Navigate to the projects page when a category is selected
   selectCategory(categoryId: number): void {
     this.router.navigate(['/category-projects', categoryId]);
   }
