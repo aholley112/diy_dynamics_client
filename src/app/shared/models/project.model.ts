@@ -6,4 +6,5 @@ export interface Project {
   instructions: string;
   estimatedTimeToCompletion: string;
   userId: number;
+  image_url: string;
 }

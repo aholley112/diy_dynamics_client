@@ -2,7 +2,7 @@
   <div class="project-details">
 <div *ngIf="project" class="project-detail">
   <h2>{{ project.title }}</h2>
-  <!-- <img src="{{ project.photoUrl }}" alt="Project Image"> -->
+  <img *ngIf="project.image_url" [src]="project.image_url" alt="Project Image">
   <p><strong>Description:</strong> {{ project.description }}</p>
   <p><strong>Instructions:</strong> {{ project.instructions }}</p>
   <p><strong>Estimated Time to Completion:</strong> {{ project.estimatedTimeToCompletion }}</p>

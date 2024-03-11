@@ -12,10 +12,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './category-projects.component.scss'
 })
 export class CategoryProjectsComponent implements OnInit {
+  // The list of projects to be displayed
   projects: Project[] = [];
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router) {}
 
+  // Fetch the projects when the component is initialized
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const categoryId = +params['id'];
@@ -26,10 +28,12 @@ export class CategoryProjectsComponent implements OnInit {
       }
     });
   }
+  // Method to navigate to project detail page
   viewProject(projectId: number): void {
     this.router.navigate(['/project-detail', projectId]);
   }
-  
+
+  // Method to fetch the projects from the API
   loadProjectsForCategory(categoryId: number): void {
     this.projectService.getProjectsByCategory(categoryId).subscribe({
       next: (projects) => this.projects = projects,
