@@ -5,7 +5,7 @@
   <img *ngIf="project.image_url" [src]="project.image_url" alt="Project Image">
   <p><strong>Description:</strong> {{ project.description }}</p>
   <p><strong>Instructions:</strong> {{ project.instructions }}</p>
-  <p><strong>Estimated Time to Completion:</strong> {{ project.estimatedTimeToCompletion }}</p>
+  <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p>
 </div>
 <ng-template #loading>
   <p>Loading project details...</p>
