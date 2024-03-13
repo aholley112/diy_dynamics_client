@@ -4,7 +4,7 @@ export interface Project {
   description: string;
   isFavoriteProject: boolean;
   instructions: string;
-  est_time_to_completion: string;
+  estimatedTimeToCompletion: string;
   userId: number;
   image_url: string;
 }
