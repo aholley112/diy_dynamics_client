@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-// TODO
-  apiUrl: 'http://www.production.com'
+  apiUrl: 'https://diy-dynamics-api.onrender.com'
 };
