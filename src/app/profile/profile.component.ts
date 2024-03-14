@@ -4,7 +4,7 @@ import { AuthenticationService } from '../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../core/services/profile.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavigationBarComponent } from '../navbar/navbar.component';
+import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 
 
 @Component({

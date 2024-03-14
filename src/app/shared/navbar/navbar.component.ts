@@ -3,8 +3,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { Category } from '../shared/models/category.model';
-import { AuthenticationService } from '../core/services/authentication.service';
+import { Category } from '../models/category.model';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class NavigationBarComponent {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
 
   goToProfile(): void {

@@ -8,7 +8,7 @@ import { ProjectsComponent } from '../projects/projects.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { Category } from '../shared/models/category.model';
 import { CommonModule } from '@angular/common';
-import { NavigationBarComponent } from '../navbar/navbar.component';
+import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 
 
 @Component({
