@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../../shared/models/category.model';
 import { AuthenticationService } from './authentication.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService{
-  private apiUrl = 'http://localhost:3000/categories';
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
@@ -22,7 +22,7 @@ export class CategoryService{
       })
     };
 
-    return this.http.get<Category[]>(this.apiUrl, httpOptions);
+    return this.http.get<Category[]>(`${environment.apiUrl}/categories`);
   }
 
   // Search for categories by name or other criteria
