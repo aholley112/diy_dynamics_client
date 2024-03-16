@@ -22,12 +22,12 @@ export class CategoryService{
       })
     };
 
-    return this.http.get<Category[]>(`${environment.apiUrl}/categories`);
+    return this.http.get<Category[]>(`${environment.apiUrl}/categories`, httpOptions);
   }
 
   // Search for categories by name or other criteria
   searchCategories(term: string): Observable<Category[]> {
-    const searchUrl = `${this.apiUrl}/search?term=${term}`;
+    const searchUrl = `${environment.apiUrl}/categories/search?term=${term}`;
     return this.http.get<Category[]>(searchUrl);
   }
 }
