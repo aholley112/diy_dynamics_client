@@ -51,6 +51,12 @@ export class NavigationBarComponent {
 
   clearSearch(): void {
     this.searchText = '';
+    this.search.emit('');
   }
 
+  showUserMenu = false;
+
+toggleUserMenu(): void {
+    this.showUserMenu = !this.showUserMenu;
+}
 }
