@@ -6,4 +6,5 @@ export interface Profile {
     lastName: string;
   };
   userId: number;
+  profilePictureUrl?: string;
 }
