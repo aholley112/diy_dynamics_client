@@ -1,12 +1,38 @@
-<app-navbar></app-navbar> 
-<div class="profile-page" *ngIf="profile">
-  <div class="profile-header">
-    <p><strong>Name:</strong> {{ profile.user.firstName }} {{ profile.user.lastName }}</p>
-    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+<app-navbar></app-navbar>
+<div>
+  <h2>{{ profile.user.firstName }} {{ profile.user.lastName }}</h2>
+  <p>{{ profile.bio }}</p>
+  <img *ngIf="profile.profilePictureUrl" [src]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
+
+  <button (click)="toggleEdit()">Edit Profile</button>
+
+  <div class="modal" *ngIf="editing">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Profile</h5>
+          <span class="close" (click)="toggleEdit()">&times;</span>
+        </div>
+        <form (submit)="updateProfile()">
+          <div class="modal-body">
+            <div class="left-inputs">
+              <label for="bio">Bio:</label>
+              <textarea id="bio" [(ngModel)]="profile.bio" name="bio"></textarea>
+            </div>
+            <div class="right-inputs">
+              <label for="file">Profile Picture:</label>
+              <input type="file" id="file" (change)="onFileSelected($event)">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="toggleEdit()">Close</button>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <!-- <div class="profile-bio">
-    <h3>Bio</h3>
-    <p>{{ profile.bio }}</p>
-  </div> -->
+  <h3>Gallery</h3>
+  <!-- TODO: need to make space for user to save their favorite projects -->
 </div>
