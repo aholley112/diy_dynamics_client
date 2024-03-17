@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../../shared/models/profile.model';
 import { environment } from '../../../environments/environment';
@@ -11,11 +11,10 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
-  getProfile(): Observable<Profile> {
+  getProfile(userId: number): Observable<Profile> {
     return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
-
-  updateProfile(profileData: Profile): Observable<Profile> {
-    return this.http.put<Profile>(`${environment.apiUrl}/users/profile`, profileData);
+  updateProfile(userId: number, profileData: FormData): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData);
   }
 }
