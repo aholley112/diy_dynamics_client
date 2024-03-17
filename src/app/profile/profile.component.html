@@ -1,9 +1,8 @@
 <app-navbar></app-navbar>
-<div>
+<div class="profile-container">
+  <img *ngIf="profile.profilePictureUrl" [src]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
   <h2>{{ profile.user.firstName }} {{ profile.user.lastName }}</h2>
   <p>{{ profile.bio }}</p>
-  <img *ngIf="profile.profilePictureUrl" [src]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
-
   <button (click)="toggleEdit()">Edit Profile</button>
 
   <div class="modal" *ngIf="editing">

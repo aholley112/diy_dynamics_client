@@ -3,73 +3,59 @@ import { Profile } from '../shared/models/profile.model';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../core/services/profile.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavigationBarComponent } from '../shared/navbar/navbar.component';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, NavigationBarComponent],
+  imports: [CommonModule, NavigationBarComponent, FormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
-  profile: Profile | null = null;
-  profileForm: FormGroup;
-  loading = false;
-  error = '';
+  profile: any = {};
+  userId: number = 1; // Assume a logged-in user ID
+  editing: boolean = false;
+  selectedFile: File | null = null;
 
-  constructor(
-    private authService: AuthenticationService,
-    private profileService: ProfileService,
-    private fb: FormBuilder
-  ) {
-    this.profileForm = this.fb.group({
-      bio: ['', Validators.required],
+  constructor(private profileService: ProfileService, private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getProfile(this.userId);
+  }
+
+  getProfile(userId: number) {
+    this.profileService.getProfile(userId).subscribe(data => {
+      this.profile = data;
     });
   }
 
-  ngOnInit() {
-    this.fetchProfile();
-  }
-
-  fetchProfile() {
-    if (this.authService.isLoggedIn()) {
-      this.profileService.getProfile().subscribe({
-        next: (data) => {
-          this.profile = data;
-          this.profileForm.patchValue({
-            bio: data.bio,
-          });
-        },
-        error: (error) => {
-          this.error = 'Failed to load profile';
-        }
-      });
-    } else {
-      // Need to come back to to decide what to do if user isn't logged in.
-    }
+  toggleEdit() {
+    this.editing = !this.editing;
   }
 
   updateProfile() {
-    if (this.profileForm.valid) {
-      this.loading = true;
-      if (this.authService.isLoggedIn()) {
-        this.profileService.updateProfile(this.profileForm.value).subscribe({
-          next: () => {
-            this.loading = false;
-            // Handle successful update
-          },
-          error: (error) => {
-            this.loading = false;
-            this.error = 'Failed to update profile';
-            // Handle error
-          }
-        });
-      } else {
-        // Need to come back to and decide what to do if user isn't logged in.
-      }
+    const formData = new FormData();
+    formData.append('profile[bio]', this.profile.bio);
+
+    if (this.selectedFile) {
+      formData.append('profile[profile_picture]', this.selectedFile);
+    }
+
+    this.profileService.updateProfile(this.userId, formData).subscribe(data => {
+      console.log('Profile updated successfully');
+      this.toggleEdit(); 
+      this.getProfile(this.userId);
+    });
+  }
+
+  onFileSelected(event: Event) {
+    const element = event.target as HTMLInputElement;
+    if (element.files && element.files.length > 0) {
+      this.selectedFile = element.files[0];
     }
   }
 }
