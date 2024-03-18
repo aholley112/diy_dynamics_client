@@ -28,7 +28,7 @@ export const routes: Routes = [
     },
 
     {
-      path: 'category-projects/:id',
+      path: 'category-projects/:category_id',
       loadComponent: () => import('./category-projects/category-projects.component').then(m => m.CategoryProjectsComponent),
     },
 
