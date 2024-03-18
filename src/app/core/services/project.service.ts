@@ -22,30 +22,9 @@ export class ProjectService {
     return this.http.get<Project[]>(`${environment.apiUrl}/categories/${categoryId}/projects`);
   }
 
-  // getFeaturedProjects(): Observable<Project[]> {
-  //   return this.http.get<Project[]>(`${this.apiUrl}/featured`);
-  // }
-
   getProjectById(id: number): Observable<Project> {
     return this.http.get<Project>(`${environment.apiUrl}/projects/${id}`);
   }
 
-  // toggleFavorite(projectId: number): Observable<Project> {
-  //   return this.http.patch<Project>(`${environment.apiUrl}/${projectId}/toggle_favorite`, {});
-  // }
-  // addProject(projectData: Project): Observable<Project> {
-  //   // Add a new project
-  //   return this.http.post<Project>(this.apiUrl, projectData);
-  // }
-
-  // updateProject(projectId: number, projectData: Project): Observable<Project> {
-  //   // Update an existing project
-  //   return this.http.put<Project>(`${this.apiUrl}/${projectId}`, projectData);
-  // }
-
-  // deleteProject(projectId: number): Observable<void> {
-  //   // Delete a project
-  //   return this.http.delete<void>(`${this.apiUrl}/${projectId}`);
-  // }
 
 }
