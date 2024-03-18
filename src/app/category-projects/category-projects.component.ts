@@ -20,7 +20,7 @@ export class CategoryProjectsComponent implements OnInit {
   // Fetch the projects when the component is initialized
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const categoryId = +params['id'];
+      const categoryId = +params['category_id'];
       if (!isNaN(categoryId)) {
         this.loadProjectsForCategory(categoryId);
       } else {
