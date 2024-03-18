@@ -6,6 +6,9 @@
   <p><strong>Description:</strong> {{ project.description }}</p>
   <p><strong>Instructions:</strong> {{ project.instructions }}</p>
   <!-- <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p> -->
+   <!-- Favorite Button -->
+   <button *ngIf="!isFavorite" (click)="addToFavorites()">Add to Favorites</button>
+   <button *ngIf="isFavorite" (click)="removeFromFavorites()">Remove from Favorites</button>
 </div>
 <ng-template #loading>
   <p>Loading project details...</p>
