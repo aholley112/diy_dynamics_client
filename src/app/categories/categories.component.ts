@@ -3,11 +3,12 @@ import { CategoryService } from '../core/services/category.service';
 import { Category } from '../shared/models/category.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavigationBarComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
