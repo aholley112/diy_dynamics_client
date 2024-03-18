@@ -15,8 +15,23 @@ export class UserService {
   getCurrentUser(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/current`);
   }
+  createFavorite(projectId: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/projects/${projectId}/create_favorite`, {});
+  }
 
   getUserProfile(userId: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/users/${userId}/profile`);
   }
+  getFavoriteProjects(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/users/${userId}/favorites`);
+  }
+
+  addProjectToFavorites(projectId: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/projects/${projectId}/add_to_favorites`, {});
+}
+
+  removeProjectFromFavorites(projectId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/projects/${projectId}/remove_from_favorites`);
+  }
+
 }
