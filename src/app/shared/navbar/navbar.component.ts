@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Category } from '../models/category.model';
 import { AuthenticationService } from '../../core/services/authentication.service';
+import { UserService } from '../../core/services/user.service';
+import { ProfileService } from '../../core/services/profile.service';
+import { Profile } from '../models/profile.model';
 
 
 @Component({
@@ -17,20 +20,40 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 export class NavigationBarComponent {
   searchText: string = '';
   searchResults: Category[] = [];
+  userProfile: Profile | null = null;
+  showUserMenu = false;
+
 
   @Output() search = new EventEmitter<string>();
 
-  constructor(public authService: AuthenticationService, private router: Router) {}
+  constructor(public authService: AuthenticationService, private router: Router, private userService: UserService, private profileService: ProfileService) {
+    this.loadUserProfile();
+  }
+  private loadUserProfile(): void {
+    if (this.authService.isLoggedIn()) {
+      this.authService.getProfile().subscribe({
+        next: (profile) => {
+          this.userProfile = profile;
+        },
+        error: (err) => {
+          console.error('Failed to load user profile', err);
+        }
+      });
+    }
+  }
 
+  // Method to search for categories
   searchCategories(): void {
     console.log('Emitting search text:', this.searchText);
     this.search.emit(this.searchText);
   }
 
+  // Method to navigate to the auth page
   goToAuth(mode: 'log-in' | 'sign-up'): void {
     console.log('Attempting to navigate to auth with mode:', mode);
     this.router.navigate(['/auth'], { queryParams: { action: mode } });
   }
+
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -41,6 +64,7 @@ export class NavigationBarComponent {
     this.router.navigate(['/']);
   }
 
+  
   goToProfile(): void {
     this.router.navigate(['/profile']);
   }
@@ -53,8 +77,6 @@ export class NavigationBarComponent {
     this.searchText = '';
     this.search.emit('');
   }
-
-  showUserMenu = false;
 
 toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;

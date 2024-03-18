@@ -1,32 +1,34 @@
 <div class="home">
-  <!-- Top Navigation Bar -->
   <nav class="top-nav">
+    <div class="left-group">
     <div class="logo">DIY Dynamics</div>
     <!-- Search Bar -->
     <div class="search-bar">
       <div class="input-wrapper">
       <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search for categories...">
-      <button *ngIf="searchText" class="clear-btn" (click)="clearSearch()">✖</button>
+      <!-- Inside your input-wrapper -->
+<button *ngIf="searchText && searchText.length > 0" class="clear-btn" (click)="clearSearch()">✖</button>
       </div>
       <button (click)="searchCategories()">Search</button>
     </div>
     <!-- Browse All Categories Button -->
-    <div class="browse-btn-container">
-      <button (click)="goToCategories()">Browse All Categories</button>
+    <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
+  </div>
+  <!-- User Controls for when user is logged in -->
+  <div *ngIf="authService.isLoggedIn()" class="user-controls" [class.showUserMenu]="showUserMenu">
+      <img *ngIf="userProfile && userProfile.profilePictureUrl"
+           [src]="userProfile.profilePictureUrl"
+           alt="Profile"
+           class="profile-icon"
+           (click)="goToProfile(); $event.stopPropagation();">
+           <button class="dropbtn" (click)="toggleUserMenu(); $event.stopPropagation();">☰</button>
+    <div *ngIf="showUserMenu" class="user-menu">
+      <a (click)="logout()">Log Out</a>
     </div>
-    <div class="user-controls">
-      <div class="dropdown">
-        <button class="dropbtn">☰</button>
-        <div class="dropdown-content">
-          <!-- Show Log In / Sign Up only if the user is not logged in -->
-          <a *ngIf="!authService.isLoggedIn()" (click)="goToAuth('log-in')">Log In or Sign Up</a>
-          <!-- Show Profile link only if the user is logged in -->
-          <a *ngIf="authService.isLoggedIn()" routerLink="/profile">Profile</a>
-          <!-- Show Log Out only if the user is logged in -->
-          <a *ngIf="authService.isLoggedIn()" (click)="logout()">Log Out</a>
-        </div>
-
-        </div>
-    </div>
+  </div>
+  <div *ngIf="!authService.isLoggedIn()" class="auth-controls">
+    <button (click)="goToAuth('sign-up')" class="signup-btn">Sign Up</button>
+    <button (click)="goToAuth('log-in')" class="login-btn">Log In</button>
+  </div>
   </nav>
-
+</div>
