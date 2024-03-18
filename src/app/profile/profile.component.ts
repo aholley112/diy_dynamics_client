@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '../shared/models/profile.model';
-import { AuthenticationService } from '../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../core/services/profile.service';
 import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../core/services/user.service';
 
 
 @Component({
@@ -17,26 +17,33 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   profile: any = {};
-  userId: number = 1; // Assume a logged-in user ID
+  userId: number = 1;
   editing: boolean = false;
   selectedFile: File | null = null;
+  favoriteProjects: any[] = [];
 
-  constructor(private profileService: ProfileService, private http: HttpClient) {}
+  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService) {}
 
   ngOnInit() {
+    // Fetches the user's profile data on component initialization.
     this.getProfile(this.userId);
+    // Fetches the user's favorite projects on component initialization.
+    this.getFavoriteProjects();
   }
 
+  // Method to fetch the user's profile data.
   getProfile(userId: number) {
     this.profileService.getProfile(userId).subscribe(data => {
       this.profile = data;
     });
   }
 
+  // Method to toggle the editing state of the profile.
   toggleEdit() {
     this.editing = !this.editing;
   }
 
+  // Method to update the user's profile data with new data.
   updateProfile() {
     const formData = new FormData();
     formData.append('profile[bio]', this.profile.bio);
@@ -47,15 +54,28 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.updateProfile(this.userId, formData).subscribe(data => {
       console.log('Profile updated successfully');
-      this.toggleEdit(); 
+      this.toggleEdit();
       this.getProfile(this.userId);
     });
   }
 
+  // Method to handle file selection for the profile picture uploaded.
   onFileSelected(event: Event) {
     const element = event.target as HTMLInputElement;
     if (element.files && element.files.length > 0) {
       this.selectedFile = element.files[0];
     }
+  }
+
+// Method to fetch the user's favorite projects.
+  getFavoriteProjects() {
+    this.userService.getFavoriteProjects(this.userId).subscribe({
+      next: (projects) => {
+        console.log('Favorite Projects:', projects);
+
+        this.favoriteProjects = projects;
+      },
+      error: (error) => console.error('Error fetching favorite projects', error)
+    });
   }
 }
