@@ -14,7 +14,7 @@ export class ProfileService {
   getProfile(userId: number): Observable<Profile> {
     return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
-  updateProfile(userId: number, profileData: FormData): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData);
-  }
+ updateProfile(userId: number, profileData: FormData): Observable<any> {
+  return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData);
+}
 }

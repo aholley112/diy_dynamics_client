@@ -13,12 +13,24 @@ export class AuthenticationService {
 
   // Method to send a POST request to the server to log in the user
   login(username: string, password: string) {
-    return this.http.post<{token: string}>(`${environment.apiUrl}/login`, {
-      username,
-      password
+    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password }).subscribe({
+      next: (res) => {
+        console.log('Login response:', res);
+        this.setToken(res.token);
+
+        if (res.user) {
+          console.log('Storing user details:', res.user);
+          localStorage.setItem('currentUser', JSON.stringify(res.user));
+          this.router.navigate(['/home']);
+        } else {
+          console.error('User details are missing in the login response');
+        }
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+      }
     });
   }
-
   // Method to send a POST request to the server to sign up the user
   signup(firstName: string, lastName: string, email: string, username: string, password: string) {
     return this.http.post<{message: string, user: any}>(`${environment.apiUrl}/signup`, {
@@ -45,9 +57,12 @@ export class AuthenticationService {
     return !!token;
   }
   getCurrentUserId(): number | null {
-    // Assuming the user ID is stored in local storage after login
-    const userId = localStorage.getItem('userId');
-    return userId ? parseInt(userId, 10) : null;
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      return user ? user.id : null;
+    }
+    return null;
   }
 
   // Method to log out the user. Need to implement in HTML
