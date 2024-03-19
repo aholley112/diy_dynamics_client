@@ -1,7 +1,10 @@
 <app-navbar></app-navbar>
+
 <div class="categories">
   <!-- Title -->
   <h2>Categories</h2>
+  <button class="circular-button" (click)="openCreateProjectForm()">+</button>
+
   <!-- Category List -->
   <div class="category-list">
     <div *ngFor="let category of categories" class="category-card" (click)="selectCategory(category.id)">

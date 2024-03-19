@@ -15,6 +15,7 @@ import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 export class CategoriesComponent implements OnInit {
   // The list of categories to be displayed
   categories: Category[] = [];
+  showCreateProjectForm: boolean = false;
 
   constructor(private categoryService: CategoryService, private router: Router) {}
 
@@ -38,4 +39,13 @@ export class CategoriesComponent implements OnInit {
   selectCategory(categoryId: number): void {
     this.router.navigate(['/category-projects', categoryId]);
   }
+  openCreateProjectForm() {
+    this.router.navigate(['/create-project']);
+    this.showCreateProjectForm = true;
+  }
+
+  closeCreateProjectForm() {
+    this.showCreateProjectForm = false;
+  }
+
 }

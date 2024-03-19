@@ -23,7 +23,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   text-align: center;
 }
 
@@ -33,4 +33,26 @@
 
 .category-card p {
   font-size: 14px;
+}
+
+.circular-button {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-color: #007bff;
+  color: red;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px; 
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 }
