@@ -25,6 +25,7 @@ export class ProjectService {
   getProjectById(id: number): Observable<Project> {
     return this.http.get<Project>(`${environment.apiUrl}/projects/${id}`);
   }
-
-
+  createProject(formData: FormData): Observable<Project> {
+    return this.http.post<Project>(`${environment.apiUrl}/projects`, formData);
+  }
 }

@@ -91,15 +91,7 @@ export class AuthComponent implements OnInit {
 
   // Logging in
   login(username: string, password: string) {
-    this.authService.login(username, password).subscribe({
-      next: (res) => {
-        this.authService.setToken(res.token);
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        this.errorMsg = 'Failed to login. Please check your credentials.';
-      }
-    });
+    this.authService.login(username, password);
   }
 
   // Signing up
