@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -72,44 +72,43 @@ export class AuthComponent implements OnInit {
   }
 
   // Handling the form submission
-  onAuthSubmit() {
-    this.formSubmitted = true;
-    if (this.authForm.invalid) {
-      this.errorMsg = 'Form is invalid. Please check your input.';
-      return;
-    }
+  onAuthSubmit(): void {
+    const username = this.authForm.get('username')?.value;
+    const password = this.authForm.get('password')?.value;
 
-    const { firstName, lastName, email, username, password } = this.authForm.value;
-
-    // Performing the login or signup based on the authentication mode
     if (this.isSignInMode) {
-      this.login(username, password);
+      this.authenticationService.login(username, password).subscribe({
+        next: (res) => {
+          this.authenticationService.setToken(res.token);
+          localStorage.setItem('currentUser', JSON.stringify(res.user));
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+          this.errorMsg = 'Failed to login: ' + error.message;
+        }
+      });
     } else {
+      const firstName = this.authForm.get('firstName')?.value;
+      const lastName = this.authForm.get('lastName')?.value;
+      const email = this.authForm.get('email')?.value;
+
       this.signup(firstName, lastName, email, username, password);
     }
   }
-
   // Logging in
   login(username: string, password: string) {
-    this.authService.login(username, password);
+    this.authenticationService.login(username, password);
   }
 
   // Signing up
   signup(firstName: string, lastName: string, email: string, username: string, password: string) {
-    this.authService.signup(firstName, lastName, email, username, password).subscribe({
+    this.authenticationService.signup(firstName, lastName, email, username, password).subscribe({
       next: (res) => {
         this.successMessage = 'Signup successful! Please log in with your new credentials.';
-
-        // Switch to login mode.
         this.isSignInMode = true;
-
         this.errorMsg = '';
-
-        this.authForm.patchValue({
-          username: username,
-          password: ''
-        });
-
+        this.authForm.patchValue({ username, password: '' });
       },
       error: (err) => {
         console.error('Signup failed:', err);

@@ -12,25 +12,10 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) { }
 
   // Method to send a POST request to the server to log in the user
-  login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password }).subscribe({
-      next: (res) => {
-        console.log('Login response:', res);
-        this.setToken(res.token);
-
-        if (res.user) {
-          console.log('Storing user details:', res.user);
-          localStorage.setItem('currentUser', JSON.stringify(res.user));
-          this.router.navigate(['/home']);
-        } else {
-          console.error('User details are missing in the login response');
-        }
-      },
-      error: (error) => {
-        console.error('Login error:', error);
-      }
-    });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password });
   }
+
   // Method to send a POST request to the server to sign up the user
   signup(firstName: string, lastName: string, email: string, username: string, password: string) {
     return this.http.post<{message: string, user: any}>(`${environment.apiUrl}/signup`, {
@@ -53,24 +38,28 @@ export class AuthenticationService {
 
   // Method to check if the user is logged in
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return !!this.getToken;
   }
   getCurrentUserId(): number | null {
-    const userJson = localStorage.getItem('currentUser');
-    if (userJson) {
-      const user = JSON.parse(userJson);
-      return user ? user.id : null;
-    }
-    return null;
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user ? user.id : null;
   }
 
+
   // Method to log out the user. Need to implement in HTML
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/auth']);  
   }
+
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
+  public isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user.isAdmin === true;
+  }
+
+
 }

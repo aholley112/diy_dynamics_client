@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     );
   }
   // Navigate to the projects page when a category is selected
-  selectCategory(categoryId: number): void {
+  selectCategory(categoryId: string): void {
     this.router.navigate(['/category-projects', categoryId]);
   }
   openCreateProjectForm() {
