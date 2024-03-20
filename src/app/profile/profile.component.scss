@@ -124,7 +124,7 @@ select.form-control option:disabled {
 
 .project-details-container {
   display: flex;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
   justify-content: center;
   margin: 20px 0;
 
@@ -138,4 +138,18 @@ select.form-control option:disabled {
     border-radius: 10px;
     background-color: white;
   }
+  .admin-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
 

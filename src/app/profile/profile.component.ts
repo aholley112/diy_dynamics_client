@@ -6,37 +6,50 @@ import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../core/services/user.service';
+import { AuthenticationService } from '../core/services/authentication.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, NavigationBarComponent, FormsModule],
+  imports: [CommonModule, NavigationBarComponent, FormsModule, RouterModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
-  profile: any = {};
-  userId: number = 1;
+  profile: any = { user: {} };
   editing: boolean = false;
   selectedFile: File | null = null;
   favoriteProjects: any[] = [];
 
-  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService) {}
+  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService, public authenticationService: AuthenticationService) {}
 
   ngOnInit() {
+    console.log('ProfileComponent ngOnInit started');
+    console.log('Is Admin:', this.authenticationService.isAdmin());
+
     // Fetches the user's profile data on component initialization.
-    this.getProfile(this.userId);
+    this.getProfile();
     // Fetches the user's favorite projects on component initialization.
     this.getFavoriteProjects();
+    console.log('ProfileComponent ngOnInit completed');
   }
 
+
   // Method to fetch the user's profile data.
-  getProfile(userId: number) {
-    this.profileService.getProfile(userId).subscribe(data => {
-      this.profile = data;
+  getProfile() {
+    this.profileService.getProfile().subscribe({
+      next: (data) => {
+        console.log('Profile data fetched:', data);
+        this.profile = data;
+      },
+      error: (error) => {
+        console.error('Error fetching profile:', error);
+      }
     });
   }
+
 
   // Method to toggle the editing state of the profile.
   toggleEdit() {
@@ -52,11 +65,17 @@ export class ProfileComponent implements OnInit {
       formData.append('profile[profile_picture]', this.selectedFile);
     }
 
-    this.profileService.updateProfile(this.userId, formData).subscribe(data => {
-      console.log('Profile updated successfully');
-      this.toggleEdit();
-      this.getProfile(this.userId);
-    });
+  
+    const userId = this.authenticationService.getCurrentUserId();
+    if (userId) {
+      this.profileService.updateProfile(userId, formData).subscribe(data => {
+        console.log('Profile updated successfully');
+        this.toggleEdit();
+        this.getProfile();
+      });
+    } else {
+      console.error('No user ID found');
+    }
   }
 
   // Method to handle file selection for the profile picture uploaded.
@@ -68,14 +87,18 @@ export class ProfileComponent implements OnInit {
   }
 
 // Method to fetch the user's favorite projects.
-  getFavoriteProjects() {
-    this.userService.getFavoriteProjects(this.userId).subscribe({
+getFavoriteProjects() {
+  const userId = this.authenticationService.getCurrentUserId();
+  if (userId) {
+    this.userService.getFavoriteProjects(userId).subscribe({
       next: (projects) => {
         console.log('Favorite Projects:', projects);
-
         this.favoriteProjects = projects;
       },
       error: (error) => console.error('Error fetching favorite projects', error)
     });
+  } else {
+    console.error('No user ID found');
   }
+}
 }

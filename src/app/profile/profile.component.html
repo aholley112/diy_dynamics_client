@@ -2,9 +2,15 @@
 <!--Profile Container-->
 <div class="profile-container">
   <img *ngIf="profile.profilePictureUrl" [src]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
-  <h2>{{ profile.user.firstName }} {{ profile.user.lastName }}</h2>
+  <h2>{{ profile.user?.firstName }} {{ profile.user?.lastName }}</h2>
+
   <p>{{ profile.bio }}</p>
   <!--Edit Profile Button -->
+ <div *ngIf="authenticationService.isAdmin()">
+  <button routerLink="/admin" class="admin-button">Admin Dashboard</button>
+</div>
+
+
   <button (click)="toggleEdit()">Edit Profile</button>
    <!-- Edit Profile Modal-->
   <div class="modal" *ngIf="editing">
@@ -41,4 +47,5 @@
     <p><strong>Description:</strong> {{ project.description }}</p>
     <p><strong>Instructions:</strong> {{ project.instructions }}</p>
   </div>
+
 </div>
