@@ -47,6 +47,11 @@ export const routes: Routes = [
       loadComponent: () => import('./create-project/create-project.component').then(m => m.CreateProjectComponent),
     },
 
+    {
+      path: 'edit-project/:id',
+      loadComponent: () => import('./edit-project/edit-project.component').then(m => m.EditProjectComponent),
+    },
+
  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', redirectTo: 'home' }
 
