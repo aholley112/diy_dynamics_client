@@ -1,0 +1,34 @@
+<div>
+  <h2>Admin Dashboard</h2>
+
+  <!-- Category Form -->
+  <form #categoryForm="ngForm" (ngSubmit)="submitCategory(categoryForm)">
+    <label for="categoryName">Category Name:</label>
+    <input type="text" id="categoryName" name="categoryName" [(ngModel)]="newCategory.category_name" required>
+    <label for="categoryDesc">Description:</label>
+    <textarea id="categoryDesc" name="categoryDesc" [(ngModel)]="newCategory.description" required></textarea>
+    <button type="submit">Add Category</button>
+  </form>
+
+  <!-- Category List -->
+  <h3>Categories</h3>
+  <ul>
+    <li *ngFor="let category of categories">
+      <strong>{{ category.category_name }}</strong>: {{ category.description }}
+      <button (click)="editCategory(category)">Edit</button>
+      <button (click)="deleteCategory(category)">Delete</button>
+    </li>
+  </ul>
+
+  <!-- Edit Category Form -->
+  <div *ngIf="showEditForm">
+    <h3>Edit Category</h3>
+    <form #editForm="ngForm" (ngSubmit)="updateCategory(editForm)">
+      <label for="editCategoryName">Category Name:</label>
+      <input type="text" id="editCategoryName" name="editCategoryName" [(ngModel)]="editedCategory.category_name" required>
+      <label for="editCategoryDesc">Description:</label>
+      <textarea id="editCategoryDesc" name="editCategoryDesc" [(ngModel)]="editedCategory.description" required></textarea>
+      <button type="submit">Update Category</button>
+    </form>
+  </div>
+</div>
