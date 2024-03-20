@@ -1,18 +1,18 @@
 <div class="project-details-container">
-  <div class="project-details">
-<div *ngIf="project" class="project-detail">
-  <h2>{{ project.title }}</h2>
-  <img *ngIf="project.image_url" [src]="project.image_url" alt="Project Image">
-  <p><strong>Description:</strong> {{ project.description }}</p>
-  <p><strong>Instructions:</strong> {{ project.instructions }}</p>
-  <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p>
+  <div *ngIf="project" class="project-detail">
+    <h2>{{ project.title }}</h2>
+    <img *ngIf="project.image_url" [src]="project.image_url" alt="Project Image">
+    <p><strong>Description:</strong> {{ project.description }}</p>
+    <p><strong>Instructions:</strong> {{ project.instructions }}</p>
+    <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p>
     <p><strong>Materials Needed:</strong> {{ project.material_names }}</p>
     <p><strong>Tools Needed:</strong> {{ project.tool_names }}</p>
 
-   <!-- Favorite Button -->
-   <button *ngIf="!isFavorite" (click)="addToFavorites()">Add to Favorites</button>
-   <button *ngIf="isFavorite" (click)="removeFromFavorites()">Remove from Favorites</button>
-</div>
-
+    <!-- Favorite Button -->
+    <button *ngIf="!isFavorite" (click)="addToFavorites()">Add to Favorites</button>
+    <button *ngIf="isFavorite" (click)="removeFromFavorites()">Remove from Favorites</button>
+    <!-- Edit Button -->
+    <button *ngIf="project.userId === currentUserId" [routerLink]="['/edit-project', project.id]" class="edit-button">Edit Project</button>
   </div>
 </div>
+
