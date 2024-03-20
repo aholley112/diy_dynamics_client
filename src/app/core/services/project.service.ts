@@ -28,4 +28,9 @@ export class ProjectService {
   createProject(formData: FormData): Observable<Project> {
     return this.http.post<Project>(`${environment.apiUrl}/projects`, formData);
   }
+
+  updateProject(projectId: number, projectData: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/projects/${projectId}`, projectData);
+  }
+
 }
