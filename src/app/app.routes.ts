@@ -11,14 +11,13 @@ export const routes: Routes = [
 
   {
     path: 'home',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
   },
 
 
   {
     path: 'categories',
     loadComponent: () => import('./categories/categories.component').then(m => m.CategoriesComponent),
-    canActivate: [AuthGuard]
   },
 
     {
