@@ -84,4 +84,9 @@ export class NavigationBarComponent {
 toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
 }
+
+goToSavedProjects(): void {
+  this.router.navigate(['/profile'], { queryParams: { tab: 'saved' } });
+}
+
 }

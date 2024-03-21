@@ -15,15 +15,29 @@
     <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
   </div>
   <!-- User Controls for when user is logged in -->
-  <div *ngIf="authService.isLoggedIn()" class="user-controls" [class.showUserMenu]="showUserMenu">
-      <img *ngIf="userProfile && userProfile.profilePictureUrl"
-           [src]="userProfile.profilePictureUrl"
-           alt="Profile"
-           class="profile-icon"
-           (click)="goToProfile(); $event.stopPropagation();">
+  <div *ngIf="authService.isLoggedIn()" class="user-controls">
+    <div *ngIf="userProfile?.profilePictureUrl; else defaultProfile"
+         class="profile-icon"
+         (click)="goToProfile(); $event.stopPropagation();">
+      <img [src]="userProfile?.profilePictureUrl" alt="Profile">
+    </div>
+    <ng-template #defaultProfile>
+      <div class="profile-icon-default" (click)="goToProfile(); $event.stopPropagation();">DIY</div>
+    </ng-template>
            <button class="dropbtn" (click)="toggleUserMenu(); $event.stopPropagation();">☰</button>
     <div *ngIf="showUserMenu" class="user-menu">
-      <a (click)="logout()">Log Out</a>
+      <a (click)="goToProfile(); toggleUserMenu(); $event.stopPropagation();">
+        <span class="material-icons-outlined">account_circle</span>
+        Profile
+      </a>
+      <a (click)="goToSavedProjects(); toggleUserMenu(); $event.stopPropagation();">
+        <span class="material-icons-outlined">favorite</span>
+        Saved Projects
+      </a>
+      <a (click)="logout(); toggleUserMenu(); $event.stopPropagation();">
+        <span class="material-icons-outlined">logout</span>
+        Log Out
+      </a>
     </div>
   </div>
   <div *ngIf="!authService.isLoggedIn()" class="auth-controls">
