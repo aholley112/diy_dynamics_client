@@ -68,37 +68,46 @@ export class AuthComponent implements OnInit {
   // Toggling the authentication mode
   toggleAuthMode() {
     this.isSignInMode = !this.isSignInMode;
+    this.errorMsg = '';
+    this.successMessage = '';
+    this.formSubmitted = false;
+    this.authForm.reset();
     this.adjustFormValidators();
   }
 
   // Handling the form submission
   onAuthSubmit(): void {
+    this.formSubmitted = true;
+   if (!this.authForm.valid) {
+      return;
+    }
+
     const username = this.authForm.get('username')?.value;
     const password = this.authForm.get('password')?.value;
 
     if (this.isSignInMode) {
-      this.authenticationService.login(username, password).subscribe({
-        next: (res) => {
-          this.authenticationService.setToken(res.token);
-          localStorage.setItem('currentUser', JSON.stringify(res.user));
-          this.router.navigate(['/home']);
-        },
-        error: (error) => {
-          console.error('Login error:', error);
-          this.errorMsg = 'Failed to login: ' + error.message;
-        }
-      });
+      this.login(username, password);
     } else {
       const firstName = this.authForm.get('firstName')?.value;
       const lastName = this.authForm.get('lastName')?.value;
       const email = this.authForm.get('email')?.value;
-
       this.signup(firstName, lastName, email, username, password);
     }
   }
   // Logging in
   login(username: string, password: string) {
-    this.authenticationService.login(username, password);
+    this.authenticationService.login(username, password).subscribe({
+      next: (res) => {
+        this.authenticationService.setToken(res.token);
+        localStorage.setItem('currentUser', JSON.stringify(res.user));
+        this.router.navigate(['/home']);
+        this.formSubmitted = false; // Reset after successful login
+      },
+      error: (err) => {
+        this.errorMsg = 'Failed to login: ' + err.message;
+        this.formSubmitted = false; // Reset after unsuccessful login
+      }
+    });
   }
 
   // Signing up
@@ -106,13 +115,14 @@ export class AuthComponent implements OnInit {
     this.authenticationService.signup(firstName, lastName, email, username, password).subscribe({
       next: (res) => {
         this.successMessage = 'Signup successful! Please log in with your new credentials.';
-        this.isSignInMode = true;
         this.errorMsg = '';
+        this.formSubmitted = false; // Reset after successful signup
+        this.isSignInMode = true;
         this.authForm.patchValue({ username, password: '' });
       },
       error: (err) => {
-        console.error('Signup failed:', err);
-        this.errorMsg = 'Failed to sign up. Please try again.';
+        this.errorMsg = 'Failed to sign up: ' + err.message;
+        this.formSubmitted = false; // Reset after unsuccessful signup
       }
     });
   }

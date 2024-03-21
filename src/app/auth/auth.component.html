@@ -13,7 +13,7 @@
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" formControlName="firstName" class="form-control" />
           <!--Error message for first name-->
-          <div *ngIf="authForm.get('firstName')?.invalid && (authForm.get('firstName')?.dirty || authForm.get('firstName')?.touched)" class="alert alert-danger">
+          <div *ngIf="authForm.get('firstName')?.invalid && formSubmitted" class="alert alert-danger">
             <div *ngIf="authForm.get('firstName')?.errors?.['required']">First name is required.</div>
           </div>
         </div>
@@ -21,17 +21,18 @@
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" formControlName="lastName" class="form-control" />
-          <!--Error message for last name-->
-          <div *ngIf="authForm.get('lastName')?.invalid && (authForm.get('lastName')?.dirty || authForm.get('lastName')?.touched)" class="alert alert-danger">
-            <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
+            <!--Error message for last name-->
+            <div *ngIf="authForm.get('lastName')?.invalid && formSubmitted" class="alert alert-danger">
+              <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
+            </div>
           </div>
-        </div>
+
         <!--Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" formControlName="email" class="form-control" />
           <!--Error message for email-->
-          <div *ngIf="authForm.get('email')?.invalid && (authForm.get('email')?.touched || formSubmitted) && authForm.get('email')?.errors?.['email']" class="alert alert-danger">
+          <div *ngIf="authForm.get('email')?.invalid && formSubmitted" class="alert alert-danger">
             <div *ngIf="authForm.get('email')?.errors?.['required']">Email is required.</div>
             <div *ngIf="authForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
           </div>
@@ -43,7 +44,7 @@
         <label for="username">Username</label>
         <input type="text" id="username" formControlName="username" class="form-control" />
         <!--Error message for username-->
-        <div *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.dirty || authForm.get('username')?.touched)" class="alert alert-danger">
+        <div *ngIf="authForm.get('username')?.invalid && formSubmitted" class="alert alert-danger">
           <div *ngIf="authForm.get('username')?.errors?.['required']">Username is required.</div>
         </div>
       </div>
@@ -52,7 +53,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" formControlName="password" class="form-control" />
         <!--Error message for password-->
-        <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || formSubmitted)" class="alert alert-danger">
+        <div *ngIf="authForm.get('password')?.invalid && formSubmitted" class="alert alert-danger">
           <div *ngIf="authForm.get('password')?.errors?.['required']">Password is required.</div>
           <div *ngIf="authForm.get('password')?.errors?.['minLength']">Password must be at least 6 characters long.</div>
         </div>
