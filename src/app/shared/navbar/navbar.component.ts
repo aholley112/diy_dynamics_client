@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { UserService } from '../../core/services/user.service';
 import { ProfileService } from '../../core/services/profile.service';
 import { Profile } from '../models/profile.model';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -23,10 +24,12 @@ export class NavigationBarComponent {
   userProfile: Profile | null = null;
   showUserMenu = false;
 
+  isLoggedIn$: Observable<boolean>;
 
   @Output() search = new EventEmitter<string>();
 
   constructor(public authService: AuthenticationService, private router: Router, private userService: UserService, private profileService: ProfileService) {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
     this.loadUserProfile();
   }
   private loadUserProfile(): void {
@@ -64,7 +67,7 @@ export class NavigationBarComponent {
     this.router.navigate(['/']);
   }
 
-  
+
   goToProfile(): void {
     this.router.navigate(['/profile']);
   }

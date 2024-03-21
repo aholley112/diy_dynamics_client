@@ -2,14 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Profile } from '../../shared/models/profile.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkToken());
+
   constructor(private http: HttpClient, private router: Router) { }
+
+  private checkToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
 
   // Method to send a POST request to the server to log in the user
   login(username: string, password: string): Observable<any> {
@@ -38,8 +44,13 @@ export class AuthenticationService {
 
   // Method to check if the user is logged in
   isLoggedIn(): boolean {
-    return !!this.getToken;
+    return this.checkToken();
   }
+
+  get isLoggedIn$(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
   getCurrentUserId(): number | null {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     return user ? user.id : null;
@@ -50,7 +61,9 @@ export class AuthenticationService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/auth']);  
+    // Notify subscribers that the user has logged out
+    this.isLoggedInSubject.next(false);
+    this.router.navigate(['/auth']);
   }
 
   getProfile(): Observable<Profile> {
