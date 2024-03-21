@@ -11,8 +11,7 @@ export const routes: Routes = [
 
   {
     path: 'home',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-    canActivate: [AuthGuard]
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   },
 
 
@@ -60,8 +59,8 @@ export const routes: Routes = [
     {
       path: 'admin',
       loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
-      canActivate: [AuthGuard],  // Ensure this is protected by AuthGuard
-      data: { requiresAdmin: true }  // Indicate that this route requires admin privileges
+      canActivate: [AuthGuard],
+      data: { requiresAdmin: true }
     },
 
 
