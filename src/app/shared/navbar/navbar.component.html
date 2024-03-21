@@ -19,7 +19,8 @@
     <div *ngIf="userProfile?.profilePictureUrl; else defaultProfile"
          class="profile-icon"
          (click)="goToProfile(); $event.stopPropagation();">
-      <img [src]="userProfile?.profilePictureUrl" alt="Profile">
+      <img [src]="userProfile?.profilePictureUrl" alt="Profile" class="profile-icon">
+
     </div>
     <ng-template #defaultProfile>
       <div class="profile-icon-default" (click)="goToProfile(); $event.stopPropagation();">DIY</div>
