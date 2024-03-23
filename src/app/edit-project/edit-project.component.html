@@ -1,11 +1,37 @@
 <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select id="category" [(ngModel)]="categoryId" formControlName="category">
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
+    </select>
+  </div>
   <div>
     <label for="title">Title</label>
     <input id="title" type="text" formControlName="title">
   </div>
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" id="image" (change)="onFileSelected($event)" formControlName="image">
+  </div>
   <div>
     <label for="description">Description</label>
     <textarea id="description" formControlName="description"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="instructions">Instructions</label>
+    <textarea id="instructions" formControlName="instructions"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="estTime">Estimated Time to Completion</label>
+    <input type="text" id="estTime" formControlName="estTime">
+  </div>
+  <div class="form-group">
+    <label for="materials">Material Names</label>
+    <textarea id="materials" formControlName="materials"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="tools">Tool Names</label>
+    <textarea id="tools" formControlName="tools"></textarea>
   </div>
   <button type="submit" [disabled]="!editForm.valid">Save Changes</button>
 </form>

@@ -1,3 +1,5 @@
+import { Category } from "./category.model";
+
 export interface Project {
   id: number;
   title: string;
@@ -9,4 +11,5 @@ export interface Project {
   image_url: string;
   material_names: string[];
   tool_names: string[];
+  categories?: Category[];
 }
