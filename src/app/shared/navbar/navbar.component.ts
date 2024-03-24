@@ -76,6 +76,10 @@ export class NavigationBarComponent {
     this.router.navigate(['/categories']);
   }
 
+  goToProjects(): void {
+    this.router.navigate(['/projects']); 
+  }
+
   clearSearch(): void {
     this.searchText = '';
     this.search.emit('');
