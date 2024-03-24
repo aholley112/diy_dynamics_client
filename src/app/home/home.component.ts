@@ -4,7 +4,7 @@ import { Project } from '../shared/models/project.model';
 import { ProjectService } from '../core/services/project.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ProjectsComponent } from '../projects/projects.component';
+// import { ProjectsComponent } from '../projects/projects.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { Category } from '../shared/models/category.model';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { NavigationBarComponent } from '../shared/navbar/navbar.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ProjectsComponent, CategoriesComponent, CommonModule, NavigationBarComponent],
+  imports: [FormsModule, CategoriesComponent, CommonModule, NavigationBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
