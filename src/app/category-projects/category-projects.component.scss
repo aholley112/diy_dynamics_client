@@ -11,8 +11,6 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
 }
 
 .project-card:hover {
@@ -21,11 +19,9 @@
 
 .project-image {
   width: 100%;
-  height: auto;
-  object-fit: cover; 
-  border-radius: 8px 8px 0 0;
+  height: 150px;
+  object-fit: cover;
 }
-
 
 .project-card h3, .project-card p {
   padding: 0 16px;
