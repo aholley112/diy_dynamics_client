@@ -3,13 +3,13 @@ import { Project } from '../shared/models/project.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../core/services/project.service';
-import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
