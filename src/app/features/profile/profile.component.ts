@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile } from '../../shared/models/profile.model';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../../core/services/profile.service';
 import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
@@ -7,13 +6,14 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, NavigationBarComponent, FormsModule, RouterModule],
+  imports: [CommonModule, NavigationBarComponent, FormsModule, RouterModule, LazyLoadImageModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   selectedFile: File | null = null;
   favoriteProjects: any[] = [];
 
-  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService, public authenticationService: AuthenticationService) {}
+  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService, public authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit() {
     console.log('ProfileComponent ngOnInit started');
@@ -86,6 +86,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  goToProjectDetails(projectId: number) {
+    this.router.navigate(['/project-detail', projectId]);
+  }
+
 // Method to fetch the user's favorite projects.
 getFavoriteProjects() {
   const userId = this.authenticationService.getCurrentUserId();
@@ -93,7 +97,12 @@ getFavoriteProjects() {
     this.userService.getFavoriteProjects(userId).subscribe({
       next: (projects) => {
         console.log('Favorite Projects:', projects);
-        this.favoriteProjects = projects;
+        this.favoriteProjects = projects.map((project: any) => {
+          return {
+            ...project,
+            image_url: project.image_url ? project.image_url : 'default_image_url_here'
+          };
+        });
       },
       error: (error) => console.error('Error fetching favorite projects', error)
     });

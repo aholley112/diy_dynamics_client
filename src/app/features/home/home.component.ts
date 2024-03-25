@@ -73,6 +73,10 @@ export class HomeComponent implements OnInit {
   clearSearchResults(): void {
     this.searchResults = [];
   }
+  navigateToProjects(): void {
+    this.router.navigateByUrl('/projects'); 
+  }
+
 
 }
 

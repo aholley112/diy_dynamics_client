@@ -42,10 +42,12 @@
   <h3>Favorites</h3>
   <div class="project-details-container">
   <!-- TODO: Favorites Section -->
-  <div *ngFor="let project of favoriteProjects" class="project-details">
+  <div *ngFor="let project of favoriteProjects" class="project-details"(click)="goToProjectDetails(project.id)">
+    <img *ngIf="project.image_url"
+    [lazyLoad]="project.image_url"
+    alt="Project Image"
+    class="project-thumbnail">
     <h3>{{ project.title }}</h3>
     <p><strong>Description:</strong> {{ project.description }}</p>
-    <p><strong>Instructions:</strong> {{ project.instructions }}</p>
   </div>
-
 </div>
