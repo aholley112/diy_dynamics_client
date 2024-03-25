@@ -6,15 +6,6 @@
 
   .project-detail {
     width: 100%;
-    max-width: 800px;
-    margin: 20px 0;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
     h2 {
       text-align: center;
@@ -23,21 +14,21 @@
     img {
       width: 100%;
       max-height: 300px;
-      object-fit: cover; // Cover the area of the element without stretching
-      border-radius: 10px; // Rounded corners for the images
-      margin-bottom: 20px; 
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
 
     p {
-      width: 100%; // Paragraphs use the full width for alignment
+      width: 100%;
       text-align: justify;
       margin-bottom: 10px;
     }
 
     .project-actions {
-      width: 100%; // Action buttons use the full width for alignment
+      width: 100%;
       display: flex;
-      justify-content: space-evenly; // Space out the buttons evenly
+      justify-content: space-evenly;
       margin-top: 10px;
 
       button {
@@ -45,7 +36,7 @@
         border-radius: 5px;
         border: none;
         cursor: pointer;
-        transition: background-color 0.3s ease; // Smooth transition for background color
+        transition: background-color 0.3s ease;
 
         &:hover {
           opacity: 0.8;
