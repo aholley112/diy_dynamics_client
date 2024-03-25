@@ -22,22 +22,22 @@
     }
     img {
       width: 100%;
-      max-height: 350px;
-      object-fit: contain;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      max-height: 300px;
+      object-fit: cover; // Cover the area of the element without stretching
+      border-radius: 10px; // Rounded corners for the images
+      margin-bottom: 20px; 
     }
 
     p {
-      width: 100%;
+      width: 100%; // Paragraphs use the full width for alignment
       text-align: justify;
       margin-bottom: 10px;
     }
 
     .project-actions {
-      width: 100%;
+      width: 100%; // Action buttons use the full width for alignment
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-evenly; // Space out the buttons evenly
       margin-top: 10px;
 
       button {
@@ -45,7 +45,7 @@
         border-radius: 5px;
         border: none;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease; // Smooth transition for background color
 
         &:hover {
           opacity: 0.8;

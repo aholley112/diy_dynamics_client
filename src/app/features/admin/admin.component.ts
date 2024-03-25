@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../core/services/admin.service';
-import { Category } from '../shared/models/category.model';
+import { AdminService } from '../../core/services/admin.service';
+import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
   categories: Category[] = [];
   newCategory: Category = { id: '0', category_name: '', description: '' };
   editedCategory: Category = { id: '0', category_name: '', description: '' };
-  showEditForm = false; 
+  showEditForm = false;
 
   constructor(private adminService: AdminService) { }
 

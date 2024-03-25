@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectService } from '../core/services/project.service';
-import { Category } from '../shared/models/category.model';
-import { CategoryService } from '../core/services/category.service';
+import { ProjectService } from '../../core/services/project.service';
+import { Category } from '../../shared/models/category.model';
+import { CategoryService } from '../../core/services/category.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -72,7 +72,7 @@ export class EditProjectComponent implements OnInit {
         });
 
         if (project.categories && project.categories.length > 0) {
-          this.categoryId = project.categories[0].id;  
+          this.categoryId = project.categories[0].id;
         }
       },
       error: error => console.error('Error fetching project', error)

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../core/services/category.service';
-import { Category } from '../shared/models/category.model';
+import { CategoryService } from '../../core/services/category.service';
+import { Category } from '../../shared/models/category.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavigationBarComponent } from '../shared/navbar/navbar.component';
+import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-categories',

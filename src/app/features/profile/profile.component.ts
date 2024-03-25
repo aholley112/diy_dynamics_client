@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile } from '../shared/models/profile.model';
+import { Profile } from '../../shared/models/profile.model';
 import { CommonModule } from '@angular/common';
-import { ProfileService } from '../core/services/profile.service';
-import { NavigationBarComponent } from '../shared/navbar/navbar.component';
+import { ProfileService } from '../../core/services/profile.service';
+import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../core/services/user.service';
-import { AuthenticationService } from '../core/services/authentication.service';
+import { UserService } from '../../core/services/user.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 import { RouterModule } from '@angular/router';
 
 
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
       formData.append('profile[profile_picture]', this.selectedFile);
     }
 
-  
+
     const userId = this.authenticationService.getCurrentUserId();
     if (userId) {
       this.profileService.updateProfile(userId, formData).subscribe(data => {

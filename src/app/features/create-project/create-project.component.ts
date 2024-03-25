@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../core/services/project.service';
+import { ProjectService } from '../../core/services/project.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Category } from '../shared/models/category.model';
-import { CategoryService } from '../core/services/category.service';
-import { Project } from '../shared/models/project.model';
-import { AuthenticationService } from '../core/services/authentication.service';
+import { Category } from '../../shared/models/category.model';
+import { CategoryService } from '../../core/services/category.service';
+import { Project } from '../../shared/models/project.model';
+import { AuthenticationService } from '../../core/services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class CreateProjectComponent implements OnInit {
     est_time_to_completion: '',
   };
 
-  categoryId?: number | string;  
+  categoryId?: number | string;
   selectedFile: File | null = null;
   materialNames: string = '';
   toolNames: string = '';

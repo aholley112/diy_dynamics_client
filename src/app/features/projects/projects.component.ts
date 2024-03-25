@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../shared/models/project.model';
+import { Project } from '../../shared/models/project.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProjectService } from '../core/services/project.service';
+import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 
 

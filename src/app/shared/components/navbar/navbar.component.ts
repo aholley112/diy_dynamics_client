@@ -3,11 +3,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { Category } from '../models/category.model';
-import { AuthenticationService } from '../../core/services/authentication.service';
-import { UserService } from '../../core/services/user.service';
-import { ProfileService } from '../../core/services/profile.service';
-import { Profile } from '../models/profile.model';
+import { Category } from '../../models/category.model';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { UserService } from '../../../core/services/user.service';
+import { ProfileService } from '../../../core/services/profile.service';
+import { Profile } from '../../models/profile.model';
 import { Observable } from 'rxjs';
 
 
@@ -77,7 +77,7 @@ export class NavigationBarComponent {
   }
 
   goToProjects(): void {
-    this.router.navigate(['/projects']); 
+    this.router.navigate(['/projects']);
   }
 
   clearSearch(): void {

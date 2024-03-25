@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../core/services/admin.service';
-import { Category } from '../shared/models/category.model';
+import { AdminService } from '../../core/services/admin.service';
+import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
 
 @Component({

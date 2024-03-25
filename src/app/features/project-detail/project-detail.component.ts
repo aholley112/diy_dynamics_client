@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ProjectService } from '../core/services/project.service';
-import { Project } from '../shared/models/project.model';
+import { ProjectService } from '../../core/services/project.service';
+import { Project } from '../../shared/models/project.model';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../core/services/user.service';
-import { AuthenticationService } from '../core/services/authentication.service';
+import { UserService } from '../../core/services/user.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -38,7 +38,7 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
-  // Method to fetch the project details 
+  // Method to fetch the project details
   fetchProject(projectId: number): void {
     this.projectService.getProjectById(projectId).subscribe({
       next: (project: any) => {
