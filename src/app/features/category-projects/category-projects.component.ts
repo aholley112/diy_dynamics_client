@@ -3,11 +3,12 @@ import { Project } from '../../shared/models/project.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../core/services/project.service';
 import { CommonModule } from '@angular/common';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @Component({
   selector: 'app-category-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LazyLoadImageModule],
   templateUrl: './category-projects.component.html',
   styleUrl: './category-projects.component.scss'
 })
