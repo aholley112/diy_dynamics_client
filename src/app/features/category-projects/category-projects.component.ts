@@ -35,6 +35,7 @@ export class CategoryProjectsComponent implements OnInit {
 
   // Method to fetch the projects from the API
   loadProjectsForCategory(categoryId: number): void {
+    console.log('Projects fetched:', this.projects);
     this.projectService.getProjectsByCategory(categoryId).subscribe({
       next: (projects) => this.projects = projects,
       error: (error) => console.error('Error fetching projects for category', error)

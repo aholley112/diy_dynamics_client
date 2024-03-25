@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
+import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, NavigationBarComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
@@ -26,6 +27,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.getProjects().subscribe(
       (projects) => {
         this.projects = projects;
+        console.log('Projects fetched:', projects);
       },
       (error) => {
         console.error('Error fetching projects', error);
