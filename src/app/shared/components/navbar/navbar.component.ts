@@ -85,12 +85,11 @@ export class NavigationBarComponent {
     this.search.emit('');
   }
 
-toggleUserMenu(): void {
-    this.showUserMenu = !this.showUserMenu;
-}
-
 goToSavedProjects(): void {
   this.router.navigate(['/profile'], { queryParams: { tab: 'saved' } });
 }
 
+goToHome(): void {
+  this.router.navigate(['home']);
+}
 }
