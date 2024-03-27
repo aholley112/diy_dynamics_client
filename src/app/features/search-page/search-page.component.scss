@@ -48,17 +48,6 @@
         object-fit: cover;
       }
     }
-  }
-}
 
-@media (max-width: 768px) {
-  .search-results-container .results-list .result-card {
-    max-width: 90%;
-  }
 }
-
-@media (max-width: 480px) {
-  .search-results-container .results-list .result-card {
-    max-width: 100%;
-  }
 }
