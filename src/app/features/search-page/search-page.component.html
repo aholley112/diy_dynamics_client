@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="search-results-container" *ngIf="searchResults">
+  <div *ngIf="searchResults.categories.length > 0">
+    <h2>Category Results</h2>
+    <div class="results-list">
+      <div *ngFor="let category of searchResults.categories" class="result-card">
+        <div class="card-content">
+          <h3>{{ category.category_name }}</h3>
+          <p>{{ category.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="searchResults.projects.length > 0">
+    <h2>Project Results</h2>
+    <div class="results-list">
+      <div *ngFor="let project of searchResults.projects" class="result-card">
+        <div class="card-content">
+          <h3>{{ project.title }}</h3>
+          <img *ngIf="project.image_url" [src]="project.image_url" alt="{{ project.title }}">
+          <p>{{ project.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

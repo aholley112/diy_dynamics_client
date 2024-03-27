@@ -32,5 +32,10 @@ export class ProjectService {
   updateProject(projectId: number, projectData: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}/projects/${projectId}`, projectData);
   }
+  searchProjects(query: string): Observable<Project[]> {
+    return this.http.get<Project[]>(`${environment.apiUrl}/search/projects`, {
+      params: { query: query }
+    });
+  }
 
 }

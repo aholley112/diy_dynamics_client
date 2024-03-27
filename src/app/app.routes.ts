@@ -62,6 +62,11 @@ export const routes: Routes = [
       data: { requiresAdmin: true }
     },
 
+    {
+      path: 'search',
+      loadComponent: () => import('./features/search-page/search-page.component').then(m => m.SearchPageComponent),
+    },
+
 
  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', redirectTo: 'home' }

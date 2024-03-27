@@ -1,15 +1,5 @@
-<app-navbar (search)="handleSearch($event)"></app-navbar>
- <!-- Search Results -->
- <div *ngIf="searchResults.length > 0" class="overlay">
-  <div class="search-results-container">
-    <button class="close-btn" (click)="clearSearchResults()">✖</button>
-    <h2>Search Results</h2>
-    <div *ngFor="let category of searchResults" class="search-result">
-      <h3>{{ category.category_name }}</h3>
-      <p>{{ category.description }}</p>
-    </div>
-  </div>
-</div>
+<app-navbar></app-navbar>
+
   <!-- Content Area -->
   <div class="content-area">
 <!-- Introduction Text -->

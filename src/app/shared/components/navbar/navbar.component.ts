@@ -20,11 +20,9 @@ import { Observable } from 'rxjs';
 })
 export class NavigationBarComponent {
   searchText: string = '';
-  searchResults: Category[] = [];
   userProfile: Profile | null = null;
-  showUserMenu = false;
-
   isLoggedIn$: Observable<boolean>;
+
 
   @Output() search = new EventEmitter<string>();
 
@@ -47,9 +45,17 @@ export class NavigationBarComponent {
 
   // Method to search for categories
   searchCategories(): void {
-    console.log('Emitting search text:', this.searchText);
-    this.search.emit(this.searchText);
+    if (this.searchText.trim()) {
+      this.router.navigate(['/search'], { queryParams: { query: this.searchText } });
+      this.searchText = '';
+    }
   }
+
+  // Method to clear the search text
+  clearSearch(): void {
+    this.searchText = '';
+  }
+
 
   // Method to navigate to the auth page
   goToAuth(mode: 'log-in' | 'sign-up'): void {
@@ -78,11 +84,6 @@ export class NavigationBarComponent {
 
   goToProjects(): void {
     this.router.navigate(['/projects']);
-  }
-
-  clearSearch(): void {
-    this.searchText = '';
-    this.search.emit('');
   }
 
 goToSavedProjects(): void {
