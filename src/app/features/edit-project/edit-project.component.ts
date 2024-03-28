@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProjectService } from '../../core/services/project.service';
 import { Category } from '../../shared/models/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { CommonModule } from '@angular/common';
+import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-edit-project',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, NavigationBarComponent, RouterModule],
   templateUrl: './edit-project.component.html',
   styleUrl: './edit-project.component.scss'
 })

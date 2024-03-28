@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div *ngIf="projects.length > 0" class="projects-grid">
   <div *ngFor="let project of projects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <img *ngIf="project.image_url"

@@ -1,5 +1,9 @@
+<app-navbar></app-navbar>
 <div class="create-project-container">
-  <form (submit)="submitProject()">
+    <div class="card">
+      <div class="close-button" routerLink="/categories">&times;</div>
+      <h2 class="form-title">Create New DIY Project</h2>
+      <form (submit)="submitProject()">
     <div class="form-group">
       <label for="category">Category</label>
       <select id="category" [(ngModel)]="categoryId" name="category">
@@ -10,10 +14,9 @@
       <label for="title">Title</label>
       <input type="text" id="title" [(ngModel)]="project.title" name="title">
     </div>
-
     <div class="form-group">
-      <label for="image">Image</label>
-      <input type="file" id="image" (change)="onFileSelected($event)">
+      <label for="estTime">Estimated Time to Completion</label>
+      <input type="text" id="estTime" [(ngModel)]="project.est_time_to_completion" name="estTime">
     </div>
 
     <div class="form-group">
@@ -26,10 +29,6 @@
       <textarea id="instructions" [(ngModel)]="project.instructions" name="instructions"></textarea>
     </div>
 
-    <div class="form-group">
-      <label for="estTime">Estimated Time to Completion</label>
-      <input type="text" id="estTime" [(ngModel)]="project.est_time_to_completion" name="estTime">
-    </div>
 
     <div class="form-group">
       <label for="materials">Material Names</label>
@@ -40,7 +39,13 @@
       <label for="tools">Tool Names</label>
       <textarea id="tools" [(ngModel)]="toolNames" name="tools"></textarea>
     </div>
-
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" id="image" (change)="onFileSelected($event)">
+    </div>
+    <div class="button-container">
     <button type="submit" class="btn btn-primary">Create Project</button>
+  </div>
   </form>
+</div>
 </div>

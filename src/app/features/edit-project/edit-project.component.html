@@ -1,3 +1,8 @@
+<app-navbar></app-navbar>
+<div class="edit-project-container">
+  <div class="card">
+    <div class="close-button" routerLink="/categories">&times;</div>
+    <h2 class="form-title">Edit DIY Project</h2>
 <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
   <div class="form-group">
     <label for="category">Category</label>
@@ -5,15 +10,11 @@
       <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
     </select>
   </div>
-  <div>
+  <div class="form-group">
     <label for="title">Title</label>
     <input id="title" type="text" formControlName="title">
   </div>
   <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" id="image" (change)="onFileSelected($event)" formControlName="image">
-  </div>
-  <div>
     <label for="description">Description</label>
     <textarea id="description" formControlName="description"></textarea>
   </div>
@@ -33,5 +34,14 @@
     <label for="tools">Tool Names</label>
     <textarea id="tools" formControlName="tools"></textarea>
   </div>
-  <button type="submit" [disabled]="!editForm.valid">Save Changes</button>
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" id="image" (change)="onFileSelected($event)" formControlName="image">
+  </div>
+  <div class="button-container">
+  <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Save Changes</button>
+</div>
 </form>
+</div>
+</div>
+
