@@ -6,16 +6,13 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProjectsComponent } from '../projects/projects.component';
 import { CategoriesComponent } from '../categories/categories.component';
-import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ProjectsComponent, CategoriesComponent, CommonModule, NavigationBarComponent, LazyLoadImageModule],
+  imports: [FormsModule, ProjectsComponent, CategoriesComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
