@@ -8,12 +8,11 @@ import { Project } from '../../shared/models/project.model';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-create-project',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavigationBarComponent, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.scss'
 })

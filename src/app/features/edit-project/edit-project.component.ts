@@ -5,12 +5,12 @@ import { ProjectService } from '../../core/services/project.service';
 import { Category } from '../../shared/models/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { CommonModule } from '@angular/common';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
+
 
 @Component({
   selector: 'app-edit-project',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule, NavigationBarComponent, RouterModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, RouterModule],
   templateUrl: './edit-project.component.html',
   styleUrl: './edit-project.component.scss'
 })
