@@ -4,14 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, NavigationBarComponent, LazyLoadImageModule],
+  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
