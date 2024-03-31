@@ -5,12 +5,11 @@ import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, NavigationBarComponent],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
 })
