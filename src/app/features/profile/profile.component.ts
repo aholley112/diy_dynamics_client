@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileService } from '../../core/services/profile.service';
-import { NavigationBarComponent } from '../../shared/components/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
@@ -13,7 +12,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, NavigationBarComponent, FormsModule, RouterModule, LazyLoadImageModule],
+  imports: [CommonModule, FormsModule, RouterModule, LazyLoadImageModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
