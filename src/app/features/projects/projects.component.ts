@@ -6,6 +6,7 @@ import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -19,7 +20,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.loadProjects();
@@ -32,6 +33,7 @@ export class ProjectsComponent implements OnInit {
           ...project,
           isLoading: true
         }));
+        this.spinner.hide();
       },
       (error) => {
         console.error('Error fetching projects', error);
