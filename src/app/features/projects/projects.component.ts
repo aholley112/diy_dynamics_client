@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule],
+  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSkeletonLoaderModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
@@ -26,13 +27,19 @@ export class ProjectsComponent implements OnInit {
   loadProjects(): void {
     this.projectService.getProjects().subscribe(
       (projects) => {
-        this.projects = projects;
-        console.log('Projects fetched:', projects);
+        this.projects = projects.map(project => ({
+          ...project,
+          isLoading: true
+        }));
       },
       (error) => {
         console.error('Error fetching projects', error);
       }
     );
   }
+  onImageLoad(project: Project): void {
+    project.isLoading = false;
+  }
+  
 }
 

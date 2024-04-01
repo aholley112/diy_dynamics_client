@@ -12,4 +12,5 @@ export interface Project {
   material_names: string[];
   tool_names: string[];
   categories?: Category[];
+  isLoading?: boolean;
 }
