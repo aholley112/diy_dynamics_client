@@ -5,22 +5,20 @@ import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgxSpinnerService } from 'ngx-spinner';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSpinnerModule],
+  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSkeletonLoaderModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
 
-  constructor(private projectService: ProjectService, private spinner: NgxSpinnerService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.loadProjects();
@@ -33,7 +31,6 @@ export class ProjectsComponent implements OnInit {
           ...project,
           isLoading: true
         }));
-        this.spinner.hide();
       },
       (error) => {
         console.error('Error fetching projects', error);
