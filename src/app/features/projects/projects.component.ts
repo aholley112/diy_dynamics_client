@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSkeletonLoaderModule],
+  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSpinnerModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })

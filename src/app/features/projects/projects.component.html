@@ -1,7 +1,7 @@
 <div *ngIf="projects.length > 0" class="projects-grid">
   <div *ngFor="let project of projects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <div class="project-image-loader" *ngIf="project.isLoading">
-   <ngx-skeleton-loader></ngx-skeleton-loader>
+      <ngx-spinner [fullScreen]="false" type="ball-scale-multiple" size="medium"></ngx-spinner>
   </div>
     <img [src]="project.image_url"
          alt="Project Image"
