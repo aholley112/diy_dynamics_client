@@ -37,9 +37,8 @@ export class ProjectsComponent implements OnInit {
       }
     );
   }
-  onImageLoad(project: Project): void {
+  onImageLoad(project: any): void {
     project.isLoading = false;
   }
-  
 }
 
