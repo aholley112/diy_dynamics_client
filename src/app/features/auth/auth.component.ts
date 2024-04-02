@@ -1,13 +1,15 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule],
+  imports: [ ReactiveFormsModule, CommonModule, NgxSkeletonLoaderModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -18,6 +20,9 @@ export class AuthComponent implements OnInit {
   errorMsg: string = '';
   successMessage: string = '';
   formSubmitted: boolean = false;
+  isLoading: boolean = false;
+
+  @Output() onFormClose = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -95,20 +100,27 @@ export class AuthComponent implements OnInit {
     }
   }
   // Logging in
-  login(username: string, password: string) {
-    this.authenticationService.login(username, password).subscribe({
-      next: (res) => {
+// Logging in
+login(username: string, password: string): void {
+  this.isLoading = true;
+
+  this.authenticationService.login(username, password).subscribe({
+    next: (res) => {
+      setTimeout(() => {
+        this.isLoading = false;
         this.authenticationService.setToken(res.token);
         localStorage.setItem('currentUser', JSON.stringify(res.user));
+        this.onFormClose.emit();
         this.router.navigate(['/home']);
-        this.formSubmitted = false; // Reset after successful login
-      },
-      error: (err) => {
-        this.errorMsg = 'Failed to login: ' + err.message;
-        this.formSubmitted = false; // Reset after unsuccessful login
-      }
-    });
-  }
+      }, 10000); // Need to remove after finishing loader. Temporarily adding a delay.
+    },
+    error: (err) => {
+      this.isLoading = false;
+      this.errorMsg = 'Failed to login: ' + err.message;
+    }
+  });
+}
+
 
   // Signing up
   signup(firstName: string, lastName: string, email: string, username: string, password: string) {
@@ -116,13 +128,13 @@ export class AuthComponent implements OnInit {
       next: (res) => {
         this.successMessage = 'Signup successful! Please log in with your new credentials.';
         this.errorMsg = '';
-        this.formSubmitted = false; // Reset after successful signup
+        this.formSubmitted = false;
         this.isSignInMode = true;
         this.authForm.patchValue({ username, password: '' });
       },
       error: (err) => {
         this.errorMsg = 'Failed to sign up: ' + err.message;
-        this.formSubmitted = false; // Reset after unsuccessful signup
+        this.formSubmitted = false; 
       }
     });
   }

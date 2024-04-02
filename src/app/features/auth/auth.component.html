@@ -1,9 +1,15 @@
-<div class="container">
+<div *ngIf="isLoading" class="loader">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+<div *ngIf="!isLoading" class="container">
   <div class="auth-form">
     <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
     <p *ngIf="isSignInMode">Log in to continue.</p>
     <p *ngIf="!isSignInMode">Sign up to start your DIY journey.</p>
-
     <!-- Auth Form -->
     <form [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
       <!-- Input fields for sign up mode -->

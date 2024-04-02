@@ -38,7 +38,9 @@ export class ProjectsComponent implements OnInit {
     );
   }
   onImageLoad(project: any): void {
+    setTimeout(() => {
     project.isLoading = false;
+  }, 5000);
   }
 }
 

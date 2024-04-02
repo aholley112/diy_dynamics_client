@@ -6,11 +6,10 @@
     <div class="search-bar">
       <div class="input-wrapper">
       <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search for categories...">
-      <!-- Inside your input-wrapper -->
 <button *ngIf="searchText && searchText.length > 0" class="clear-btn" (click)="clearSearch()">✖</button>
       </div>
       <button (click)="searchCategories()">Search</button>
-      
+
     </div>
     <!-- Browse All Categories Button -->
     <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
@@ -34,8 +33,13 @@
 
     </div>
   <div *ngIf="!authService.isLoggedIn()" class="auth-controls">
-    <button (click)="goToAuth('sign-up')" class="signup-btn">Sign Up</button>
-    <button (click)="goToAuth('log-in')" class="login-btn">Log In</button>
+    <button (click)="showAuthForm = true; authAction = 'sign-up'" class="signup-btn">Sign Up</button>
+    <button (click)="showAuthForm = true; authAction = 'log-in'" class="login-btn">Log In</button>
   </div>
   </nav>
-</div>
+  <div *ngIf="showAuthForm" class="auth-overlay">
+    <app-auth (onFormClose)="showAuthForm = false"></app-auth>
+  </div>
+  </div>
+
+
