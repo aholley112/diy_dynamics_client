@@ -22,6 +22,7 @@
     </a>
     <span class="material-icons-outlined" (click)="goToSavedProjects()">favorite</span>
       <span class="material-icons-outlined" (click)="logout()">logout</span>
+      
     <div *ngIf="userProfile?.profilePictureUrl; else defaultProfile"
          class="profile-icon"
          (click)="goToProfile(); $event.stopPropagation();">

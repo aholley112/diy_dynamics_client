@@ -106,14 +106,12 @@ login(username: string, password: string): void {
 
   this.authenticationService.login(username, password).subscribe({
     next: (res) => {
-      setTimeout(() => {
         this.isLoading = false;
         this.authenticationService.setToken(res.token);
         localStorage.setItem('currentUser', JSON.stringify(res.user));
         this.onFormClose.emit();
         this.router.navigate(['/home']);
-      }, 10000); // Need to remove after finishing loader. Temporarily adding a delay.
-    },
+      },
     error: (err) => {
       this.isLoading = false;
       this.errorMsg = 'Failed to login: ' + err.message;
@@ -134,7 +132,7 @@ login(username: string, password: string): void {
       },
       error: (err) => {
         this.errorMsg = 'Failed to sign up: ' + err.message;
-        this.formSubmitted = false; 
+        this.formSubmitted = false;
       }
     });
   }

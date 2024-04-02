@@ -37,6 +37,8 @@ export class NavigationBarComponent {
       this.authService.getProfile().subscribe({
         next: (profile) => {
           this.userProfile = profile;
+          console.log('UserProfile loaded:', this.userProfile); // Log the loaded profile
+        console.log('Profile picture URL:', this.userProfile.profilePictureUrl); 
         },
         error: (err) => {
           console.error('Failed to load user profile', err);

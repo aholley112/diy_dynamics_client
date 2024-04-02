@@ -1,15 +1,15 @@
 .top-nav {
+  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
   font-size: 1.8em;
-  color: #e60023;
+  color: #0B3C5D;
 }
 
 .left-group {
@@ -46,7 +46,7 @@
 
 .search-bar button {
   padding: 8px 16px;
-  background: #e60023;
+  background: #0B3C5D;
   color: white;
   border: none;
   cursor: pointer;
@@ -60,7 +60,7 @@
 
 .browse-btn {
   padding: 8px 16px;
-  background: #e60023;
+  background: #0B3C5D;
   color: white;
   border: none;
   cursor: pointer;
@@ -75,7 +75,6 @@
   position: absolute;
   right: 5px;
   top: 50%;
-
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -91,12 +90,12 @@
   font-size: 1em;
   border: none;
   margin-left: 10px;
-  background: #ccc;
-  color: #333;
+  background: #0B3C5D;
+  color: white;
 }
 
 .login-btn {
-  background: #e60023;
+  background: #0B3C5D;
   color: white;
 }
 
@@ -117,7 +116,7 @@
   display: inline-block;
   width: 40px;
   height: 40px;
-  background-color: red;
+  background-color: #0B3C5D;
   border-radius: 50%;
   color: white;
   font-size: 20px;
@@ -143,4 +142,18 @@
   align-items: center;
   gap: 10px;
 }
+
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 
