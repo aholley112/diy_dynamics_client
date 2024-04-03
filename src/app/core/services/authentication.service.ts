@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Profile } from '../../shared/models/profile.model';
 
 @Injectable({
@@ -19,7 +19,12 @@ export class AuthenticationService {
 
   // Method to send a POST request to the server to log in the user
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password });
+    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password }).pipe(
+      tap(response => {
+        this.setToken(response.token); 
+        this.isLoggedInSubject.next(true);
+      })
+    );
   }
 
   // Method to send a POST request to the server to sign up the user

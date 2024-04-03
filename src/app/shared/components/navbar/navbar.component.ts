@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -18,7 +18,8 @@ import { AuthComponent } from '../../../features/auth/auth.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavigationBarComponent {
+
+export class NavigationBarComponent implements OnInit {
   searchText: string = '';
   userProfile: Profile | null = null;
   isLoggedIn$: Observable<boolean>;
@@ -30,15 +31,27 @@ export class NavigationBarComponent {
 
   constructor(public authService: AuthenticationService, private router: Router, private userService: UserService, private profileService: ProfileService) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
-    this.loadUserProfile();
   }
+
+  ngOnInit() {
+
+    this.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.loadUserProfile();
+      } else {
+        this.userProfile = null;
+      }
+    });
+        this.profileService.profileUpdated.subscribe(() => {
+          this.loadUserProfile();
+        });
+      }
+
   private loadUserProfile(): void {
     if (this.authService.isLoggedIn()) {
       this.authService.getProfile().subscribe({
         next: (profile) => {
           this.userProfile = profile;
-          console.log('UserProfile loaded:', this.userProfile); // Log the loaded profile
-        console.log('Profile picture URL:', this.userProfile.profilePictureUrl); 
         },
         error: (err) => {
           console.error('Failed to load user profile', err);
