@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Profile } from '../../shared/models/profile.model';
 import { environment } from '../../../environments/environment';
 
@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ProfileService {
+  profileUpdated = new EventEmitter<void>();
 
   constructor(private http: HttpClient) {}
 
@@ -16,6 +17,10 @@ export class ProfileService {
   }
 
  updateProfile(userId: number, profileData: FormData): Observable<any> {
-  return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData);
+  return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData).pipe(
+    tap(() => {
+      this.profileUpdated.emit();
+    })
+  );
 }
 }

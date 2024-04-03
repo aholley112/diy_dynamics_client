@@ -22,17 +22,19 @@ export class ProfileComponent implements OnInit {
   selectedFile: File | null = null;
   favoriteProjects: any[] = [];
 
-  constructor(private profileService: ProfileService, private http: HttpClient, private userService: UserService, public authenticationService: AuthenticationService, private router: Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private http: HttpClient,
+    private userService: UserService,
+    public authenticationService: AuthenticationService,
+    private router: Router) {}
 
   ngOnInit() {
-    console.log('ProfileComponent ngOnInit started');
-    console.log('Is Admin:', this.authenticationService.isAdmin());
 
     // Fetches the user's profile data on component initialization.
     this.getProfile();
     // Fetches the user's favorite projects on component initialization.
     this.getFavoriteProjects();
-    console.log('ProfileComponent ngOnInit completed');
   }
 
 
@@ -40,11 +42,9 @@ export class ProfileComponent implements OnInit {
   getProfile() {
     this.profileService.getProfile().subscribe({
       next: (data) => {
-        console.log('Profile data fetched:', data);
         this.profile = data;
       },
       error: (error) => {
-        console.error('Error fetching profile:', error);
       }
     });
   }
@@ -56,14 +56,15 @@ export class ProfileComponent implements OnInit {
   }
 
   // Method to update the user's profile data with new data.
-  updateProfile() {
+  updateProfile(): void {
     const formData = new FormData();
     formData.append('profile[bio]', this.profile.bio);
 
     if (this.selectedFile) {
       formData.append('profile[profile_picture]', this.selectedFile);
+    } else if (this.profile.profilePictureUrl === null) {
+      formData.append('profile[remove_profile_picture]', '1');
     }
-
 
     const userId = this.authenticationService.getCurrentUserId();
     if (userId) {
@@ -75,6 +76,15 @@ export class ProfileComponent implements OnInit {
     } else {
       console.error('No user ID found');
     }
+  }
+
+  removeProfilePicture(): void {
+    this.selectedFile = null;
+    this.profile.profilePictureUrl = null;
+  }
+
+  saveProfile(): void {
+    this.updateProfile();
   }
 
   // Method to handle file selection for the profile picture uploaded.
@@ -95,7 +105,6 @@ getFavoriteProjects() {
   if (userId) {
     this.userService.getFavoriteProjects(userId).subscribe({
       next: (projects) => {
-        console.log('Favorite Projects:', projects);
         this.favoriteProjects = projects.map((project: any) => {
           return {
             ...project,

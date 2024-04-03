@@ -26,6 +26,7 @@
             <div class="right-inputs">
               <label for="file">Profile Picture:</label>
               <input type="file" id="file" (change)="onFileSelected($event)">
+              <button type="button" (click)="removeProfilePicture()">Remove Picture</button>
             </div>
           </div>
           <div class="modal-footer">
