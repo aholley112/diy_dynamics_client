@@ -7,6 +7,7 @@ import { UserService } from '../../core/services/user.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { Router, RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { FavoritesBoardService } from '../../core/services/favorites-board.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private userService: UserService,
     public authenticationService: AuthenticationService,
-    private router: Router) {}
+    private router: Router,
+    private favoritesBoardService: FavoritesBoardService) {}
 
   ngOnInit() {
 
@@ -104,18 +106,29 @@ getFavoriteProjects() {
   const userId = this.authenticationService.getCurrentUserId();
   if (userId) {
     this.userService.getFavoriteProjects(userId).subscribe({
-      next: (projects) => {
-        this.favoriteProjects = projects.map((project: any) => {
+      next: (favorites) => {
+        this.favoriteProjects = favorites.map((favorite: any) => {
           return {
-            ...project,
-            image_url: project.image_url ? project.image_url : 'default_image_url_here'
+            id: favorite.id,
+            title: favorite.title,
+            description: favorite.description,
+            image_url: favorite.image_url,
+            favoriteId: favorite.favorite_id
           };
         });
+        console.log('Favorite Projects with IDs:', this.favoriteProjects);
       },
       error: (error) => console.error('Error fetching favorite projects', error)
     });
   } else {
     console.error('No user ID found');
   }
+}
+
+categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done'): void {
+  console.log(`categorizeProject called with favoriteId: ${favoriteId}, status: ${status}`);
+  event.stopPropagation();
+  
+  this.favoritesBoardService.categorizeFavorite(favoriteId, status);
 }
 }

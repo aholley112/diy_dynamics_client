@@ -47,5 +47,8 @@
     class="project-thumbnail">
     <h3>{{ project.title }}</h3>
     <p><strong>Description:</strong> {{ project.description }}</p>
+  <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')">Want to Do</button>
+  <button (click)="categorizeProject($event, project.favoriteId, 'done')">Done</button>
   </div>
 </div>
+<button routerLink="/favorites-board">Go to Favorites Board</button>

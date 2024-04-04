@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { Project } from '../../shared/models/project.model';
 import { environment } from '../../../environments/environment';
 
@@ -37,5 +37,7 @@ export class ProjectService {
       params: { query: query }
     });
   }
-
+  getFavoriteProjects(userId: number): Observable<Project[]> {
+    return this.http.get<Project[]>(`${environment.apiUrl}/users/${userId}/favorite-projects`);
+  }
 }

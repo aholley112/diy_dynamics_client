@@ -17,6 +17,8 @@ export class ProjectDetailComponent implements OnInit {
   project: Project | null = null;
   isFavorite: boolean = false;
   currentUserId: number | null = null;
+  favoriteId: number | null = null;
+  favoriteProjectIds: number[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +46,11 @@ export class ProjectDetailComponent implements OnInit {
       next: (project: any) => {
         console.log('Project:', project);
         console.log('Current User ID:', this.currentUserId);
+
+        this.project = project;
+        this.isFavorite = project.is_favorite_project;
+        this.favoriteId = project.favorite_id;
+
         project.material_names = Array.isArray(project.material_names)
         ? project.material_names.join(', ')
         : project.material_names;
@@ -51,20 +58,26 @@ export class ProjectDetailComponent implements OnInit {
       project.tool_names = Array.isArray(project.tool_names)
         ? project.tool_names.join(', ')
         : project.tool_names;
-
-        this.project = project as Project;
       },
       error: (error) => console.error('Error fetching project details', error)
     });
+  }
+
+  isProjectFavorite(projectId: number): boolean {
+    return this.favoriteProjectIds.includes(projectId);
   }
 
   // Method to add the project to the user's favorites
   addToFavorites(): void {
     if (this.project) {
       this.userService.addProjectToFavorites(this.project.id).subscribe({
-        next: () => {
+        next: (response) => {
           console.log('Added to favorites');
           this.isFavorite = true;
+          this.favoriteId = response.favorite_id;
+          if (this.project) {
+            this.fetchProject(this.project.id);
+          }
         },
         error: (error) => console.error('Error adding to favorites', error)
       });
@@ -73,14 +86,19 @@ export class ProjectDetailComponent implements OnInit {
 
   // Method to remove the project from the user's favorites
   removeFromFavorites(): void {
-    if (this.project) {
-      this.userService.removeProjectFromFavorites(this.project.id).subscribe({
+    if (this.project && this.favoriteId != null) {  
+      this.userService.removeProjectFromFavorites(this.favoriteId).subscribe({
         next: () => {
           console.log('Removed from favorites');
           this.isFavorite = false;
+          if (this.project) {
+            this.fetchProject(this.project.id);
+          }
         },
         error: (error) => console.error('Error removing from favorites', error)
       });
     }
   }
-}
+
+  }
+
