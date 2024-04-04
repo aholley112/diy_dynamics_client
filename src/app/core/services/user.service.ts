@@ -30,8 +30,8 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/projects/${projectId}/add_to_favorites`, {});
 }
 
-  removeProjectFromFavorites(projectId: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/projects/${projectId}/remove_from_favorites`);
+  removeProjectFromFavorites(favoriteId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/projects/${favoriteId}/remove_from_favorites`);
   }
 
 }
