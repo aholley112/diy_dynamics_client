@@ -18,9 +18,12 @@ export class FavoritesBoardService {
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
-  categorizeFavorite(favoriteId: number, status: 'wantToDo' | 'done'): void {
-    this.updateFavoriteStatus(favoriteId, status).subscribe({
-      next: () => {
+  categorizeFavorite(favorite_Id: number, status: 'wantToDo' | 'done'): void {
+    console.log(`Categorizing favorite ${favorite_Id} as ${status}`);
+    this.updateFavoriteStatus(favorite_Id, status).subscribe({
+      next: (response) => {
+        console.log('Favorite status update response:', response);
+
         const userId = this.authService.getCurrentUserId();
         if (userId !== null) {
           this.refreshFavorites(userId);
@@ -35,18 +38,20 @@ export class FavoritesBoardService {
 
   refreshFavorites(userId: number): void {
     this.http.get<FavoriteProject[]>(`${environment.apiUrl}/users/${userId}/favorites`).subscribe(favorites => {
+      console.log('Fetched favorites:', favorites);
       const wantToDoProjects = favorites.filter(f => f.status === 'wantToDo');
       const doneProjects = favorites.filter(f => f.status === 'done');
+      console.log('Refreshed Want To Do Projects:', wantToDoProjects);
+        console.log('Refreshed Done Projects:', doneProjects);
+
       this.wantToDoProjects.next(wantToDoProjects);
       this.doneProjects.next(doneProjects);
     });
   }
 
+  updateFavoriteStatus(favoriteId: number, newStatus: 'wantToDo' | 'done'): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/favorites/${favoriteId}/status`, { status: newStatus });
+}
 
-
-  private updateFavoriteStatus(favoriteId: number, status: 'wantToDo' | 'done'): Observable<any> {
-    const url = `${environment.apiUrl}/favorites/${favoriteId}/status`;
-    return this.http.put(url, { status });
-  }
 }
 
