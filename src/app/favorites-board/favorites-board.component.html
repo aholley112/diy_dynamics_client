@@ -1,0 +1,46 @@
+<div class="drag-drop-container">
+  <h3>Project Planner</h3>
+  <div class="project-columns">
+    <!-- Want To Do Column -->
+    <div class="project-column" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'wantToDo')">
+      <h4>Want to Do</h4>
+      <div class="project-container">
+        <ng-container *ngFor="let project of wantToDoProjects">
+          <div class="project-card"
+               draggable="true"
+               (dragstart)="onDragStart($event, project)"
+               (click)="goToProjectDetails(project.id)">
+            <img *ngIf="project.image_url"
+                 [src]="project.image_url"
+                 [lazyLoad]="project.image_url"
+                 alt="Project Image"
+                 class="project-thumbnail">
+            <h5>{{ project.title }}</h5>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Done Column -->
+    <div class="project-column" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'done')">
+      <h4>Done</h4>
+      <div class="project-container">
+        <ng-container *ngFor="let project of doneProjects">
+          <div class="project-card"
+               draggable="true"
+               (dragstart)="onDragStart($event, project)"
+               (click)="goToProjectDetails(project.id)">
+            <img *ngIf="project.image_url"
+                 [src]="project.image_url"
+                 [lazyLoad]="project.image_url"
+                 alt="Project Image"
+                 class="project-thumbnail">
+            <h5>{{ project.title }}</h5>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
