@@ -69,7 +69,7 @@ export const routes: Routes = [
 
     {
       path: 'favorites-board',
-      loadComponent: () => import('./favorites-board/favorites-board.component').then(m => m.FavoritesBoardComponent),
+      loadComponent: () => import('./features/favorites-board/favorites-board.component').then(m => m.FavoritesBoardComponent),
     },
 
 
