@@ -4,13 +4,13 @@ export interface Project {
   id: number;
   title: string;
   description: string;
-  isFavoriteProject: boolean;
+  is_favorite_project: boolean;
   instructions: string;
   est_time_to_completion: string;
-  userId: number;
+  user_id?: number;
   image_url: string;
   material_names: string[];
   tool_names: string[];
   categories?: Category[];
-  isLoading?: boolean;
+  is_loading?: boolean;
 }
