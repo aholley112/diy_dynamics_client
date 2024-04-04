@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrl: './create-project.component.scss'
 })
 export class CreateProjectComponent implements OnInit {
-  project: Omit<Project, 'id' | 'userId' | 'isFavoriteProject' | 'image_url' | 'material_names' | 'tool_names'> = {
+  project: Omit<Project, 'id' | 'userId' | 'is_favorite_project' | 'image_url' | 'material_names' | 'tool_names'> = {
     title: '',
     description: '',
     instructions: '',
