@@ -6,6 +6,8 @@ import { ProjectService } from '../../core/services/project.service';
 import { RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { Category } from '../../shared/models/category.model';
+import { CategoryService } from '../../core/services/category.service';
 
 
 @Component({
@@ -17,12 +19,31 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
+  filteredProjects: Project[] = [];
+  categories: Category[] = [];
+  estimatedTimes: string[] = [];
+  selectedCategory: string = '';
+  selectedTime: string = '';
 
-  constructor(private projectService: ProjectService) {}
+
+  constructor(private projectService: ProjectService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.loadProjects();
+    this.loadCategories();
   }
+
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe(
+      (categories) => {
+        this.categories = categories;
+      },
+      (error) => {
+        console.error('Error fetching categories', error);
+      }
+    );
+  }
+
 
   loadProjects(): void {
     this.projectService.getProjects().subscribe(
@@ -31,6 +52,8 @@ export class ProjectsComponent implements OnInit {
           ...project,
           isLoading: true
         }));
+        this.applyFilters();
+        this.estimatedTimes = [...new Set(projects.map(project => project.est_time_to_completion))];
       },
       (error) => {
         console.error('Error fetching projects', error);
@@ -42,5 +65,13 @@ export class ProjectsComponent implements OnInit {
     project.isLoading = false;
   }, 5000);
   }
+  applyFilters(): void {
+    this.filteredProjects = this.projects.filter(project => {
+      const categoryMatch = this.selectedCategory ? project.categories?.some(category => category.id === this.selectedCategory) : true;
+      const timeMatch = this.selectedTime ? project.est_time_to_completion === this.selectedTime : true;
+      return categoryMatch && timeMatch;
+    });
+  }
+
 }
 
