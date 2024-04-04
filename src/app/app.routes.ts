@@ -67,6 +67,11 @@ export const routes: Routes = [
       loadComponent: () => import('./features/search-page/search-page.component').then(m => m.SearchPageComponent),
     },
 
+    {
+      path: 'favorites-board',
+      loadComponent: () => import('./favorites-board/favorites-board.component').then(m => m.FavoritesBoardComponent),
+    },
+
 
  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', redirectTo: 'home' }
