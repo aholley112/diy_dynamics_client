@@ -1,6 +1,7 @@
 
 .drag-drop-container {
-  width: 100%; 
+  width: 100%;
+  min-height: 300px;
 }
 
 .project-columns {
@@ -20,6 +21,9 @@
 }
 
 .project-card {
+  width: 100%;
+  max-width: 500px; 
+  margin: 10px 0;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;

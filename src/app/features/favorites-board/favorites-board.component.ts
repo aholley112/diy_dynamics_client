@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { ProjectService } from '../core/services/project.service';
+import { ProjectService } from '../../core/services/project.service';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../core/services/authentication.service';
-import { FavoritesBoardService } from '../core/services/favorites-board.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { FavoritesBoardService } from '../../core/services/favorites-board.service';
 
 @Component({
   selector: 'app-favorites-board',
@@ -47,25 +47,33 @@ export class FavoritesBoardComponent implements OnInit {
   }
 
   onDragStart(event: DragEvent, project: any): void {
-    event.dataTransfer?.setData('text/plain', JSON.stringify(project));
-  }
-
-  onDragOver(event: DragEvent): void {
-    event.preventDefault();
-  }
-
-  onDrop(event: DragEvent, status: 'wantToDo' | 'done'): void {
-    event.preventDefault();
-    const projectData = event.dataTransfer?.getData('text/plain');
-    const project = projectData ? JSON.parse(projectData) : null;
-
-    console.log('Dropped project data:', project);
-    console.log('New status:', status);
-
-    if (project && project.favoriteId) {
-      this.favoritesBoardService.categorizeFavorite(project.favoriteId, status);
+    console.log(`Dragging project with favoriteId: ${project.favorite_id}`);
+    if (project.favorite_id) {
+      event.dataTransfer?.setData('text/plain', project.favorite_id.toString());
+    } else {
+      console.log('No favoriteId found for project:', project);
     }
   }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+}
+
+onDrop(event: DragEvent, newStatus: 'wantToDo' | 'done'): void {
+  event.preventDefault();
+  const favoriteId = event.dataTransfer?.getData('text/plain');
+  console.log('Dropped favoriteId:', favoriteId);
+
+  if (favoriteId) {
+    console.log('Updating status for favoriteId:', favoriteId, 'to', newStatus);
+    this.favoritesBoardService.categorizeFavorite(parseInt(favoriteId, 10), newStatus);
+  } else {
+    console.error('Invalid favoriteId received on drop:', favoriteId);
+  }
+}
+
+
+
   goToProjectDetails(projectId: number): void {
     this.router.navigate(['/project-detail', projectId]);
   }
