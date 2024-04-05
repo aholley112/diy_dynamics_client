@@ -1,9 +1,16 @@
-.profile-container {
+.profile-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
   margin-top: 20px;
+}
+
+.profile-sidebar {
+  flex: 0 0 300px;
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-header {
+  margin-bottom: 20px;
 }
 
 .profile-picture {
@@ -14,17 +21,56 @@
   margin-bottom: 20px;
 }
 
-.profile-container h2 {
-  margin-bottom: 10px;
-}
-
-.profile-container p {
+.bio-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
-.profile-container h3 {
-  margin-top: 40px;
+.profile-actions {
+  display: flex;
+  flex-direction: column;
 }
+
+.admin-button,
+.edit-button,
+.project-planner-button {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: #0B3C5D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-button:hover,
+.edit-button:hover,
+.project-planner-button:hover,
+.favorites-board-button:hover {
+  background-color: #0056b3;
+}
+
+.favorites-section {
+  flex-grow: 1;
+  padding-left: 20px;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.project-details {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
 .project-thumbnail {
   width: 100%;
   height: 150px;
@@ -35,7 +81,7 @@
 .modal {
   display: block;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
@@ -47,19 +93,16 @@
 .modal-dialog {
   max-width: 70%;
   margin: 10% auto;
-  border-radius: 15px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {
   background-color: #fff;
-  padding: 20px 40px;
   border: none;
   border-radius: 15px;
+  padding: 20px 40px;
 }
 
 .modal-header {
-  color: black;
   border-bottom: none;
   padding-bottom: 15px;
 }
@@ -69,12 +112,8 @@
 }
 
 .modal-body {
-  font-size: 18px;
-  color: #555;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
 }
 
 .modal-footer {
@@ -84,24 +123,19 @@
   justify-content: flex-end;
 }
 
-.left-inputs, .right-inputs {
+.left-inputs,
+.right-inputs {
   flex: 1;
-  flex-basis: 0;
 }
 
-.left-inputs {
-  margin-right: 20px;
+.left-inputs label,
+.right-inputs label {
+  display: block; 
 }
 
-.modal-body input[type="text"],
-.modal-body input[type="date"],
-.modal-body textarea,
-.modal-body select {
+.modal-body input[type="file"] {
   border: 2px solid #ddd;
   border-radius: 5px;
-  outline: none;
-  box-shadow: none;
-  width: 100%;
   padding: 8px;
   margin-bottom: 20px;
 }
@@ -122,40 +156,5 @@
   color: white;
   border: none;
 }
-
-select.form-control option:disabled {
-  color: #888;
-}
-
-.project-details-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px 0;
-
-}
-
-  .project-details {
-    width: 30%;
-    margin: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 10px;
-    background-color: white;
-  }
-  .admin-button {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    padding: 10px 20px;
-    background-color: #0B3C5D;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
 
 
