@@ -96,7 +96,8 @@
 
 .image-container-create {
   flex: 3;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto;
   gap: 20px;
