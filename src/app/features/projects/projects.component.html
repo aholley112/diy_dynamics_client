@@ -14,7 +14,7 @@
 </div>
 
 <div *ngIf="projects.length > 0" class="projects-grid">
-  <div *ngFor="let project of filteredProjects" class="project-card" [routerLink]="['/project-detail', project.id]">
+  <div *ngFor="let project of projects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <div class="project-image-loader" *ngIf="project.is_loading">
       <div class="custom-loader"></div>
     </div>

@@ -50,7 +50,7 @@ export class ProjectsComponent implements OnInit {
       (projects) => {
         this.projects = projects.map(project => ({
           ...project,
-          isLoading: true
+          is_loading: true
         }));
         this.applyFilters();
         this.estimatedTimes = [...new Set(projects.map(project => project.est_time_to_completion))];
@@ -60,11 +60,12 @@ export class ProjectsComponent implements OnInit {
       }
     );
   }
-  onImageLoad(project: any): void {
+  onImageLoad(project: Project): void {
     setTimeout(() => {
-    project.isLoading = false;
-  }, 5000);
+      project.is_loading = false;
+    }, 5000);
   }
+
   applyFilters(): void {
     this.filteredProjects = this.projects.filter(project => {
       const categoryMatch = this.selectedCategory ? project.categories?.some(category => category.id === this.selectedCategory) : true;
