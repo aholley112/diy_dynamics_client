@@ -1,10 +1,4 @@
 <div class="filter-controls">
-  <select [(ngModel)]="selectedCategory">
-    <option value="">All Categories</option>
-    <option *ngFor="let category of categories" [value]="category.id">
-      {{ category.category_name }}
-    </option>
-  </select>
   <select [(ngModel)]="selectedTime" (change)="applyFilters()">
     <option value="">All Times</option>
     <option *ngFor="let time of estimatedTimes" [value]="time">
@@ -13,8 +7,8 @@
   </select>
 </div>
 
-<div *ngIf="projects.length > 0" class="projects-grid">
-  <div *ngFor="let project of projects" class="project-card" [routerLink]="['/project-detail', project.id]">
+<div *ngIf="filteredProjects.length > 0" class="projects-grid">
+  <div *ngFor="let project of filteredProjects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <div class="project-image-loader" *ngIf="project.is_loading">
       <div class="custom-loader"></div>
     </div>

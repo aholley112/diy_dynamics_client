@@ -30,36 +30,38 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
-    this.loadCategories();
   }
-
-  loadCategories(): void {
-    this.categoryService.getCategories().subscribe(
-      (categories) => {
-        this.categories = categories;
-      },
-      (error) => {
-        console.error('Error fetching categories', error);
-      }
-    );
-  }
-
 
   loadProjects(): void {
     this.projectService.getProjects().subscribe(
       (projects) => {
         this.projects = projects.map(project => ({
           ...project,
-          is_loading: true
+          is_loading: true,
+          est_time_to_completion: this.mapTimeToCategory(project.est_time_to_completion)
         }));
+        console.log('Mapped Projects:', this.projects);
+
         this.applyFilters();
-        this.estimatedTimes = [...new Set(projects.map(project => project.est_time_to_completion))];
+        this.estimatedTimes = ['1 hour', '2 hours', '3+ hours'];
       },
       (error) => {
         console.error('Error fetching projects', error);
       }
     );
   }
+
+  mapTimeToCategory(time: string): string {
+    const hours = parseFloat(time);
+    if (hours <= 1) {
+      return '1 hour';
+    } else if (hours <= 2) {
+      return '2 hours';
+    } else {
+      return '3+ hours';
+    }
+  }
+
   onImageLoad(project: Project): void {
     setTimeout(() => {
       project.is_loading = false;
@@ -67,11 +69,12 @@ export class ProjectsComponent implements OnInit {
   }
 
   applyFilters(): void {
+    console.log('Selected Time:', this.selectedTime);
     this.filteredProjects = this.projects.filter(project => {
-      const categoryMatch = this.selectedCategory ? project.categories?.some(category => category.id === this.selectedCategory) : true;
       const timeMatch = this.selectedTime ? project.est_time_to_completion === this.selectedTime : true;
-      return categoryMatch && timeMatch;
+      return timeMatch;
     });
+    console.log('Filtered Projects:', this.filteredProjects);
   }
 
 }
