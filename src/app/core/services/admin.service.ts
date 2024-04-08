@@ -8,7 +8,7 @@ import { Category } from '../../shared/models/category.model';
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = `${environment.apiUrl}/categories`; 
+  private apiUrl = `${environment.apiUrl}/categories`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,15 +22,17 @@ export class AdminService {
     return this.http.get<Category>(`${this.apiUrl}/${id}`);
   }
 
-
+  // Create a new category
   createCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(this.apiUrl, category);
   }
 
+  // Update a category
   updateCategory(id: string, category: Category): Observable<Category> {
     return this.http.put<Category>(`${this.apiUrl}/${id}`, category);
   }
 
+  // Delete a category
   deleteCategory(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
