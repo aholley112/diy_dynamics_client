@@ -128,7 +128,7 @@ getFavoriteProjects() {
 categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done'): void {
   console.log(`categorizeProject called with favoriteId: ${favoriteId}, status: ${status}`);
   event.stopPropagation();
-  
+
   this.favoritesBoardService.categorizeFavorite(favoriteId, status);
 }
 }

@@ -29,7 +29,6 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUserId = this.authenticationService.getCurrentUserId();
-
     this.route.params.subscribe(params => {
       const projectId = +params['id'];
       if (!isNaN(projectId)) {
@@ -44,9 +43,6 @@ export class ProjectDetailComponent implements OnInit {
   fetchProject(projectId: number): void {
     this.projectService.getProjectById(projectId).subscribe({
       next: (project: any) => {
-        console.log('Project:', project);
-        console.log('Current User ID:', this.currentUserId);
-
         this.project = project;
         this.isFavorite = project.is_favorite_project;
         this.favoriteId = project.favorite_id;
@@ -86,7 +82,7 @@ export class ProjectDetailComponent implements OnInit {
 
   // Method to remove the project from the user's favorites
   removeFromFavorites(): void {
-    if (this.project && this.favoriteId != null) {  
+    if (this.project && this.favoriteId != null) {
       this.userService.removeProjectFromFavorites(this.favoriteId).subscribe({
         next: () => {
           console.log('Removed from favorites');
@@ -101,4 +97,3 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   }
-

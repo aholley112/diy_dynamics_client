@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { Project } from '../../shared/models/project.model';
 import { environment } from '../../../environments/environment';
@@ -22,8 +22,12 @@ export class ProjectService {
     return this.http.get<Project[]>(`${environment.apiUrl}/categories/${categoryId}/projects`);
   }
 
-  getProjectById(id: number): Observable<Project> {
-    return this.http.get<Project>(`${environment.apiUrl}/projects/${id}`);
+  getProjectById(id: number, userId?: number): Observable<Project> {
+    let headers = new HttpHeaders();
+    if (userId) {
+      headers = headers.set('User-ID', userId.toString());
+    }
+    return this.http.get<Project>(`${environment.apiUrl}/projects/${id}`, { headers: headers });
   }
   createProject(formData: FormData): Observable<Project> {
     return this.http.post<Project>(`${environment.apiUrl}/projects`, formData);

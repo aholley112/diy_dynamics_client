@@ -15,17 +15,15 @@ export class CategoryService{
   // Fetch all categories from the backend
   getCategories(): Observable<Category[]> {
     const token = this.authService.getToken();
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-
     return this.http.get<Category[]>(`${environment.apiUrl}/categories`, httpOptions);
   }
 
-  // Search for categories by name or other criteria
+  // Search for categories by name or related word
   searchCategories(term: string): Observable<Category[]> {
     const searchUrl = `${environment.apiUrl}/categories/search?term=${term}`;
     return this.http.get<Category[]>(searchUrl);
