@@ -21,7 +21,7 @@ export class AuthenticationService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
-        this.setToken(response.token); 
+        this.setToken(response.token);
         this.isLoggedInSubject.next(true);
       })
     );
@@ -52,10 +52,12 @@ export class AuthenticationService {
     return this.checkToken();
   }
 
+  // Method to get the isLoggedInSubject as an observable
   get isLoggedIn$(): Observable<boolean> {
     return this.isLoggedInSubject.asObservable();
   }
 
+  // Method to get the current user ID
   getCurrentUserId(): number | null {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     return user ? user.id : null;
@@ -71,13 +73,15 @@ export class AuthenticationService {
     this.router.navigate(['/auth']);
   }
 
+  // Method to fetch the user profile
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
+
+  // Method to check if the user is an admin
   public isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     return user.isAdmin === true;
   }
-
 
 }
