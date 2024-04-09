@@ -38,7 +38,8 @@
   </div>
   </nav>
   <div *ngIf="showAuthForm" class="auth-overlay">
-    <app-auth (onFormClose)="showAuthForm = false"></app-auth>
+    <app-auth [authAction]="authAction" (onFormClose)="showAuthForm = false"></app-auth>
+
   </div>
   </div>
 

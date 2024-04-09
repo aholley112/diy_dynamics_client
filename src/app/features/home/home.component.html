@@ -16,7 +16,7 @@
         <h2 class="feature-title">Discover</h2>
         <p class="feature-text">
           Explore a world of projects. From crafting and woodworking to children's activities, discover a universe of possibilities. Whether you're looking to manage projects or just find inspiration, you've come to the right place. Each project comes with step-by-step guides to bring your project to life. It's your one-stop shop for all things DIY.</p>
-        <button class="btn-cta" (click)="navigateToProjects()">Browse all Projects</button>
+          <button class="btn-cta" (click)="handleCallToAction('/projects')">Browse all Projects</button>
     </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
         <h2 class="feature-title">Create</h2>
         <p class="feature-text">
           Unleash your creative potential with an array of DIY projects that cater to all skill levels. Whether you're crafting a simple handmade gift or tackling a comprehensive home improvement project, discover everything you need to bring your unique visions to life. It's time to create, customize, and celebrate the joy of DIY.</p>
-        <button class="btn-cta" (click)="navigateToProjects()">Browse all Projects</button>
+          <button class="btn-cta" (click)="handleCallToAction('/create-project')">Create a Project</button>
       </div>
       <div class="image-container-create">
         <img src="https://res.cloudinary.com/dks6nqxbg/image/upload/0p9so7119ms7bgixad3uf7gyw6nt.jpeg" alt="Create Project 1" class="feature-image-create" loading="lazy">
@@ -47,9 +47,13 @@
         <h2 class="feature-title">Inspire</h2>
         <p class="feature-text">
           Become a beacon of creativity within a vibrant DIY community. Share your completed projects, unique solutions, and artistic flair to not just showcase your achievements, but to light the way for others.</p>
-        <button class="btn-cta" (click)="navigateToProjects()">Browse all Projects</button>
+          <button class="btn-cta" (click)="handleCallToAction('/profile')">Go To Profile</button>
+
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="showAuthForm" class="auth-overlay">
+  <app-auth [authAction]="authAction" (onFormClose)="closeAuthForm()"></app-auth>
 </div>
 

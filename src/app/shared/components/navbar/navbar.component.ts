@@ -102,4 +102,9 @@ goToHome(): void {
   this.router.navigate(['home']);
 }
 
+toggleAuthForm(action: 'sign-up' | 'log-in'): void {
+  this.authAction = action;
+  this.showAuthForm = true;
+}
+
 }

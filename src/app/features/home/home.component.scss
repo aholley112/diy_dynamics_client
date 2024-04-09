@@ -163,3 +163,15 @@ p.feature-text {
 .feature-image-create:hover {
   transform: scale(1.05) rotate(0deg);
 }
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
