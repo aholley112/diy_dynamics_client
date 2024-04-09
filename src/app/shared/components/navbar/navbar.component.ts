@@ -9,12 +9,14 @@ import { ProfileService } from '../../../core/services/profile.service';
 import { Profile } from '../../models/profile.model';
 import { Observable } from 'rxjs';
 import { AuthComponent } from '../../../features/auth/auth.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, AuthComponent],
+  imports: [FormsModule, CommonModule, RouterModule, AuthComponent, MatTooltipModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -100,6 +102,10 @@ goToSavedProjects(): void {
 
 goToHome(): void {
   this.router.navigate(['home']);
+}
+
+goToProjectPlanner(): void {
+  this.router.navigate(['favorites-board']);
 }
 
 toggleAuthForm(action: 'sign-up' | 'log-in'): void {

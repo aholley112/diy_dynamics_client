@@ -8,9 +8,19 @@
 }
 
 .logo {
-  font-size: 1.8em;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
   color: #0B3C5D;
+  text-transform: uppercase;
+  transition: transform 0.2s ease-in-out; 
 }
+
+.logo:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 
 .left-group {
   display: flex;
@@ -106,14 +116,32 @@
 }
 
 
+.material-icons-outlined,
+.material-symbols-outlined,
+.home-icon {
+  font-size: 24px;
+  color: black;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.home-icon {
+  text-decoration: none;
+}
+
+
 .profile-icon {
-  border-radius: 50%;
   width: 40px;
   height: 40px;
+  border-radius: 50%;
   object-fit: cover;
 }
+
 .profile-icon-default {
-  display: inline-block;
   width: 40px;
   height: 40px;
   background-color: #0B3C5D;
@@ -123,18 +151,6 @@
   line-height: 40px;
   text-align: center;
   user-select: none;
-}
-
-.home-icon {
-  font-size: 24px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-
-.material-icons-outlined {
-  font-size: 24px;
-  margin-right: 10px;
 }
 
 .user-controls, .auth-controls {
