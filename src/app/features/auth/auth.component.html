@@ -1,3 +1,4 @@
+<!-- Loader -->
 <div *ngIf="isLoading" class="loader">
   <div class="circle"></div>
   <div class="circle"></div>
@@ -5,12 +6,12 @@
   <div class="circle"></div>
   <div class="circle"></div>
 </div>
+<!-- Auth Form -->
 <div *ngIf="!isLoading" class="container">
   <div class="auth-form">
     <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
     <p *ngIf="isSignInMode">Log in to continue.</p>
     <p *ngIf="!isSignInMode">Sign up to start your DIY journey.</p>
-    <!-- Auth Form -->
     <form [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
       <!-- Input fields for sign up mode -->
       <div *ngIf="!isSignInMode">
@@ -32,7 +33,6 @@
               <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
             </div>
           </div>
-
         <!--Email -->
         <div class="form-group">
           <label for="email">Email</label>
@@ -64,7 +64,6 @@
           <div *ngIf="authForm.get('password')?.errors?.['minLength']">Password must be at least 6 characters long.</div>
         </div>
       </div>
-
       <!-- Buttons for both sign up and log in form -->
       <div class="form-actions">
         <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
@@ -75,6 +74,7 @@
         </button>
       </div>
     </form>
+    <!-- Error and success messages -->
     <p class="alert alert-danger mt-3" *ngIf="errorMsg">{{ errorMsg }}</p>
     <p class="alert alert-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
   </div>
