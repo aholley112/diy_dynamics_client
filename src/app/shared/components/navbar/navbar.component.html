@@ -5,7 +5,7 @@
     <!-- Search Bar -->
     <div class="search-bar">
       <div class="input-wrapper">
-      <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search for categories...">
+      <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search...">
 <button *ngIf="searchText && searchText.length > 0" class="clear-btn" (click)="clearSearch()">✖</button>
       </div>
       <button (click)="searchCategories()">Search</button>
