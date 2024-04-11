@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { NoAuthGuard } from './core/guards/no-auth.guard';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -58,7 +59,7 @@ export const routes: Routes = [
     {
       path: 'admin',
       loadComponent: () => import('./features/admin/admin.component').then(m => m.AdminComponent),
-      canActivate: [AuthGuard],
+      canActivate: [AdminGuard],
       data: { requiresAdmin: true }
     },
 
