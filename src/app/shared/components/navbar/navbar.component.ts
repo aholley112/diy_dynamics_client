@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -28,6 +28,9 @@ export class NavigationBarComponent implements OnInit {
   showAuthForm = false;
   authAction: 'sign-up' | 'log-in' = 'log-in';
   isLoading = false;
+  showSearchBar = false;
+  showExploreMenu: boolean = false;
+
 
   @Output() search = new EventEmitter<string>();
 
@@ -112,5 +115,30 @@ toggleAuthForm(action: 'sign-up' | 'log-in'): void {
   this.authAction = action;
   this.showAuthForm = true;
 }
+toggleSearchBar(): void {
+  this.showSearchBar = !this.showSearchBar;
+}
+
+@HostListener('window:resize')
+onWindowResize() {
+  if (window.innerWidth > 600) {
+    this.showSearchBar = false;
+    this.showExploreMenu = false;
+  }
+}
+
+isMobile(): boolean {
+  return window.innerWidth <= 600;
+}
+
+toggleExploreMenu(): void {
+  this.showExploreMenu = !this.showExploreMenu;
+}
+
+navigateAndCloseMenu(path: string): void {
+  this.router.navigate([path]);
+  this.showExploreMenu = false;
+}
+
 
 }
