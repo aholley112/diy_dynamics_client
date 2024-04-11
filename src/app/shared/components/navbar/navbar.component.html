@@ -1,48 +1,59 @@
 <div class="home">
   <nav class="top-nav">
-    <div class="left-group">
-    <div class="logo">DIY Dynamics</div>
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <div class="input-wrapper">
-      <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search...">
-<button *ngIf="searchText && searchText.length > 0" class="clear-btn" (click)="clearSearch()">✖</button>
+    <!-- Mobile view container -->
+    <div *ngIf="isMobile()" class="mobile-icons">
+      <!-- Logo and basic icons for mobile -->
+      <div class="logo">
+        <div class="profile-icon-default">DIY</div>
       </div>
-      <button (click)="searchCategories()">Search</button>
+      <div class="search-icon" (click)="toggleSearchBar()">
+        <span class="material-icons-outlined">search</span>
+      </div>
+      <div class="explore-icon" (click)="toggleExploreMenu()" matTooltip="Explore">
+        <span class="material-symbols-outlined">explore</span>
+      </div>
+    </div>
 
+    <!-- Container for larger screens -->
+    <div *ngIf="!isMobile()" class="left-group">
+      <!-- Logo and search bar for larger screens -->
+      <div class="logo">DIY Dynamics</div>
+      <div class="search-bar">
+        <div class="input-wrapper">
+          <input type="text" [(ngModel)]="searchText" (keyup.enter)="searchCategories()" placeholder="Search...">
+          <button *ngIf="searchText" class="clear-btn" (click)="clearSearch()">✖</button>
+        </div>
+        <button (click)="searchCategories()">Search</button>
+      </div>
+      <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
+      <button class="browse-btn" (click)="goToProjects()">Browse All Projects</button>
     </div>
-    <!-- Browse All Categories Button -->
-    <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
-    <button class="browse-btn" (click)="goToProjects()">Browse All Projects</button>
-  </div>
-  <!-- User Controls for when user is logged in -->
-  <div *ngIf="authService.isLoggedIn()" class="user-controls">
-    <a routerLink="/" class="home-icon">
-      <span matTooltip="Home"  class="material-icons-outlined">home</span>
-    </a>
-    <span matTooltip="View Favorites" class="material-icons-outlined" (click)="goToSavedProjects()">favorite</span>
-    <span matTooltip="Project Planner" class="material-icons-outlined" (click)="goToProjectPlanner()">
-      calendar_month
-    </span>
-      <span matTooltip="Log-Out"  class="material-icons-outlined" (click)="logout()">logout</span>
-    <div *ngIf="userProfile?.profilePictureUrl; else defaultProfile"
-         class="profile-icon"
-         (click)="goToProfile(); $event.stopPropagation();" matTooltip="Profile">
-      <img [src]="userProfile?.profilePictureUrl" alt="Profile" class="profile-icon">
+
+    <!-- User Controls for when user is logged in -->
+    <div *ngIf="authService.isLoggedIn()" class="user-controls">
+      <!-- Icons for user controls -->
+      <a routerLink="/" class="home-icon">
+        <span matTooltip="Home" class="material-icons-outlined">home</span>
+      </a>
+      <span matTooltip="View Favorites" class="material-icons-outlined" (click)="goToSavedProjects()">favorite</span>
+      <span matTooltip="Project Planner" class="material-icons-outlined" (click)="goToProjectPlanner()">calendar_month</span>
+      <span matTooltip="Log-Out" class="material-icons-outlined" (click)="logout()">logout</span>
+      <!-- Profile icon or default icon -->
+      <div *ngIf="userProfile?.profilePictureUrl; else defaultProfile" class="profile-icon" (click)="goToProfile(); $event.stopPropagation();" matTooltip="Profile">
+        <img [src]="userProfile?.profilePictureUrl" alt="Profile" class="profile-icon">
+      </div>
+      <ng-template #defaultProfile>
+        <div class="profile-icon-default" (click)="goToProfile(); $event.stopPropagation();" matTooltip="Profile">DIY</div>
+      </ng-template>
     </div>
-    <ng-template #defaultProfile>
-      <div class="profile-icon-default" (click)="goToProfile(); $event.stopPropagation();" matTooltip="Profile">DIY</div>
-    </ng-template>
+
+    <!-- Auth controls for when user is not logged in -->
+    <div *ngIf="!authService.isLoggedIn()" class="auth-controls">
+      <button (click)="showAuthForm = true; authAction = 'sign-up'" class="signup-btn">Sign Up</button>
+      <button (click)="showAuthForm = true; authAction = 'log-in'" class="login-btn">Log In</button>
     </div>
-  <div *ngIf="!authService.isLoggedIn()" class="auth-controls">
-    <button (click)="showAuthForm = true; authAction = 'sign-up'" class="signup-btn">Sign Up</button>
-    <button (click)="showAuthForm = true; authAction = 'log-in'" class="login-btn">Log In</button>
-  </div>
   </nav>
   <div *ngIf="showAuthForm" class="auth-overlay">
     <app-auth [authAction]="authAction" (onFormClose)="showAuthForm = false"></app-auth>
-
   </div>
-  </div>
-
-
+</div>
