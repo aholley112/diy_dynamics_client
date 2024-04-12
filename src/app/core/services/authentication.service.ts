@@ -79,7 +79,7 @@ export class AuthenticationService {
   }
 
   // Method to check if the user is an admin
-  public isAdmin(): boolean {
+  isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     return user.isAdmin === true;
   }
