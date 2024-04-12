@@ -13,18 +13,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
-  // The list of categories to be displayed
   categories: Category[] = [];
-  showCreateProjectForm: boolean = false;
+
 
   constructor(private categoryService: CategoryService, private router: Router) {}
 
-  // Fetch the categories when the component is initialized
   ngOnInit(): void {
     this.loadCategories();
   }
 
-  // Fetch the categories from the API
+  // Method to load categories
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(
       (data) => {
@@ -35,17 +33,9 @@ export class CategoriesComponent implements OnInit {
       }
     );
   }
-  // Navigate to the projects page when a category is selected
+
+  // Method to navigate to the projects page when a category is selected
   selectCategory(categoryId: string): void {
     this.router.navigate(['/category-projects', categoryId]);
   }
-  openCreateProjectForm() {
-    this.router.navigate(['/create-project']);
-    this.showCreateProjectForm = true;
-  }
-
-  closeCreateProjectForm() {
-    this.showCreateProjectForm = false;
-  }
-
 }
