@@ -7,6 +7,7 @@ export interface Comment {
   user_id: number;
   project_id: number;
   profile_picture_url?: string;
- 
+  user?: User; 
+
 }
 
