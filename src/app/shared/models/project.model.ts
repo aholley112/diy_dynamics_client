@@ -13,4 +13,6 @@ export interface Project {
   tool_names: string[];
   categories?: Category[];
   is_loading?: boolean;
+  comments?: Comment[];
+  isLiked?: boolean; 
 }

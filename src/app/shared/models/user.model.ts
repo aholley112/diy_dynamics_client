@@ -5,4 +5,5 @@ export interface User {
   first_name: string;
   last_name: string;
   admin: boolean;
+  profile_picture_url?: string;
 }
