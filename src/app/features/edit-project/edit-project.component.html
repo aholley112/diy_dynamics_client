@@ -1,11 +1,13 @@
+<!-- Edit project form -->
 <div class="edit-project-container">
   <div class="card">
+    <!-- Close button -->
     <div class="close-button" routerLink="/categories">&times;</div>
     <h2 class="form-title">Edit DIY Project</h2>
 <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" [(ngModel)]="categoryId" formControlName="category">
+    <select id="category" formControlName="category">
       <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
     </select>
   </div>
@@ -23,20 +25,24 @@
   </div>
   <div class="form-group">
     <label for="estTime">Estimated Time to Completion</label>
-    <input type="text" id="estTime" formControlName="estTime">
+    <input type="text" id="estTime" formControlName="est_time_to_completion">
+
   </div>
   <div class="form-group">
     <label for="materials">Material Names</label>
-    <textarea id="materials" formControlName="materials"></textarea>
+    <textarea id="materials" formControlName="material_names"></textarea>
+
   </div>
   <div class="form-group">
     <label for="tools">Tool Names</label>
-    <textarea id="tools" formControlName="tools"></textarea>
+    <textarea id="tools" formControlName="tool_names"></textarea>
+
   </div>
   <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" id="image" (change)="onFileSelected($event)" formControlName="image">
+    <label for="image">Change Image</label>
+    <input type="file" id="image" (change)="onFileSelected($event)">
   </div>
+<!-- Submit button -->
   <div class="button-container">
   <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Save Changes</button>
 </div>

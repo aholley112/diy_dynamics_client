@@ -1,11 +1,13 @@
+<div class="home-container">
   <div class="content-area">
 <!-- Introduction Text -->
 </div>
 
-<!-- Bootstrap Carousel for Features -->
+<!-- Bootstrap carousel for features -->
 <div id="featureCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
+      <!-- Feature box - Discover -->
       <div class="feature-box">
         <div class="image-container">
           <img src="https://res.cloudinary.com/dks6nqxbg/image/upload/es5k4jjt3cru7497vi6p7u81mb7t.webp" alt="DIY Project 1" class="feature-image first-image" loading="lazy">
@@ -15,17 +17,18 @@
         <div class="text-container">
         <h2 class="feature-title">Discover</h2>
         <p class="feature-text">
-          Explore a world of projects. From crafting and woodworking to children's activities, discover a universe of possibilities. Whether you're looking to manage projects or just find inspiration, you've come to the right place. Each project comes with step-by-step guides to bring your project to life. It's your one-stop shop for all things DIY.</p>
+          Explore a world of projects. From crafting and woodworking to children's activities, discover a universe of possibilities. Each project comes with step-by-step guides to bring your project to life. It's your one-stop shop for all things DIY.</p>
           <button class="btn-cta" (click)="handleCallToAction('/projects')">Browse all Projects</button>
     </div>
       </div>
     </div>
     <div class="carousel-item">
+      <!-- Feature box - Create -->
       <div class="feature-box create">
         <div class="text-container">
         <h2 class="feature-title">Create</h2>
         <p class="feature-text">
-          Unleash your creative potential with an array of DIY projects that cater to all skill levels. Whether you're crafting a simple handmade gift or tackling a comprehensive home improvement project, discover everything you need to bring your unique visions to life. It's time to create, customize, and celebrate the joy of DIY.</p>
+          Unleash your creative potential with an array of DIY projects that cater to all skill levels. Whether you're crafting a simple handmade gift or tackling a comprehensive home improvement project, discover everything you need to bring your unique visions to life.</p>
           <button class="btn-cta" (click)="handleCallToAction('/create-project')">Create a Project</button>
       </div>
       <div class="image-container-create">
@@ -38,6 +41,7 @@
       </div>
     </div>
     <div class="carousel-item">
+      <!-- Feature box - Inspire -->
       <div class="feature-box">
         <div class="image-container">
           <img src="https://res.cloudinary.com/dks6nqxbg/image/upload/aocjccqr7wx7hfc4soi7hrbc90tb.jpeg" alt="Create Project 5" class="feature-image-create" loading="lazy">
@@ -53,6 +57,7 @@
     </div>
   </div>
 </div>
+<!-- Overlay for auth form-->
 <div *ngIf="showAuthForm" class="auth-overlay">
   <app-auth [authAction]="authAction" (onFormClose)="closeAuthForm()"></app-auth>
 </div>
