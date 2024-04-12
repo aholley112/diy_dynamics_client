@@ -1,3 +1,6 @@
+<!-- Top controls section -->
+<div class="top-controls">
+<!-- Filter controls -->
 <div class="filter-controls">
   <select [(ngModel)]="selectedTime" (change)="applyFilters()">
     <option value="">All Times</option>
@@ -7,12 +10,17 @@
   </select>
 </div>
 
+<!-- Button to open the create project form -->
+  <button class="circular-button" (click)="openCreateProjectForm()">+</button>
+</div>
+
+<!-- Filtered projects -->
 <div *ngIf="filteredProjects.length > 0" class="projects-grid">
   <div *ngFor="let project of filteredProjects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <div class="project-image-loader" *ngIf="project.is_loading">
       <div class="custom-loader"></div>
     </div>
-
+<!-- Project image -->
     <img [src]="project.image_url"
          alt="Project Image"
          class="project-thumbnail"
