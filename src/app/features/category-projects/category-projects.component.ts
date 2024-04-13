@@ -33,18 +33,24 @@ export class CategoryProjectsComponent implements OnInit {
   }
 
   // Callback for when project images have loaded.
-  onImageLoad(project: Project): void {
+  onImageLoad(project: any): void {
     setTimeout(() => {
       project.is_loading = false;
-    }, 5000);
+    }, 2000); // 2 seconds delay
   }
 
   // Method to fetch the projects from the API
   loadProjectsForCategory(categoryId: number): void {
-    console.log('Projects fetched:', this.projects);
     this.projectService.getProjectsByCategory(categoryId).subscribe({
-      next: (projects) => this.projects = projects,
+      next: (projects) => {
+        this.projects = projects.map(project => ({
+          ...project,
+          is_loading: true
+        }));
+        console.log('Projects fetched:', this.projects);
+      },
       error: (error) => console.error('Error fetching projects for category', error)
     });
   }
 }
+

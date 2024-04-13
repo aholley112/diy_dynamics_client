@@ -1,15 +1,28 @@
+.main-container {
+  background-color: #77B0AA;
+  padding-top: 20px; 
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
-  margin: 20px;
-  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box
 
 }
 
 .project-card {
   background: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #003C43;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;

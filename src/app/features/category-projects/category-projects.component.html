@@ -1,9 +1,11 @@
+<div class="main-container">
 <!-- Projects grid-->
 <div class="projects-grid">
   <div *ngFor="let project of projects" class="project-card" [routerLink]="['/project-detail', project.id]">
     <div class="project-image-loader" *ngIf="project.is_loading">
       <div class="custom-loader"></div>
     </div>
+
 <!-- Project image -->
     <img *ngIf="project.image_url"
          [src]="project.image_url"
@@ -14,5 +16,6 @@
     <h3>{{ project.title }}</h3>
     <p>{{ project.description }}</p>
   </div>
+</div>
 </div>
 
