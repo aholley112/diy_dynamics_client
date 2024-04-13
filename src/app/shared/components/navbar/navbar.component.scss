@@ -1,20 +1,21 @@
 .top-nav {
-  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #EBF5F6;
+  background-color: #E3FEF7;
+  height: 50px;
+  border-bottom: 4px solid #003C43;
 }
 
 .logo {
   font-family: 'Verdana', sans-serif;
-  text-shadow: 1px 1px #0B3C5D;
+  text-shadow: 1px 1px #003C43;
   border-radius: 3px;
   font-size: 1.5em;
   font-weight: bold;
-  color: #0B3C5D;
+  color: #003C43;
   text-transform: uppercase;
   transition: transform 0.2s ease-in-out;
 }
@@ -27,7 +28,7 @@
 .profile-icon-default {
   width: 40px;
   height: 40px;
-  background-color: #0B3C5D;
+  background-color: #003C43;
   border-radius: 50%;
   color: white;
   font-size: 20px;
@@ -86,7 +87,7 @@
 
 .search-bar button {
   padding: 8px 16px;
-  background: #0B3C5D;
+  background: #003C43;
   color: white;
   border: none;
   cursor: pointer;
@@ -99,7 +100,7 @@
 
 .browse-btn {
   padding: 8px 16px;
-  background: #0B3C5D;
+  background: #003C43;
   color: white;
   border: none;
   cursor: pointer;
@@ -117,12 +118,12 @@
   font-size: 1em;
   border: none;
   margin-left: 10px;
-  background: #0B3C5D;
+  background: #003C43;
   color: white;
 }
 
 .login-btn {
-  background: #0B3C5D;
+  background: #135D66;
   color: white;
   cursor: pointer;
 }
