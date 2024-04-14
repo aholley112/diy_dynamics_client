@@ -13,6 +13,7 @@
   margin-bottom: 20px;
 }
 
+
 .profile-picture {
   width: 150px;
   height: 150px;
@@ -53,6 +54,13 @@
   background-color: #0056b3;
 }
 
+.favorites-section h3 {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .favorites-section {
   flex-grow: 1;
   padding-left: 20px;
@@ -61,7 +69,7 @@
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 30px;
 }
 
 .project-details {
@@ -71,6 +79,14 @@
   padding: 20px;
 }
 
+.project-title h3 {
+  font-size: 1.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 .project-thumbnail {
   width: 100%;
   height: 150px;
@@ -78,83 +94,115 @@
   border-radius: 8px 8px 0 0;
 }
 
-.modal {
-  display: block;
+// .btn-secondary {
+//   background-color: darkslategray;
+//   color: white;
+//   border: none;
+// }
+
+// .btn-primary {
+//   background-color: #4CAF50;
+//   color: white;
+//   border: none;
+// }
+
+.want-to-do-btn, .done-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.want-to-do-btn {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.want-to-do-btn:hover {
+  background-color: #4cae4c;
+}
+
+.done-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.done-btn:hover {
+  background-color: #5a6268; 
+}
+
+.overlay {
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
-.modal-dialog {
-  max-width: 70%;
-  margin: 10% auto;
-}
-
-.modal-content {
-  background-color: #fff;
-  border: none;
-  border-radius: 15px;
-  padding: 20px 40px;
-}
-
-.modal-header {
-  border-bottom: none;
-  padding-bottom: 15px;
-}
-
-.modal-title {
-  font-weight: 500;
-}
-
-.modal-body {
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.modal-footer {
-  border-top: none;
-  padding-top: 20px;
+.edit-form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  z-index: 1001;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
 }
 
-.left-inputs,
-.right-inputs {
-  flex: 1;
+.edit-form-container label,
+.edit-form-container input,
+.edit-form-container textarea {
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
-.left-inputs label,
-.right-inputs label {
-  display: block; 
+.edit-form-container input,
+.edit-form-container textarea {
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(100% - 20px);
 }
 
-.modal-body input[type="file"] {
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  padding: 8px;
-  margin-bottom: 20px;
-}
 
-.modal-footer button {
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-.btn-secondary {
-  background-color: darkslategray;
+.update-button, .close-button {
+  background: #5cb85c;
   color: white;
   border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-.btn-primary {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
+.close-button {
+  background: #f44336;
 }
+
+.update-button:hover, .close-button:hover {
+  opacity: 0.8;
+}
+
+
+.form-actions {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
+}
+
 
 

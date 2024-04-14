@@ -14,7 +14,7 @@
   <button *ngIf="authenticationService.isAdmin()" routerLink="/admin" class="admin-button">Admin Dashboard</button>
   <!-- Edit Profile button -->
   <button (click)="toggleEdit()" class="edit-button">Edit Profile</button>
-  <button routerLink="/favorites-board" class="project-planner-button">Project Planner</button>
+  <button routerLink="/project-planner" class="project-planner-button">Project Planner</button>
 </div>
 </div>
  <!--  Favorites Section -->
@@ -26,39 +26,35 @@
     [lazyLoad]="project.image_url"
     alt="Project Image"
     class="project-thumbnail">
+    <div class="project-title">
     <h3>{{ project.title }}</h3>
+    </div>
     <p><strong>Description:</strong> {{ project.description }}</p>
-  <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')">Want to Do</button>
-  <button (click)="categorizeProject($event, project.favoriteId, 'done')">Done</button>
+    <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">Want to Do</button>
+    <button (click)="categorizeProject($event, project.favoriteId, 'done')" class="done-btn">Done</button>
+
   </div>
 </div>
 
-   <!-- Edit Profile Modal-->
-   <div class="modal" *ngIf="editing">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit Profile</h5>
-          <span class="close" (click)="toggleEdit()">&times;</span>
-        </div>
-        <form (submit)="updateProfile()">
-          <div class="modal-body">
-            <div class="left-inputs">
-              <label for="bio">Bio:</label>
-              <textarea id="bio" [(ngModel)]="profile.bio" name="bio"></textarea>
-            </div>
-            <div class="right-inputs">
-              <label for="file">Profile Picture:</label>
-              <input type="file" id="file" (change)="onFileSelected($event)">
-              <button type="button" (click)="removeProfilePicture()">Remove Picture</button>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="toggleEdit()">Close</button>
-            <button type="submit" class="btn btn-primary">Save Profile</button>
-          </div>
-        </form>
+<div *ngIf="editing" class="overlay">
+  <div class="edit-form-container">
+    <h3>Edit Profile</h3>
+    <form (submit)="updateProfile()">
+      <!-- Left inputs for Bio -->
+      <label for="bio">Bio:</label>
+      <textarea id="bio" [(ngModel)]="profile.bio" name="bio" required></textarea>
+
+      <!-- Right inputs for Profile Picture -->
+      <label for="file">Profile Picture:</label>
+      <input type="file" id="file" (change)="onFileSelected($event)" required>
+      <button type="button" (click)="removeProfilePicture()">Remove Picture</button>
+
+      <div class="form-actions">
+        <button type="button" (click)="toggleEdit()" class="close-button">Close</button>
+        <button type="submit" class="update-button">Save Profile</button>
       </div>
-    </div>
+    </form>
   </div>
+</div>
+
 

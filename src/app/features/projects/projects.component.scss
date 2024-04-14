@@ -19,16 +19,16 @@
 
 
 /* Not sure if I want to keep this. Need to fix navbar first */
-// @media only screen and (min-width: 1000px) {
-//   .projects-grid {
-//     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-//     gap: 20px;
-//     margin: 0 20px;
-//   }
-// }
+@media only screen and (min-width: 1000px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 0 20px;
+  }
+}
 
 .main-container {
-  background-color: #77B0AA
+  background-color: #E8F3F1
 }
 
 .projects-grid {
@@ -135,7 +135,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Don't know if I want to keep this */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 
 }
