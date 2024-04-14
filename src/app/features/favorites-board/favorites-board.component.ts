@@ -72,8 +72,6 @@ onDrop(event: DragEvent, newStatus: 'wantToDo' | 'done'): void {
   }
 }
 
-
-
   goToProjectDetails(projectId: number): void {
     this.router.navigate(['/project-detail', projectId]);
   }

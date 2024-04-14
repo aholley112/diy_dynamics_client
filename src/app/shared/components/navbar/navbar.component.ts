@@ -108,7 +108,7 @@ goToHome(): void {
 }
 
 goToProjectPlanner(): void {
-  this.router.navigate(['favorites-board']);
+  this.router.navigate(['project-planner']);
 }
 
 toggleAuthForm(action: 'sign-up' | 'log-in'): void {
