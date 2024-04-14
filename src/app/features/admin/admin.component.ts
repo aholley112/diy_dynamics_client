@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AdminService } from '../../core/services/admin.service';
 import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatTooltipModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -17,6 +18,7 @@ export class AdminComponent implements OnInit {
   newCategory: Category = { id: '0', category_name: '', description: '' };
   editedCategory: Category = { id: '0', category_name: '', description: '' };
   showEditForm = false;
+  showAddCategoryForm = false;
 
   constructor(private adminService: AdminService) { }
 
@@ -41,6 +43,7 @@ export class AdminComponent implements OnInit {
         (data) => {
           this.categories.push(data);
           this.newCategory = { id: '0', category_name: '', description: '' };
+          this.showAddCategoryForm = false;
         },
         (error) => {
           console.error('Error creating category:', error);
@@ -50,10 +53,12 @@ export class AdminComponent implements OnInit {
   }
 
 
-  editCategory(category: Category): void {
+  editCategory(event: Event, category: Category): void {
+    event.stopPropagation();
     this.editedCategory = { ...category };
     this.showEditForm = true;
   }
+
 
   updateCategory(form: any): void {
     if (form.valid) {
@@ -72,7 +77,9 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  deleteCategory(category: Category): void {
+  deleteCategory(event: Event, category: Category): void {
+    event.stopPropagation();
+
     if (confirm('Are you sure you want to delete this category?')) {
       this.adminService.deleteCategory(category.id).subscribe(
         () => {
@@ -89,5 +96,14 @@ export class AdminComponent implements OnInit {
     this.showEditForm = false;
     this.editedCategory = { id: '0', category_name: '', description: '' };
   }
+  openCreateCategoryForm(): void {
+    this.showAddCategoryForm = true;
+  }
+
+  // Method to close the Add Category Form overlay
+  closeCreateCategoryForm(): void {
+    this.showAddCategoryForm = false;
+  }
+
 
 }
