@@ -69,9 +69,10 @@ export const routes: Routes = [
     },
 
     {
-      path: 'favorites-board',
+      path: 'project-planner',
       loadComponent: () => import('./features/favorites-board/favorites-board.component').then(m => m.FavoritesBoardComponent),
     },
+
 
 
  { path: '', redirectTo: 'home', pathMatch: 'full'},
