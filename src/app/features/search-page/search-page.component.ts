@@ -4,7 +4,7 @@ import { SearchService } from '../../core/services/search.service';
 import { Category } from '../../shared/models/category.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -18,7 +18,7 @@ export class SearchPageComponent implements OnInit {
   filterOption: string = 'all';
   searchResults: { categories: Category[], projects: Project[] } | null = null;
 
-  constructor(private searchService: SearchService, private activatedRoute: ActivatedRoute) {}
+  constructor(private searchService: SearchService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -67,4 +67,13 @@ export class SearchPageComponent implements OnInit {
     this.filterOption = newFilter;
     this.performSearch(this.searchText);
   }
+
+  goToCategory(categoryId: string): void {
+    this.router.navigate(['/category-projects', categoryId]);
+  }
+
+  goToProject(projectId: number): void {
+    this.router.navigate(['/project-detail', projectId]);
+  }
+
 }
