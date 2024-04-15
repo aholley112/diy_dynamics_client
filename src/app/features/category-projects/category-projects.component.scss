@@ -1,6 +1,6 @@
 .main-container {
-  background-color: #77B0AA;
-  padding-top: 20px; 
+  background-color: #E7EDE4;
+  padding-top: 20px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -21,8 +21,8 @@
 }
 
 .project-card {
-  background: #fff;
-  border: 1px solid #003C43;
+  background-color: white;
+  border: 3px solid #003C43;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -51,8 +51,8 @@
 .project-card h3 {
   padding: 16px;
   margin: 0;
-  background-color: #f7f7f7;
-  color: #0B3C5D;
+  background-color: #003C43;
+  color: white;
   font-weight: 600;
   font-size: 1.1em;
 }
