@@ -20,8 +20,9 @@
  <!--  Favorites Section -->
 <div class="favorites-section">
   <h3>Favorites</h3>
-  <div class="favorites-grid">
-  <div *ngFor="let project of favoriteProjects" class="project-details"(click)="goToProjectDetails(project.id)">
+  <div class="favorites-container">
+
+  <div *ngFor="let project of favoriteProjects" class="project-card"(click)="goToProjectDetails(project.id)">
     <img *ngIf="project.image_url"
     [lazyLoad]="project.image_url"
     alt="Project Image"
@@ -30,8 +31,7 @@
     <h3>{{ project.title }}</h3>
     </div>
     <p><strong>Description:</strong> {{ project.description }}</p>
-    <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">Want to Do</button>
-    <button (click)="categorizeProject($event, project.favoriteId, 'done')" class="done-btn">Done</button>
+    <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">Add to Project Planner</button>
 
   </div>
 </div>

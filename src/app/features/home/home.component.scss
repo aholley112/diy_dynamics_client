@@ -1,21 +1,12 @@
-.category-card,
-.grid-item,
-.search-results-container {
-  background: white;
-  border-radius: 6px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .carousel {
-  margin-top: 2rem;
-  background-color: white;
-  padding: 20px;
+  padding: 0;
+  margin-top: 0;
+  background-color: #719192;
 }
 
 .carousel-inner {
   position: relative;
-  gap: 20px;
+  gap: 0;
 }
 
 .carousel-item {
@@ -23,8 +14,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 2rem;
-  background-color: #EBF5F6
+  padding: 0 2rem;
+  background-color: #E7EDE4
 }
 
 .feature-box {

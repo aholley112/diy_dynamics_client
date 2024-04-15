@@ -1,8 +1,9 @@
 .search-results-container {
+  background-color: #E7EDE4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+
 
   h2 {
     text-align: center;
@@ -22,7 +23,7 @@
     max-width: 300px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 10px;
-    background-color: #EBF5F6;
+    background-color: white;
     margin: 10px;
     overflow: hidden;
 
@@ -58,7 +59,7 @@
 .project-card {
   background-color: white;
   border: 1px solid #003C43;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -86,8 +87,8 @@
 .project-card h3 {
   padding: 16px;
   margin: 0;
-  background-color: #E3FEF7;
-  color: #003C43;
+  background-color: #003C43;
+  color: white;
   font-weight: 600;
   font-size: 1.1em;
 }

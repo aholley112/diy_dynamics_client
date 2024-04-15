@@ -28,7 +28,7 @@
 }
 
 .main-container {
-  background-color: #E8F3F1
+  background-color: #E7EDE4;
 }
 
 .projects-grid {
@@ -94,8 +94,8 @@
 
 .project-card {
   background-color: white;
-  border: 1px solid #003C43;
-  border-radius: 8px;
+  border: 3px solid #003C43;
+  border-radius: 4 px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -123,8 +123,8 @@
 .project-card h3 {
   padding: 16px;
   margin: 0;
-  background-color: #E3FEF7;
-  color: #003C43;
+  background-color: #003C43;
+  color: white;
   font-weight: 600;
   font-size: 1.1em;
 }
