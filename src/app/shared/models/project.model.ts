@@ -14,5 +14,5 @@ export interface Project {
   categories?: Category[];
   is_loading?: boolean;
   comments?: Comment[];
-  isLiked?: boolean; 
+  isLiked?: boolean;
 }

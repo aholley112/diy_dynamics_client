@@ -8,12 +8,14 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Category } from '../../shared/models/category.model';
 import { CategoryService } from '../../core/services/category.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSkeletonLoaderModule],
+  imports: [FormsModule, CommonModule, RouterModule, LazyLoadImageModule, NgxSkeletonLoaderModule, MatTooltipModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
