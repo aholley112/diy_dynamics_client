@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { Router, RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { FavoritesBoardService } from '../../core/services/favorites-board.service';
+import { ProjectService } from '../../core/services/project.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     public authenticationService: AuthenticationService,
     private router: Router,
-    private favoritesBoardService: FavoritesBoardService) {}
+    private favoritesBoardService: FavoritesBoardService,
+    private projectService: ProjectService) {}
 
   ngOnInit() {
 
@@ -131,4 +133,6 @@ categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done')
 
   this.favoritesBoardService.categorizeFavorite(favoriteId, status);
 }
+
+
 }
