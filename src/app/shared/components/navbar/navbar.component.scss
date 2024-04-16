@@ -4,9 +4,8 @@
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  background-color: #003C43;
   height: 50px;
-  border-bottom: 4px solid #003C43;
 }
 
 .logo {
@@ -15,7 +14,7 @@
   border-radius: 3px;
   font-size: 1.5em;
   font-weight: bold;
-  color: #003C43;
+  color: white;
   text-transform: uppercase;
   transition: transform 0.2s ease-in-out;
 }
@@ -71,13 +70,13 @@
 
 .search-bar .input-wrapper .clear-btn {
   position: absolute;
-  left: 190px;
+  left: 270px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  color: darkgray;
+  color: #003C43;
   transition: transform 0.2s;
 }
 
@@ -87,28 +86,26 @@
 
 .search-bar button {
   padding: 8px 16px;
-  background: #003C43;
+  background: none;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
-  min-width: 200px;
-  max-width: 200px;
-  box-sizing: border-box;
   margin-left: 10px;
+  box-sizing: content-box;
+  font-size: 1em;
+
 }
 
 .browse-btn {
   padding: 8px 16px;
-  background: #003C43;
+  background: none;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
-  margin-left: 20px;
-  min-width: 200px;
-  max-width: 200px;
-  box-sizing: border-box;
+  margin-left: 10px;
+  font-size: 1em;
+  box-sizing: content-box;
+
 }
 
 .signup-btn, .login-btn {
@@ -123,7 +120,7 @@
 }
 
 .login-btn {
-  background: #135D66;
+  background: #003C43;
   color: white;
   cursor: pointer;
 }
@@ -139,7 +136,7 @@
 .home-icon,
 .explore-icon {
   font-size: 24px;
-  color: black;
+  color: white;
   width: 24px;
   height: 24px;
   display: flex;

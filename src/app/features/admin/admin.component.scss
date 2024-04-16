@@ -1,14 +1,15 @@
 .admin-dashboard-title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #004d40;
+  color: #003C43;
   text-align: center;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 
 .main-container {
-  background-color: #77B0AA;
+  background-color: #E7EDE4;
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@
 .categories-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #004d40;
+  color: #003C43;
   text-align: center;
   margin: 1rem 0;
 }
@@ -41,7 +42,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #E3FEF7;
+  background-color: white;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -124,7 +125,7 @@
 }
 
 .update-button, .close-button {
-  background: #5cb85c;
+  background: #003C43;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -180,7 +181,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #4CAF50;
+  background-color: #003C43;
   color: white;
   border: none;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
