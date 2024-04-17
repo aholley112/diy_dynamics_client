@@ -9,6 +9,7 @@
 <!-- Auth Form -->
 <div *ngIf="!isLoading" class="container">
   <div class="auth-form">
+    <button class="close-btn" (click)="closeAuthForm()">&times;</button>
     <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
     <p *ngIf="isSignInMode">Log in to continue.</p>
     <p *ngIf="!isSignInMode">Sign up to start your DIY journey.</p>

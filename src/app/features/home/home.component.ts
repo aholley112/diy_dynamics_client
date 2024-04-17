@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { AuthComponent } from '../auth/auth.component';
 
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -36,15 +35,27 @@ export class HomeComponent implements OnInit {
 
   }
 
-  handleCallToAction(url: string): void {
+  handleCallToAction(route: string): void {
     if (this.authService.isLoggedIn()) {
-      // Navigate if the user is logged in
-      this.router.navigateByUrl(url);
+      this.router.navigate([route]);
     } else {
-      // Show the login form if the user is not logged in
-      this.openAuthForm('log-in');
+
+      this.authService.setPendingRoute(route);
+      this.showAuthForm = true;
+      this.authAction = 'log-in';
     }
   }
+
+  handleLoginSuccess(): void {
+    const route = this.authService.getPendingRoute();
+    if (route) {
+      this.router.navigate([route]);
+      this.authService.clearPendingRoute();
+    } else {
+      this.router.navigate(['/home']); 
+    }
+  }
+
   openAuthForm(action: 'sign-up' | 'log-in'): void {
     this.authAction = action;
     this.showAuthForm = true;

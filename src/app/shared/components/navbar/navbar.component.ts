@@ -32,6 +32,7 @@ export class NavigationBarComponent implements OnInit {
   showExploreMenu: boolean = false;
 
 
+
   @Output() search = new EventEmitter<string>();
 
   constructor(public authService: AuthenticationService, private router: Router, private userService: UserService, private profileService: ProfileService) {
@@ -52,7 +53,7 @@ export class NavigationBarComponent implements OnInit {
         });
       }
 
-  private loadUserProfile(): void {
+  loadUserProfile(): void {
     if (this.authService.isLoggedIn()) {
       this.authService.getProfile().subscribe({
         next: (profile) => {
@@ -67,10 +68,27 @@ export class NavigationBarComponent implements OnInit {
   // Method to search for categories
   searchCategories(): void {
     if (this.searchText.trim()) {
-      this.router.navigate(['/search'], { queryParams: { query: this.searchText } });
-      this.searchText = '';
+      if (this.authService.isLoggedIn()) {
+        this.router.navigate(['/search'], { queryParams: { query: this.searchText } });
+        this.searchText = '';
+      } else {
+        this.authService.setPendingSearchQuery(this.searchText);
+        this.showAuthForm = true;
+        this.authAction = 'log-in';
+      }
     }
   }
+
+  onLoginSuccess(): void {
+    const pendingQuery = this.authService.getPendingSearchQuery();
+    if (pendingQuery) {
+      this.router.navigate(['/search'], { queryParams: { query: pendingQuery } });
+      this.authService.clearPendingSearchQuery();
+    } else {
+      this.router.navigate(['/default-route']);
+    }
+  }
+
 
   // Method to clear the search text
   clearSearch(): void {
@@ -111,10 +129,16 @@ goToProjectPlanner(): void {
   this.router.navigate(['project-planner']);
 }
 
-toggleAuthForm(action: 'sign-up' | 'log-in'): void {
+toggleAuthForm(action: 'sign-up' | 'log-in', intendedRoute: string): void {
+  if (this.authService.isLoggedIn()) {
+    this.router.navigate([intendedRoute]);
+  } else {
+
   this.authAction = action;
   this.showAuthForm = true;
 }
+}
+
 toggleSearchBar(): void {
   this.showSearchBar = !this.showSearchBar;
 }
@@ -138,6 +162,16 @@ toggleExploreMenu(): void {
 navigateAndCloseMenu(path: string): void {
   this.router.navigate([path]);
   this.showExploreMenu = false;
+}
+
+handleLoginSuccess(): void {
+  const pendingQuery = this.authService.getPendingSearchQuery();
+  if (pendingQuery) {
+    this.router.navigate(['/search'], { queryParams: { query: pendingQuery } });
+    this.authService.clearPendingSearchQuery();
+  } else {
+    this.router.navigate(['/home']);
+  }
 }
 
 

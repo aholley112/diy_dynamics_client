@@ -9,6 +9,9 @@ import { Profile } from '../../shared/models/profile.model';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private pendingRoute: string | null = null;
+
+  private pendingSearchQuery: string | null = null;
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkToken());
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -83,5 +86,30 @@ export class AuthenticationService {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     return user.isAdmin === true;
   }
+
+  setPendingSearchQuery(query: string) {
+    this.pendingSearchQuery = query;
+  }
+
+  getPendingSearchQuery(): string | null {
+    return this.pendingSearchQuery;
+  }
+
+  clearPendingSearchQuery(): void {
+    this.pendingSearchQuery = null;
+  }
+
+  setPendingRoute(route: string): void {
+    this.pendingRoute = route;
+  }
+
+  getPendingRoute(): string | null {
+    return this.pendingRoute;
+  }
+
+  clearPendingRoute(): void {
+    this.pendingRoute = null;
+  }
+
 
 }

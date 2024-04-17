@@ -55,6 +55,6 @@
 </div>
 <!-- Overlay for auth form-->
 <div *ngIf="showAuthForm" class="auth-overlay">
-  <app-auth [authAction]="authAction" (onFormClose)="closeAuthForm()"></app-auth>
+  <app-auth [authAction]="authAction" (onFormClose)="closeAuthForm()" (onLoginSuccess)="handleLoginSuccess()"></app-auth>
 </div>
 

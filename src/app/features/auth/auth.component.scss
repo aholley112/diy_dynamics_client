@@ -1,5 +1,6 @@
 .auth-form {
-  width: 500px !important; 
+width: 500px !important;
+position: relative;
 margin: 0 auto;
 padding: 20px;
 background-color: #fff;
@@ -7,6 +8,24 @@ border-radius: 10px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 border: 1px solid #ddd;
 text-align: center;
+}
+
+.close-btn {
+  z-index: 100;
+  color: black;
+  position: absolute;
+  top: -15px;
+  right: -1px;
+  padding: 0.5em;
+  border: none;
+  background: transparent;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+
+.close-btn:hover {
+  color: dark red;
 }
 
 .form-group {

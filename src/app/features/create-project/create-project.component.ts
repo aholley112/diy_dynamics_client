@@ -85,7 +85,7 @@ export class CreateProjectComponent implements OnInit {
     this.projectService.createProject(formData).subscribe({
       next: (response) => {
         console.log('Project created successfully', response);
-        this.router.navigate(['/categories', this.categoryId]);
+        this.router.navigate(['/projects']);
       },
       error: (error) => {
         console.error('Error creating project', error);

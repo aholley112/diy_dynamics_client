@@ -21,8 +21,11 @@ export class AuthComponent implements OnInit {
   successMessage: string = '';
   formSubmitted: boolean = false;
   isLoading: boolean = false;
+  showAuthForm: boolean = true;
 
   @Output() onFormClose = new EventEmitter<void>();
+  @Output() onLoginSuccess = new EventEmitter<void>();
+
 
   @Input() set authAction(action: 'sign-up' | 'log-in') {
     this.isSignInMode = action === 'log-in';
@@ -98,15 +101,15 @@ export class AuthComponent implements OnInit {
   }
 
 // Method to handle login
- login(username: string, password: string): void {
+login(username: string, password: string): void {
   this.isLoading = true;
   this.authenticationService.login(username, password).subscribe({
     next: (res) => {
       this.isLoading = false;
       this.authenticationService.setToken(res.token);
       localStorage.setItem('currentUser', JSON.stringify(res.user));
-      this.onFormClose.emit();
-      this.router.navigate(['/home']);
+      this.onLoginSuccess.emit(); 
+      this.closeAuthForm();
     },
     error: (err) => {
       this.isLoading = false;
@@ -114,6 +117,7 @@ export class AuthComponent implements OnInit {
     }
   });
 }
+
 
 // Private method to handle signup
 signup(firstName: string, lastName: string, email: string, username: string, password: string): void {
@@ -134,4 +138,9 @@ signup(firstName: string, lastName: string, email: string, username: string, pas
     }
   });
 }
+closeAuthForm() {
+  this.showAuthForm = false;
+  this.onFormClose.emit();
+}
+
 }

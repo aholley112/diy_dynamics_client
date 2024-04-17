@@ -25,8 +25,8 @@
         </div>
         <button (click)="searchCategories()">Search</button>
       </div>
-      <button class="browse-btn" (click)="goToCategories()">Browse All Categories</button>
-      <button class="browse-btn" (click)="goToProjects()">Browse All Projects</button>
+      <button class="browse-btn" (click)="toggleAuthForm('log-in', '/categories')">Browse All Categories</button>
+      <button class="browse-btn" (click)="toggleAuthForm('log-in', '/projects')">Browse All Projects</button>
     </div>
 
     <!-- User Controls for when user is logged in -->
@@ -54,6 +54,6 @@
     </div>
   </nav>
   <div *ngIf="showAuthForm" class="auth-overlay">
-    <app-auth [authAction]="authAction" (onFormClose)="showAuthForm = false"></app-auth>
+    <app-auth [authAction]="authAction" (onFormClose)="showAuthForm = false" (onLoginSuccess)="handleLoginSuccess()"></app-auth>
   </div>
 </div>
