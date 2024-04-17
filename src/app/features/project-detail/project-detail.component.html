@@ -1,5 +1,3 @@
-<div class="main-container">
-
 <!-- Project details container -->
 <div class="project-details-container">
   <div *ngIf="project" class="project-detail">
@@ -44,15 +42,16 @@
     <div class="comment-item" *ngFor="let comment of comments">
       <!-- Profile picture -->
       <div class="comment-profile-pic">
-        <img *ngIf="comment.profile_picture_url; else defaultProfilePic" [src]="comment.profile_picture_url" alt="Profile Pic">
-        <ng-template #defaultProfilePic>
-          <div class="default-profile-pic">DY</div>
-        </ng-template>
-      </div>
+        <img *ngIf="comment.user?.profile_picture_url; else defaultProfilePic"
+        [src]="comment.user?.profile_picture_url"
+        alt="{{ comment.user?.first_name }} {{ comment.user?.last_name }} Profile Picture">
+   <ng-template #defaultProfilePic>
+     <div class="default-profile-pic">DY</div>
+   </ng-template>
+ </div>
 
       <!-- Comment box -->
       <div class="comment-box">
-        <!-- Edit comment box -->
         <ng-container *ngIf="editCommentId === comment.id; else staticCommentText">
           <!-- Input field for editing -->
           <input type="text" [(ngModel)]="currentlyEditingCommentText">
@@ -61,17 +60,22 @@
         </ng-container>
         <ng-template #staticCommentText>
           <div class="comment-text">
-            <div class="comment-user">{{ comment.user_name }}</div>
+            <!-- Display name -->
+            <div class="comment-user">{{ comment.user?.first_name }} {{ comment.user?.last_name }}</div>
             <!-- Static comment text is shown only when NOT editing -->
-            <div class="comment-content" *ngIf="editCommentId !== comment.id">{{ comment.text }}</div>
+            <div class="comment-content">{{ comment.text }}</div>
           </div>
         </ng-template>
         <!-- Buttons for edit and delete comments -->
         <div class="comment-actions">
-          <button *ngIf="comment.user_id === currentUserId && editCommentId !== comment.id" (click)="startEditComment(comment)" matTooltip="Edit">
+          <button *ngIf="comment.user_id === currentUserId && editCommentId !== comment.id"
+                  (click)="startEditComment(comment)"
+                  matTooltip="Edit">
             <span class="material-icons">edit</span>
           </button>
-          <button *ngIf="comment.user_id === currentUserId" (click)="deleteComment(comment.id)" matTooltip="Delete">
+          <button *ngIf="comment.user_id === currentUserId"
+                  (click)="deleteComment(comment.id)"
+                  matTooltip="Delete">
             <span class="material-icons">delete</span>
           </button>
         </div>

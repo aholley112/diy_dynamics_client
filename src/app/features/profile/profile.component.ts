@@ -115,7 +115,8 @@ getFavoriteProjects() {
             title: favorite.title,
             description: favorite.description,
             image_url: favorite.image_url,
-            favoriteId: favorite.favorite_id
+            favoriteId: favorite.favorite_id,
+            inPlanner: favorite.status === 'wantToDo' || favorite.status === 'done'
           };
         });
         console.log('Favorite Projects with IDs:', this.favoriteProjects);
@@ -126,13 +127,17 @@ getFavoriteProjects() {
     console.error('No user ID found');
   }
 }
+  categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done' | 'unclassified'): void {
+    event.stopPropagation();
+    const project = this.favoriteProjects.find(p => p.favoriteId === favoriteId);
+    if (!project) return;
 
-categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done'): void {
-  console.log(`categorizeProject called with favoriteId: ${favoriteId}, status: ${status}`);
-  event.stopPropagation();
+    this.favoritesBoardService.categorizeFavorite(favoriteId, status, () => {
+      project.inPlanner = status !== 'unclassified';
+    });
+  }
 
-  this.favoritesBoardService.categorizeFavorite(favoriteId, status);
+
 }
 
 
-}

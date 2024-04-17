@@ -18,22 +18,23 @@ export class FavoritesBoardService {
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
 
-  categorizeFavorite(favorite_Id: number, status: 'wantToDo' | 'done'): void {
+  categorizeFavorite(favorite_Id: number, status: 'wantToDo' | 'done' | 'unclassified', onSuccess?: () => void): void {
     console.log(`Categorizing favorite ${favorite_Id} as ${status}`);
     this.updateFavoriteStatus(favorite_Id, status).subscribe({
       next: (response) => {
         console.log('Favorite status update response:', response);
-
+        if (onSuccess) {
+          onSuccess();
+        }
         const userId = this.authService.getCurrentUserId();
-        if (userId !== null) {
+        if (userId) {
           this.refreshFavorites(userId);
-        } else {
-          console.error('User ID is null');
         }
       },
       error: error => console.error('Error updating favorite status', error)
     });
   }
+
 
 
   refreshFavorites(userId: number): void {
@@ -49,8 +50,8 @@ export class FavoritesBoardService {
     });
   }
 
-  updateFavoriteStatus(favoriteId: number, newStatus: 'wantToDo' | 'done'): Observable<any> {
+  updateFavoriteStatus(favoriteId: number, newStatus: 'wantToDo' | 'done' | 'unclassified'): Observable<any> {
     return this.http.put(`${environment.apiUrl}/favorites/${favoriteId}/status`, { status: newStatus });
-}
+  }
 
 }

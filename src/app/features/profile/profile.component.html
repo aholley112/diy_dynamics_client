@@ -1,4 +1,3 @@
-
 <div class="profile-page">
   <!-- Profile header -->
 <div class="profile-sidebar">
@@ -31,7 +30,13 @@
     <h3>{{ project.title }}</h3>
     </div>
     <p><strong>Description:</strong> {{ project.description }}</p>
-    <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">Add to Project Planner</button>
+    <button *ngIf="!project.inPlanner" (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">
+      Add to Project Planner
+    </button>
+    <button *ngIf="project.inPlanner" (click)="categorizeProject($event, project.favoriteId, 'unclassified')" class="remove-from-planner-btn">
+      Remove from Project Planner
+    </button>
+
 
 
   </div>
@@ -57,5 +62,3 @@
     </form>
   </div>
 </div>
-
-

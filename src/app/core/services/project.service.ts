@@ -5,7 +5,6 @@ import { Project } from '../../shared/models/project.model';
 import { environment } from '../../../environments/environment';
 import { Comment } from '../../shared/models/comment.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -84,4 +83,10 @@ export class ProjectService {
   removeLike(likeId: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/likes/${likeId}`);
   }
+
+  updatePlannerStatus(projectId: number, isInPlanner: boolean): Observable<any> {
+    const url = `${environment.apiUrl}/projects/${projectId}/${isInPlanner ? 'add_to_planner' : 'remove_from_planner'}`;
+    return this.http.post(url, {});
+  }
+
 }
