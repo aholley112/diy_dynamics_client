@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../core/services/admin.service';
 import { Category } from '../../shared/models/category.model';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

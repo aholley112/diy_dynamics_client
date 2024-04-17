@@ -1,52 +1,54 @@
 <div class="main-container">
-<div class="create-project-container">
+  <div class="create-project-container">
     <div class="card">
       <div class="close-button" routerLink="/projects">&times;</div>
       <h2 class="form-title">Create New DIY Project</h2>
       <form (submit)="submitProject()">
-    <div class="form-group">
-      <label for="category">Category</label>
-      <select id="category" [(ngModel)]="categoryId" name="category">
-        <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" id="title" [(ngModel)]="project.title" name="title">
-    </div>
-    <div class="form-group">
-      <label for="estTime">Estimated Time to Completion</label>
-      <input type="text" id="estTime" [(ngModel)]="project.est_time_to_completion" name="estTime">
-    </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" [(ngModel)]="categoryId" name="category">
+            @for (category of categories; track category) {
+              <option [value]="category.id">{{ category.category_name }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" [(ngModel)]="project.title" name="title">
+        </div>
+        <div class="form-group">
+          <label for="estTime">Estimated Time to Completion</label>
+          <input type="text" id="estTime" [(ngModel)]="project.est_time_to_completion" name="estTime">
+        </div>
 
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" [(ngModel)]="project.description" name="description"></textarea>
-    </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" [(ngModel)]="project.description" name="description"></textarea>
+        </div>
 
-    <div class="form-group">
-      <label for="instructions">Instructions</label>
-      <textarea id="instructions" [(ngModel)]="project.instructions" name="instructions"></textarea>
-    </div>
+        <div class="form-group">
+          <label for="instructions">Instructions</label>
+          <textarea id="instructions" [(ngModel)]="project.instructions" name="instructions"></textarea>
+        </div>
 
 
-    <div class="form-group">
-      <label for="materials">Material Names</label>
-      <textarea id="materials" [(ngModel)]="materialNames" name="materials"></textarea>
-    </div>
+        <div class="form-group">
+          <label for="materials">Material Names</label>
+          <textarea id="materials" [(ngModel)]="materialNames" name="materials"></textarea>
+        </div>
 
-    <div class="form-group">
-      <label for="tools">Tool Names</label>
-      <textarea id="tools" [(ngModel)]="toolNames" name="tools"></textarea>
+        <div class="form-group">
+          <label for="tools">Tool Names</label>
+          <textarea id="tools" [(ngModel)]="toolNames" name="tools"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" id="image" (change)="onFileSelected($event)">
+        </div>
+        <div class="button-container">
+          <button type="submit" class="btn btn-primary">Create Project</button>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="image">Image</label>
-      <input type="file" id="image" (change)="onFileSelected($event)">
-    </div>
-    <div class="button-container">
-    <button type="submit" class="btn btn-primary">Create Project</button>
   </div>
-  </form>
-</div>
-</div>
 </div>

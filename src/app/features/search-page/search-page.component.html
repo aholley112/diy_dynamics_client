@@ -1,29 +1,40 @@
-<div class="search-results-container" *ngIf="searchResults">
-<!-- Category results section -->
-  <div *ngIf="searchResults.categories.length > 0" class="category-results">
-    <h2>Category Results</h2>
-    <div class="results-list">
-      <div *ngFor="let category of searchResults.categories" class="result-card" (click)="goToCategory(category.id)">
-        <div class="card-content">
-          <h3>{{ category.category_name }}</h3>
-          <p>{{ category.description }}</p>
+@if (searchResults) {
+  <div class="search-results-container">
+    <!-- Category results section -->
+    @if (searchResults.categories.length > 0) {
+      <div class="category-results">
+        <h2>Category Results</h2>
+        <div class="results-list">
+          @for (category of searchResults.categories; track category) {
+            <div class="result-card" (click)="goToCategory(category.id)">
+              <div class="card-content">
+                <h3>{{ category.category_name }}</h3>
+                <p>{{ category.description }}</p>
+              </div>
+            </div>
+          }
         </div>
       </div>
-    </div>
-  </div>
-  <div class="results-spacing"></div>
-
-<!-- Project results section -->
-  <div *ngIf="searchResults.projects.length > 0" class="project-results">
-    <h2>Project Results</h2>
-    <div class="results-list">
-      <div *ngFor="let project of searchResults.projects" class="project-card" (click)="goToProject(project.id)">
-        <div class="card-content">
-          <img *ngIf="project.image_url" [src]="project.image_url" class="project-thumbnail" alt="{{ project.title }}">
-          <h3 class="project-title">{{ project.title }}</h3>
-          <p class="project-description">{{ project.description }}</p>
+    }
+    <div class="results-spacing"></div>
+    <!-- Project results section -->
+    @if (searchResults.projects.length > 0) {
+      <div class="project-results">
+        <h2>Project Results</h2>
+        <div class="results-list">
+          @for (project of searchResults.projects; track project) {
+            <div class="project-card" (click)="goToProject(project.id)">
+              <div class="card-content">
+                @if (project.image_url) {
+                  <img [src]="project.image_url" class="project-thumbnail" alt="{{ project.title }}">
+                }
+                <h3 class="project-title">{{ project.title }}</h3>
+                <p class="project-description">{{ project.description }}</p>
+              </div>
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
   </div>
-</div>
+}

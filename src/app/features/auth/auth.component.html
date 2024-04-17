@@ -1,82 +1,120 @@
 <!-- Loader -->
-<div *ngIf="isLoading" class="loader">
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-</div>
+@if (isLoading) {
+  <div class="loader">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+}
 <!-- Auth Form -->
-<div *ngIf="!isLoading" class="container">
-  <div class="auth-form">
-    <button class="close-btn" (click)="closeAuthForm()">&times;</button>
-    <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
-    <p *ngIf="isSignInMode">Log in to continue.</p>
-    <p *ngIf="!isSignInMode">Sign up to start your DIY journey.</p>
-    <form [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
-      <!-- Input fields for sign up mode -->
-      <div *ngIf="!isSignInMode">
-        <div class="form-group">
-          <!--First Name-->
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" formControlName="firstName" class="form-control" />
-          <!--Error message for first name-->
-          <div *ngIf="authForm.get('firstName')?.invalid && formSubmitted" class="alert alert-danger">
-            <div *ngIf="authForm.get('firstName')?.errors?.['required']">First name is required.</div>
-          </div>
-        </div>
-        <!--Last Name-->
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" formControlName="lastName" class="form-control" />
-            <!--Error message for last name-->
-            <div *ngIf="authForm.get('lastName')?.invalid && formSubmitted" class="alert alert-danger">
-              <div *ngIf="authForm.get('lastName')?.errors?.['required']">Last name is required.</div>
+@if (!isLoading) {
+  <div class="container">
+    <div class="auth-form">
+      <button class="close-btn" (click)="closeAuthForm()">&times;</button>
+      <h2>{{ isSignInMode ? 'Welcome Back!' : 'Time To Get Inspired' }}</h2>
+      @if (isSignInMode) {
+        <p>Log in to continue.</p>
+      }
+      @if (!isSignInMode) {
+        <p>Sign up to start your DIY journey.</p>
+      }
+      <form [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
+        <!-- Input fields for sign up mode -->
+        @if (!isSignInMode) {
+          <div>
+            <div class="form-group">
+              <!--First Name-->
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" formControlName="firstName" class="form-control" />
+              <!--Error message for first name-->
+              @if (authForm.get('firstName')?.invalid && formSubmitted) {
+                <div class="alert alert-danger">
+                  @if (authForm.get('firstName')?.errors?.['required']) {
+                    <div>First name is required.</div>
+                  }
+                </div>
+              }
+            </div>
+            <!--Last Name-->
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+              <!--Error message for last name-->
+              @if (authForm.get('lastName')?.invalid && formSubmitted) {
+                <div class="alert alert-danger">
+                  @if (authForm.get('lastName')?.errors?.['required']) {
+                    <div>Last name is required.</div>
+                  }
+                </div>
+              }
+            </div>
+            <!--Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" class="form-control" />
+              <!--Error message for email-->
+              @if (authForm.get('email')?.invalid && formSubmitted) {
+                <div class="alert alert-danger">
+                  @if (authForm.get('email')?.errors?.['required']) {
+                    <div>Email is required.</div>
+                  }
+                  @if (authForm.get('email')?.errors?.['email']) {
+                    <div>Please enter a valid email address.</div>
+                  }
+                </div>
+              }
             </div>
           </div>
-        <!--Email -->
+        }
+        <!-- Input fields for both sign up and log in form -->
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" class="form-control" />
-          <!--Error message for email-->
-          <div *ngIf="authForm.get('email')?.invalid && formSubmitted" class="alert alert-danger">
-            <div *ngIf="authForm.get('email')?.errors?.['required']">Email is required.</div>
-            <div *ngIf="authForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
-          </div>
+          <!--Username-->
+          <label for="username">Username</label>
+          <input type="text" id="username" formControlName="username" class="form-control" />
+          <!--Error message for username-->
+          @if (authForm.get('username')?.invalid && formSubmitted) {
+            <div class="alert alert-danger">
+              @if (authForm.get('username')?.errors?.['required']) {
+                <div>Username is required.</div>
+              }
+            </div>
+          }
         </div>
-      </div>
-      <!-- Input fields for both sign up and log in form -->
-      <div class="form-group">
-        <!--Username-->
-        <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username" class="form-control" />
-        <!--Error message for username-->
-        <div *ngIf="authForm.get('username')?.invalid && formSubmitted" class="alert alert-danger">
-          <div *ngIf="authForm.get('username')?.errors?.['required']">Username is required.</div>
+        <!--Password-->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control" />
+          <!--Error message for password-->
+          @if (authForm.get('password')?.invalid && formSubmitted) {
+            <div class="alert alert-danger">
+              @if (authForm.get('password')?.errors?.['required']) {
+                <div>Password is required.</div>
+              }
+              @if (authForm.get('password')?.errors?.['minLength']) {
+                <div>Password must be at least 6 characters long.</div>
+              }
+            </div>
+          }
         </div>
-      </div>
-      <!--Password-->
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password" class="form-control" />
-        <!--Error message for password-->
-        <div *ngIf="authForm.get('password')?.invalid && formSubmitted" class="alert alert-danger">
-          <div *ngIf="authForm.get('password')?.errors?.['required']">Password is required.</div>
-          <div *ngIf="authForm.get('password')?.errors?.['minLength']">Password must be at least 6 characters long.</div>
+        <!-- Buttons for both sign up and log in form -->
+        <div class="form-actions">
+          <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
+            {{ isSignInMode ? 'Sign Up' : 'Log In' }}
+          </button>
+          <button class="btn btn-primary" type="submit">
+            {{ isSignInMode ? 'Log In' : 'Sign Up' }}
+          </button>
         </div>
-      </div>
-      <!-- Buttons for both sign up and log in form -->
-      <div class="form-actions">
-        <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
-          {{ isSignInMode ? 'Sign Up' : 'Log In' }}
-        </button>
-        <button class="btn btn-primary" type="submit">
-          {{ isSignInMode ? 'Log In' : 'Sign Up' }}
-        </button>
-      </div>
-    </form>
-    <!-- Error and success messages -->
-    <p class="alert alert-danger mt-3" *ngIf="errorMsg">{{ errorMsg }}</p>
-    <p class="alert alert-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
+      </form>
+      <!-- Error and success messages -->
+      @if (errorMsg) {
+        <p class="alert alert-danger mt-3">{{ errorMsg }}</p>
+      }
+      @if (successMessage) {
+        <p class="alert alert-success mt-3">{{ successMessage }}</p>
+      }
+    </div>
   </div>
-</div>
+}

@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProjectsComponent } from '../projects/projects.component';
 import { CategoriesComponent } from '../categories/categories.component';
-import { CommonModule } from '@angular/common';
+
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { AuthComponent } from '../auth/auth.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ProjectsComponent, CategoriesComponent, CommonModule, AuthComponent],
+  imports: [FormsModule, ProjectsComponent, CategoriesComponent, AuthComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

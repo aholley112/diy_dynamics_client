@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../core/services/authentication.service';
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -9,7 +9,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule, NgxSkeletonLoaderModule],
+  imports: [ReactiveFormsModule, NgxSkeletonLoaderModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })

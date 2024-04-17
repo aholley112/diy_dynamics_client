@@ -5,20 +5,22 @@
     <div class="project-column" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'wantToDo')">
       <h4>Want to Do</h4>
       <div class="project-container">
-        <ng-container *ngFor="let project of wantToDoProjects">
+        @for (project of wantToDoProjects; track project) {
           <div class="project-card"
-               draggable="true"
-               (dragstart)="onDragStart($event, project)"
-               (click)="goToProjectDetails(project.id)">
-            <img *ngIf="project.image_url"
-                 [src]="project.image_url"
-                 [lazyLoad]="project.image_url"
-                 alt="Project Image"
-                 class="project-thumbnail">
+            draggable="true"
+            (dragstart)="onDragStart($event, project)"
+            (click)="goToProjectDetails(project.id)">
+            @if (project.image_url) {
+              <img
+                [src]="project.image_url"
+                [lazyLoad]="project.image_url"
+                alt="Project Image"
+                class="project-thumbnail">
+            }
             <h5>{{ project.title }}</h5>
             <p><strong>Description:</strong> {{ project.description }}</p>
           </div>
-        </ng-container>
+        }
       </div>
     </div>
 
@@ -26,20 +28,22 @@
     <div class="project-column" (dragover)="onDragOver($event)" (drop)="onDrop($event, 'done')">
       <h4>Done</h4>
       <div class="project-container">
-        <ng-container *ngFor="let project of doneProjects">
+        @for (project of doneProjects; track project) {
           <div class="project-card"
-               draggable="true"
-               (dragstart)="onDragStart($event, project)"
-               (click)="goToProjectDetails(project.id)">
-            <img *ngIf="project.image_url"
-                 [src]="project.image_url"
-                 [lazyLoad]="project.image_url"
-                 alt="Project Image"
-                 class="project-thumbnail">
+            draggable="true"
+            (dragstart)="onDragStart($event, project)"
+            (click)="goToProjectDetails(project.id)">
+            @if (project.image_url) {
+              <img
+                [src]="project.image_url"
+                [lazyLoad]="project.image_url"
+                alt="Project Image"
+                class="project-thumbnail">
+            }
             <h5>{{ project.title }}</h5>
             <p><strong>Description:</strong> {{ project.description }}</p>
           </div>
-        </ng-container>
+        }
       </div>
     </div>
   </div>

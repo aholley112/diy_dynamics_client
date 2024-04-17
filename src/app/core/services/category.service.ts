@@ -28,4 +28,14 @@ export class CategoryService{
     const searchUrl = `${environment.apiUrl}/categories/search?term=${term}`;
     return this.http.get<Category[]>(searchUrl);
   }
+  getCategoryById(categoryId: number): Observable<Category> {
+    const token = this.authService.getToken();
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        })
+    };
+    return this.http.get<Category>(`${environment.apiUrl}/categories/${categoryId}`, httpOptions);
+}
+
 }

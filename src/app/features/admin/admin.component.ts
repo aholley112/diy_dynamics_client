@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AdminService } from '../../core/services/admin.service';
 import { Category } from '../../shared/models/category.model';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -9,7 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatTooltipModule],
+  imports: [FormsModule, MatTooltipModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })

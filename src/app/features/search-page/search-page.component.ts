@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../../shared/models/project.model';
 import { SearchService } from '../../core/services/search.service';
 import { Category } from '../../shared/models/category.model';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
 })

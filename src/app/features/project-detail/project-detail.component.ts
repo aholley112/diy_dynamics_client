@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProjectService } from '../../core/services/project.service';
 import { Project } from '../../shared/models/project.model';
-import { CommonModule } from '@angular/common';
+
 import { UserService } from '../../core/services/user.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { Comment } from '../../shared/models/comment.model';
@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MatTooltipModule],
+  imports: [RouterModule, FormsModule, MatTooltipModule],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss'
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ProfileService } from '../../core/services/profile.service';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { ProjectService } from '../../core/services/project.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, LazyLoadImageModule],
+  imports: [FormsModule, RouterModule, LazyLoadImageModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

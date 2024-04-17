@@ -4,49 +4,51 @@
     <!-- Close button -->
     <div class="close-button" routerLink="/categories">&times;</div>
     <h2 class="form-title">Edit DIY Project</h2>
-<form [formGroup]="editForm" (ngSubmit)="saveChanges()">
-  <div class="form-group">
-    <label for="category">Category</label>
-    <select id="category" formControlName="category">
-      <option *ngFor="let category of categories" [value]="category.id">{{ category.category_name }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input id="title" type="text" formControlName="title">
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <textarea id="description" formControlName="description"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="instructions">Instructions</label>
-    <textarea id="instructions" formControlName="instructions"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="estTime">Estimated Time to Completion</label>
-    <input type="text" id="estTime" formControlName="est_time_to_completion">
+    <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" formControlName="category">
+          @for (category of categories; track category) {
+            <option [value]="category.id">{{ category.category_name }}</option>
+          }
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="instructions">Instructions</label>
+        <textarea id="instructions" formControlName="instructions"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="estTime">Estimated Time to Completion</label>
+        <input type="text" id="estTime" formControlName="est_time_to_completion">
 
-  </div>
-  <div class="form-group">
-    <label for="materials">Material Names</label>
-    <textarea id="materials" formControlName="material_names"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="materials">Material Names</label>
+        <textarea id="materials" formControlName="material_names"></textarea>
 
-  </div>
-  <div class="form-group">
-    <label for="tools">Tool Names</label>
-    <textarea id="tools" formControlName="tool_names"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="tools">Tool Names</label>
+        <textarea id="tools" formControlName="tool_names"></textarea>
 
+      </div>
+      <div class="form-group">
+        <label for="image">Change Image</label>
+        <input type="file" id="image" (change)="onFileSelected($event)">
+      </div>
+      <!-- Submit button -->
+      <div class="button-container">
+        <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Save Changes</button>
+      </div>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="image">Change Image</label>
-    <input type="file" id="image" (change)="onFileSelected($event)">
-  </div>
-<!-- Submit button -->
-  <div class="button-container">
-  <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Save Changes</button>
-</div>
-</form>
-</div>
 </div>
 

@@ -1,11 +1,17 @@
-<div *ngIf="categories.length > 0">
-  <h2>Categories</h2>
-  <ul>
-    <li *ngFor="let category of categories">
-      <strong>{{ category.category_name }}</strong>: {{ category.description }}
-    </li>
-  </ul>
-</div>
-<div *ngIf="categories.length === 0">
-  <p>No categories available.</p>
-</div>
+@if (categories.length > 0) {
+  <div>
+    <h2>Categories</h2>
+    <ul>
+      @for (category of categories; track category) {
+        <li>
+          <strong>{{ category.category_name }}</strong>: {{ category.description }}
+        </li>
+      }
+    </ul>
+  </div>
+}
+@if (categories.length === 0) {
+  <div>
+    <p>No categories available.</p>
+  </div>
+}

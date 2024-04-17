@@ -1,85 +1,98 @@
 <!-- Project details container -->
 <div class="project-details-container">
-  <div *ngIf="project" class="project-detail">
-    <h2>{{ project.title }}</h2>
-    <img *ngIf="project.image_url" [src]="project.image_url" alt="Project Image">
-    <p><strong>Description:</strong> {{ project.description }}</p>
-    <p><strong>Instructions:</strong> {{ project.instructions }}</p>
-    <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p>
-    <p><strong>Materials Needed:</strong> {{ project.material_names }}</p>
-    <p><strong>Tools Needed:</strong> {{ project.tool_names }}</p>
-  </div>
+  @if (project) {
+    <div class="project-detail">
+      <h2>{{ project.title }}</h2>
+      @if (project.image_url) {
+        <img [src]="project.image_url" alt="Project Image">
+      }
+      <p><strong>Description:</strong> {{ project.description }}</p>
+      <p><strong>Instructions:</strong> {{ project.instructions }}</p>
+      <p><strong>Estimated Time to Completion:</strong> {{ project.est_time_to_completion }}</p>
+      <p><strong>Materials Needed:</strong> {{ project.material_names }}</p>
+      <p><strong>Tools Needed:</strong> {{ project.tool_names }}</p>
+    </div>
+  }
   <!-- Action bar buttons -->
   <div class="actions-bar">
     <!-- Like button -->
     <button (click)="project ? toggleLike(project.id) : null" [class.liked]="project?.isLiked"
-          [matTooltip]="project?.isLiked ? 'Unlike Project' : 'Like Project'">
-    <span class="material-symbols-outlined">thumb_up</span>
-  </button>
+      [matTooltip]="project?.isLiked ? 'Unlike Project' : 'Like Project'">
+      <span class="material-symbols-outlined">thumb_up</span>
+    </button>
     <!-- Add to favorites button -->
     <button (click)="toggleFavorite()" [class.favorited]="isFavorite"
-          [matTooltip]="isFavorite ? 'Remove from Favorites' : 'Add to Favorites'">
-    <span class="material-symbols-outlined">{{ isFavorite ? 'favorite' : 'favorite_border' }}</span>
-  </button>
+      [matTooltip]="isFavorite ? 'Remove from Favorites' : 'Add to Favorites'">
+      <span class="material-symbols-outlined">{{ isFavorite ? 'favorite' : 'favorite_border' }}</span>
+    </button>
     <!-- Comment button -->
     <button (click)="toggleCommentBox()" matTooltip="Comment">
       <span class="material-symbols-outlined">chat_bubble</span>
     </button>
     <!-- Edit project button - only visible if user created the project -->
-    <button *ngIf="project?.user_id === currentUserId" [routerLink]="['/edit-project', project?.id]" matTooltip="Edit Project">
-      <span class="material-symbols-outlined">edit</span>
-    </button>
+    @if (project?.user_id === currentUserId) {
+      <button [routerLink]="['/edit-project', project?.id]" matTooltip="Edit Project">
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+    }
   </div>
   <!-- Comments section -->
-  <div *ngIf="showCommentBox" class="comment-form">
-    <textarea #commentInput [(ngModel)]="newCommentText" placeholder="Write a comment..."></textarea>
-    <button (click)="addComment()">Post Comment</button>
-  </div>
-<!-- Comments list -->
-<div class="comments-section">
-  <h3>Comments</h3>
-  <div class="comments-list">
-    <div class="comment-item" *ngFor="let comment of comments">
-      <!-- Profile picture -->
-      <div class="comment-profile-pic">
-        <img *ngIf="comment.user?.profile_picture_url; else defaultProfilePic"
-        [src]="comment.user?.profile_picture_url"
-        alt="{{ comment.user?.first_name }} {{ comment.user?.last_name }} Profile Picture">
-   <ng-template #defaultProfilePic>
-     <div class="default-profile-pic">DY</div>
-   </ng-template>
- </div>
-
-      <!-- Comment box -->
-      <div class="comment-box">
-        <ng-container *ngIf="editCommentId === comment.id; else staticCommentText">
-          <!-- Input field for editing -->
-          <input type="text" [(ngModel)]="currentlyEditingCommentText">
-          <!-- Save button -->
-          <button class="save-button" (click)="saveEditedComment(comment)">Save</button>
-        </ng-container>
-        <ng-template #staticCommentText>
-          <div class="comment-text">
-            <!-- Display name -->
-            <div class="comment-user">{{ comment.user?.first_name }} {{ comment.user?.last_name }}</div>
-            <!-- Static comment text is shown only when NOT editing -->
-            <div class="comment-content">{{ comment.text }}</div>
+  @if (showCommentBox) {
+    <div class="comment-form">
+      <textarea #commentInput [(ngModel)]="newCommentText" placeholder="Write a comment..."></textarea>
+      <button (click)="addComment()">Post Comment</button>
+    </div>
+  }
+  <!-- Comments list -->
+  <div class="comments-section">
+    <h3>Comments</h3>
+    <div class="comments-list">
+      @for (comment of comments; track comment) {
+        <div class="comment-item">
+          <!-- Profile picture -->
+          <div class="comment-profile-pic">
+            @if (comment.user?.profile_picture_url) {
+              <img
+                [src]="comment.user?.profile_picture_url"
+                alt="{{ comment.user?.first_name }} {{ comment.user?.last_name }} Profile Picture">
+            } @else {
+              <div class="default-profile-pic">DY</div>
+            }
           </div>
-        </ng-template>
-        <!-- Buttons for edit and delete comments -->
-        <div class="comment-actions">
-          <button *ngIf="comment.user_id === currentUserId && editCommentId !== comment.id"
+          <!-- Comment box -->
+          <div class="comment-box">
+            @if (editCommentId === comment.id) {
+              <!-- Input field for editing -->
+              <input type="text" [(ngModel)]="currentlyEditingCommentText">
+              <!-- Save button -->
+              <button class="save-button" (click)="saveEditedComment(comment)">Save</button>
+            } @else {
+              <div class="comment-text">
+                <!-- Display name -->
+                <div class="comment-user">{{ comment.user?.first_name }} {{ comment.user?.last_name }}</div>
+                <!-- Static comment text is shown only when NOT editing -->
+                <div class="comment-content">{{ comment.text }}</div>
+              </div>
+            }
+            <!-- Buttons for edit and delete comments -->
+            <div class="comment-actions">
+              @if (comment.user_id === currentUserId && editCommentId !== comment.id) {
+                <button
                   (click)="startEditComment(comment)"
                   matTooltip="Edit">
-            <span class="material-icons">edit</span>
-          </button>
-          <button *ngIf="comment.user_id === currentUserId"
+                  <span class="material-icons">edit</span>
+                </button>
+              }
+              @if (comment.user_id === currentUserId) {
+                <button
                   (click)="deleteComment(comment.id)"
                   matTooltip="Delete">
-            <span class="material-icons">delete</span>
-          </button>
+                  <span class="material-icons">delete</span>
+                </button>
+              }
+            </div>
+          </div>
         </div>
-      </div>
+      }
     </div>
   </div>
-</div>

@@ -1,64 +1,73 @@
 <div class="profile-page">
   <!-- Profile header -->
-<div class="profile-sidebar">
-  <div class="profile-header">
-  <img *ngIf="profile.profilePictureUrl" [src]="profile.profilePictureUrl" [lazyLoad]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
-  <h2>{{ profile.user?.firstName }} {{ profile.user?.lastName }}</h2>
-</div>
-<div class="bio-card">
-  <p>{{ profile.bio }}</p>
-</div>
-<div class="profile-actions">
-  <!--Edit Profile and Admin Buttons -->
-  <button *ngIf="authenticationService.isAdmin()" routerLink="/admin" class="admin-button">Admin Dashboard</button>
-  <!-- Edit Profile button -->
-  <button (click)="toggleEdit()" class="edit-button">Edit Profile</button>
-  <button routerLink="/project-planner" class="project-planner-button">Project Planner</button>
-</div>
-</div>
- <!--  Favorites Section -->
-<div class="favorites-section">
-  <h3>Favorites</h3>
-  <div class="favorites-container">
-
-  <div *ngFor="let project of favoriteProjects" class="project-card"(click)="goToProjectDetails(project.id)">
-    <img *ngIf="project.image_url"
-    [lazyLoad]="project.image_url"
-    alt="Project Image"
-    class="project-thumbnail">
-    <div class="project-title">
-    <h3>{{ project.title }}</h3>
+  <div class="profile-sidebar">
+    <div class="profile-header">
+      @if (profile.profilePictureUrl) {
+        <img [src]="profile.profilePictureUrl" [lazyLoad]="profile.profilePictureUrl" alt="Profile picture" class="profile-picture">
+      }
+      <h2>{{ profile.user?.firstName }} {{ profile.user?.lastName }}</h2>
     </div>
-    <p><strong>Description:</strong> {{ project.description }}</p>
-    <button *ngIf="!project.inPlanner" (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">
-      Add to Project Planner
-    </button>
-    <button *ngIf="project.inPlanner" (click)="categorizeProject($event, project.favoriteId, 'unclassified')" class="remove-from-planner-btn">
-      Remove from Project Planner
-    </button>
-
-
-
+    <div class="bio-card">
+      <p>{{ profile.bio }}</p>
+    </div>
+    <div class="profile-actions">
+      <!--Edit Profile and Admin Buttons -->
+      @if (authenticationService.isAdmin()) {
+        <button routerLink="/admin" class="admin-button">Admin Dashboard</button>
+      }
+      <!-- Edit Profile button -->
+      <button (click)="toggleEdit()" class="edit-button">Edit Profile</button>
+      <button routerLink="/project-planner" class="project-planner-button">Project Planner</button>
+    </div>
   </div>
-</div>
+  <!--  Favorites Section -->
+  <div class="favorites-section">
+    <h3>Favorites</h3>
+    <div class="favorites-container">
 
-<div *ngIf="editing" class="overlay">
-  <div class="edit-form-container">
-    <h3>Edit Profile</h3>
-    <form (submit)="updateProfile()">
-      <!-- Left inputs for Bio -->
-      <label for="bio">Bio:</label>
-      <textarea id="bio" [(ngModel)]="profile.bio" name="bio" required></textarea>
+      @for (project of favoriteProjects; track project) {
+        <div class="project-card"(click)="goToProjectDetails(project.id)">
+          @if (project.image_url) {
+            <img
+              [lazyLoad]="project.image_url"
+              alt="Project Image"
+              class="project-thumbnail">
+          }
+          <div class="project-title">
+            <h3>{{ project.title }}</h3>
+          </div>
+          <p><strong>Description:</strong> {{ project.description }}</p>
+          @if (!project.inPlanner) {
+            <button (click)="categorizeProject($event, project.favoriteId, 'wantToDo')" class="want-to-do-btn">
+              Add to Project Planner
+            </button>
+          }
+          @if (project.inPlanner) {
+            <button (click)="categorizeProject($event, project.favoriteId, 'unclassified')" class="remove-from-planner-btn">
+              Remove from Project Planner
+            </button>
+          }
+        </div>
+      }
+    </div>
 
-      <!-- Right inputs for Profile Picture -->
-      <label for="file">Profile Picture:</label>
-      <input type="file" id="file" (change)="onFileSelected($event)" required>
-      <button type="button" (click)="removeProfilePicture()">Remove Picture</button>
-
-      <div class="form-actions">
-        <button type="button" (click)="toggleEdit()" class="close-button">Close</button>
-        <button type="submit" class="update-button">Save Profile</button>
+    @if (editing) {
+      <div class="overlay">
+        <div class="edit-form-container">
+          <h3>Edit Profile</h3>
+          <form (submit)="updateProfile()">
+            <!-- Left inputs for Bio -->
+            <label for="bio">Bio:</label>
+            <textarea id="bio" [(ngModel)]="profile.bio" name="bio" required></textarea>
+            <!-- Right inputs for Profile Picture -->
+            <label for="file">Profile Picture:</label>
+            <input type="file" id="file" (change)="onFileSelected($event)" required>
+            <button type="button" (click)="removeProfilePicture()">Remove Picture</button>
+            <div class="form-actions">
+              <button type="button" (click)="toggleEdit()" class="close-button">Close</button>
+              <button type="submit" class="update-button">Save Profile</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
-  </div>
-</div>
+    }

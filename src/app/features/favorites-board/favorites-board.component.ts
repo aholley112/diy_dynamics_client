@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ProjectService } from '../../core/services/project.service';
@@ -9,7 +9,7 @@ import { FavoritesBoardService } from '../../core/services/favorites-board.servi
 @Component({
   selector: 'app-favorites-board',
   standalone: true,
-  imports: [CommonModule, LazyLoadImageModule],
+  imports: [LazyLoadImageModule],
   templateUrl: './favorites-board.component.html',
   styleUrl: './favorites-board.component.scss'
 })

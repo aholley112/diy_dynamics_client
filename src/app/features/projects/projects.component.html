@@ -1,34 +1,42 @@
 <div class="main-container">
-<!-- Top controls section -->
-<div class="top-controls">
-<!-- Filter controls -->
-<div class="filter-controls">
-  <select [(ngModel)]="selectedTime" (change)="applyFilters()">
-    <option value="">All Times</option>
-    <option *ngFor="let time of estimatedTimes" [value]="time">
-      {{ time }}
-    </option>
-  </select>
-</div>
-
-<!-- Button to open the create project form -->
-  <button class="circular-button" (click)="openCreateProjectForm()" matTooltip="Create a New Project">+</button>
-</div>
-
-<!-- Filtered projects -->
-<div *ngIf="filteredProjects.length > 0" class="projects-grid">
-  <div *ngFor="let project of filteredProjects" class="project-card" [routerLink]="['/project-detail', project.id]">
-    <div class="project-image-loader" *ngIf="project.is_loading">
-      <div class="custom-loader"></div>
+  <!-- Top controls section -->
+  <div class="top-controls">
+    <!-- Filter controls -->
+    <div class="filter-controls">
+      <select [(ngModel)]="selectedTime" (change)="applyFilters()">
+        <option value="">All Times</option>
+        @for (time of estimatedTimes; track time) {
+          <option [value]="time">
+            {{ time }}
+          </option>
+        }
+      </select>
     </div>
-<!-- Project image -->
-    <img [src]="project.image_url"
-         alt="Project Image"
-         class="project-thumbnail"
-         [hidden]="project.is_loading"
-         (load)="onImageLoad(project)">
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.description }}</p>
+
+    <!-- Button to open the create project form -->
+    <button class="circular-button" (click)="openCreateProjectForm()" matTooltip="Create a New Project">+</button>
   </div>
-</div>
+
+  <!-- Filtered projects -->
+  @if (filteredProjects.length > 0) {
+    <div class="projects-grid">
+      @for (project of filteredProjects; track project) {
+        <div class="project-card" [routerLink]="['/project-detail', project.id]">
+          @if (project.is_loading) {
+            <div class="project-image-loader">
+              <div class="custom-loader"></div>
+            </div>
+          }
+          <!-- Project image -->
+          <img [src]="project.image_url"
+            alt="Project Image"
+            class="project-thumbnail"
+            [hidden]="project.is_loading"
+            (load)="onImageLoad(project)">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description }}</p>
+        </div>
+      }
+    </div>
+  }
 </div>
