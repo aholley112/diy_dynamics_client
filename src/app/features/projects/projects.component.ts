@@ -66,8 +66,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   // Method to handle image load
-  onImageLoad(project: Project): void {
-    project.is_loading = false;
+  onImageLoad(project: any): void {
+    setTimeout(() => {
+      project.is_loading = false;
+    }, 2000); 
   }
 
   // Method to filter projects based on selected time
