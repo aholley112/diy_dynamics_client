@@ -1,15 +1,12 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../core/services/authentication.service';
-
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ReactiveFormsModule, NgxSkeletonLoaderModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -25,9 +22,8 @@ export class AuthComponent implements OnInit {
 
   @Output() onFormClose = new EventEmitter<void>();
   @Output() onLoginSuccess = new EventEmitter<void>();
-
-
   @Input() set authAction(action: 'sign-up' | 'log-in') {
+    // Set the mode based on the input
     this.isSignInMode = action === 'log-in';
     if (this.authForm) {
       this.authForm.reset();
@@ -38,15 +34,13 @@ export class AuthComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   ngOnInit() {
     this.initializeForm();
   }
 
-  // Method to initialize the form
+  // Method to initialize the form with validators
   initializeForm() {
     this.authForm = this.fb.group({
       firstName: [''],
@@ -58,7 +52,7 @@ export class AuthComponent implements OnInit {
     this.adjustFormValidators();
   }
 
-  // Method to adjust form validators based on the current mode
+  // Method to adjust form validators based on the current sign-up/log in mode
   adjustFormValidators() {
     if (this.authForm) {
       const controls = this.authForm.controls;
@@ -108,7 +102,7 @@ login(username: string, password: string): void {
       this.isLoading = false;
       this.authenticationService.setToken(res.token);
       localStorage.setItem('currentUser', JSON.stringify(res.user));
-      this.onLoginSuccess.emit(); 
+      this.onLoginSuccess.emit();
       this.closeAuthForm();
     },
     error: (err) => {
@@ -118,8 +112,7 @@ login(username: string, password: string): void {
   });
 }
 
-
-// Private method to handle signup
+// Method to handle signup
 signup(firstName: string, lastName: string, email: string, username: string, password: string): void {
   this.isLoading = true;
   this.authenticationService.signup(firstName, lastName, email, username, password).subscribe({
@@ -138,9 +131,10 @@ signup(firstName: string, lastName: string, email: string, username: string, pas
     }
   });
 }
+
+// Method to close the form
 closeAuthForm() {
   this.showAuthForm = false;
   this.onFormClose.emit();
 }
-
 }

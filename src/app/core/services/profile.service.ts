@@ -12,10 +12,12 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
+  // Method to get the user's profile data
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>(`${environment.apiUrl}/profile`);
   }
 
+  // Method to update the user's profile data
  updateProfile(userId: number, profileData: FormData): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/users/${userId}/profile`, profileData).pipe(
     tap(() => {

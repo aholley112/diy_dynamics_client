@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../core/services/admin.service';
 import { Category } from '../../shared/models/category.model';
-
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -13,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
+
 export class AdminComponent implements OnInit {
   categories: Category[] = [];
   newCategory: Category = { id: '0', category_name: '', description: '' };
@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit {
     this.loadCategories();
   }
 
+  // Method to load the categories
   loadCategories(): void {
     this.adminService.getCategories().subscribe(
       (data) => {
@@ -37,6 +38,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  // Method to handle form submission when adding a new category
   submitCategory(form: any): void {
     if (form.valid) {
       this.adminService.createCategory(this.newCategory).subscribe(
@@ -52,14 +54,14 @@ export class AdminComponent implements OnInit {
     }
   }
 
-
+// Method to edit a category
   editCategory(event: Event, category: Category): void {
     event.stopPropagation();
     this.editedCategory = { ...category };
     this.showEditForm = true;
   }
 
-
+// Method to update a category
   updateCategory(form: any): void {
     if (form.valid) {
       this.adminService.updateCategory(this.editedCategory.id.toString(), this.editedCategory).subscribe(
@@ -77,6 +79,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // Method to delete a category
   deleteCategory(event: Event, category: Category): void {
     event.stopPropagation();
 
@@ -92,10 +95,13 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // Method to cancel the edit form
   cancelEdit(): void {
     this.showEditForm = false;
     this.editedCategory = { id: '0', category_name: '', description: '' };
   }
+
+  // Method to open the Add Category Form overlay
   openCreateCategoryForm(): void {
     this.showAddCategoryForm = true;
   }

@@ -10,12 +10,12 @@ import { Profile } from '../../shared/models/profile.model';
 })
 export class AuthenticationService {
   private pendingRoute: string | null = null;
-
   private pendingSearchQuery: string | null = null;
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkToken());
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  // Method to check if the JWT token is present in local storage
   private checkToken(): boolean {
     return !!localStorage.getItem('token');
   }
@@ -40,6 +40,7 @@ export class AuthenticationService {
       password: password
     });
   }
+
   // Method to save the JWT token in local storage
   setToken(token: string) {
     localStorage.setItem('token', token);
@@ -67,11 +68,10 @@ export class AuthenticationService {
   }
 
 
-  // Method to log out the user. Need to implement in HTML
+  // Method to log out the user.
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
-    // Notify subscribers that the user has logged out
     this.isLoggedInSubject.next(false);
     this.router.navigate(['/auth']);
   }
@@ -87,29 +87,33 @@ export class AuthenticationService {
     return user.isAdmin === true;
   }
 
+  // Method to set the pending search query
   setPendingSearchQuery(query: string) {
     this.pendingSearchQuery = query;
   }
 
+  // Method to get the pending search query when user searches without being logged in.
   getPendingSearchQuery(): string | null {
     return this.pendingSearchQuery;
   }
 
+  // Method to clear the pending search query when user searches without being logged in.
   clearPendingSearchQuery(): void {
     this.pendingSearchQuery = null;
   }
 
+  // Method to set the pending route when user clicks call to action button on home page.
   setPendingRoute(route: string): void {
     this.pendingRoute = route;
   }
 
+  // Method to get the pending route when user clicks call to action button on home page.
   getPendingRoute(): string | null {
     return this.pendingRoute;
   }
 
+  // Method to clear the pending route
   clearPendingRoute(): void {
     this.pendingRoute = null;
   }
-
-
 }

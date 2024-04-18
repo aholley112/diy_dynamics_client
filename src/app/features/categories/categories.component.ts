@@ -3,8 +3,6 @@ import { CategoryService } from '../../core/services/category.service';
 import { Category } from '../../shared/models/category.model';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-categories',
   standalone: true,
@@ -34,7 +32,7 @@ export class CategoriesComponent implements OnInit {
     );
   }
 
-  // Method to navigate to the projects page when a category is selected
+  // Method to navigate to the category-projects page when a category is selected
   selectCategory(categoryId: string): void {
     this.router.navigate(['/category-projects', categoryId]);
   }

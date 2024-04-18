@@ -1,61 +1,64 @@
+<!-- Main container-->
 <div class="main-container">
-  <h2 class="admin-dashboard-title">Admin Dashboard</h2>
-  <button class="circular-button" (click)="openCreateCategoryForm()" class="circular-button" matTooltip="Add Category">+</button>
-  <h2 class="categories-title">Categories</h2>
+<h2 class="admin-dashboard-title">Admin Dashboard</h2>
+<!--Create category button-->
+<button class="circular-button" (click)="openCreateCategoryForm()" class="circular-button" matTooltip="Add Category">+</button>
+<h2 class="categories-title">Categories</h2>
 
-
-  <!-- Add category form -->
-  @if (showAddCategoryForm) {
-    <div class="add-category-overlay">
-      <!-- Form Container -->
-      <div class="add-form-container">
-        <h3>Add Category</h3>
-        <form #categoryForm="ngForm" (ngSubmit)="submitCategory(categoryForm)">
-          <label for="categoryName">Category Name:</label>
-          <input type="text" id="categoryName" name="categoryName" [(ngModel)]="newCategory.category_name" required>
-          <label for="categoryDesc">Description:</label>
-          <textarea id="categoryDesc" name="categoryDesc" [(ngModel)]="newCategory.description" required></textarea>
-          <div class="form-actions">
-            <button type="submit" class="add-category-button" matTooltip="Add Category">Add Category</button>
-            <button type="button" (click)="closeCreateCategoryForm()" class="close-button">Close</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  }
-  <div class="categories">
-    <!-- Category list -->
-    <div class="category-list">
-      @for (category of categories; track category) {
-        <div class="category-card">
-          <div class="card-content">
-            <h3>{{ category.category_name }}</h3>
-            <p>{{ category.description }}</p>
-          </div>
-          <div class="card-actions">
-            <button (click)="editCategory($event, category)" class="material-icons" matTooltip="Edit Category">edit</button>
-            <button (click)="deleteCategory($event, category)" class="material-icons" matTooltip="Delete Category">delete</button>
-          </div>
+<!-- Add category form -->
+@if (showAddCategoryForm) {
+  <div class="add-category-overlay">
+    <!-- Form Container -->
+    <div class="add-form-container">
+      <h3>Add Category</h3>
+      <form #categoryForm="ngForm" (ngSubmit)="submitCategory(categoryForm)">
+        <label for="categoryName">Category Name:</label>
+        <input type="text" id="categoryName" name="categoryName" [(ngModel)]="newCategory.category_name" required>
+        <label for="categoryDesc">Description:</label>
+        <textarea id="categoryDesc" name="categoryDesc" [(ngModel)]="newCategory.description" required></textarea>
+        <div class="form-actions">
+          <!--Action buttons-->
+          <button type="submit" class="add-category-button" matTooltip="Add Category">Add Category</button>
+          <button type="button" (click)="closeCreateCategoryForm()" class="close-button">Close</button>
         </div>
-      }
+      </form>
     </div>
   </div>
-
-  <!-- Edit form with overlay-->
-  @if (showEditForm) {
-    <div class="overlay">
-      <div class="edit-form-container">
-        <h3>Edit Category</h3>
-        <form #editForm="ngForm" (ngSubmit)="updateCategory(editForm)">
-          <label for="editCategoryName">Category Name:</label>
-          <input type="text" id="editCategoryName" name="editCategoryName" [(ngModel)]="editedCategory.category_name" required>
-          <label for="editCategoryDesc">Description:</label>
-          <textarea id="editCategoryDesc" name="editCategoryDesc" [(ngModel)]="editedCategory.description" required></textarea>
-          <div class="form-actions">
-            <button type="submit" class="update-button">Update</button>
-            <button type="button" (click)="cancelEdit()" class="close-button">Close</button>
-          </div>
-        </form>
+}
+<div class="categories">
+  <!-- Category list -->
+  <div class="category-list">
+    @for (category of categories; track category) {
+      <div class="category-card">
+        <div class="card-content">
+          <h3>{{ category.category_name }}</h3>
+          <p>{{ category.description }}</p>
+        </div>
+        <div class="card-actions">
+          <button (click)="editCategory($event, category)" class="material-icons" matTooltip="Edit Category">edit</button>
+          <button (click)="deleteCategory($event, category)" class="material-icons" matTooltip="Delete Category">delete</button>
+        </div>
       </div>
+    }
+  </div>
+</div>
+
+<!-- Edit form with overlay-->
+@if (showEditForm) {
+  <div class="overlay">
+    <div class="edit-form-container">
+      <h3>Edit Category</h3>
+      <form #editForm="ngForm" (ngSubmit)="updateCategory(editForm)">
+        <label for="editCategoryName">Category Name:</label>
+        <input type="text" id="editCategoryName" name="editCategoryName" [(ngModel)]="editedCategory.category_name" required>
+        <label for="editCategoryDesc">Description:</label>
+        <textarea id="editCategoryDesc" name="editCategoryDesc" [(ngModel)]="editedCategory.description" required></textarea>
+        <!--Action buttons-->
+        <div class="form-actions">
+          <button type="submit" class="update-button">Update</button>
+          <button type="button" (click)="cancelEdit()" class="close-button">Close</button>
+        </div>
+      </form>
     </div>
-  }
+  </div>
+}

@@ -10,7 +10,6 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { FavoritesBoardService } from '../../core/services/favorites-board.service';
 import { ProjectService } from '../../core/services/project.service';
 
-
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -18,6 +17,7 @@ import { ProjectService } from '../../core/services/project.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
+
 export class ProfileComponent implements OnInit {
   profile: any = { user: {} };
   editing: boolean = false;
@@ -34,13 +34,9 @@ export class ProfileComponent implements OnInit {
     private projectService: ProjectService) {}
 
   ngOnInit() {
-
-    // Fetches the user's profile data on component initialization.
     this.getProfile();
-    // Fetches the user's favorite projects on component initialization.
     this.getFavoriteProjects();
   }
-
 
   // Method to fetch the user's profile data.
   getProfile() {
@@ -52,7 +48,6 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
 
   // Method to toggle the editing state of the profile.
   toggleEdit() {
@@ -82,11 +77,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // Method to remove profile picture.
   removeProfilePicture(): void {
     this.selectedFile = null;
     this.profile.profilePictureUrl = null;
   }
 
+  // Method to save the profile data.
   saveProfile(): void {
     this.updateProfile();
   }
@@ -99,6 +96,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // Method to navigate to the project details page.
   goToProjectDetails(projectId: number) {
     this.router.navigate(['/project-detail', projectId]);
   }
@@ -127,17 +125,16 @@ getFavoriteProjects() {
     console.error('No user ID found');
   }
 }
+
+// Method to categorize the project for the project planner
   categorizeProject(event: Event, favoriteId: number, status: 'wantToDo' | 'done' | 'unclassified'): void {
     event.stopPropagation();
     const project = this.favoriteProjects.find(p => p.favoriteId === favoriteId);
     if (!project) return;
-
     this.favoritesBoardService.categorizeFavorite(favoriteId, status, () => {
       project.inPlanner = status !== 'unclassified';
     });
   }
-
-
 }
 
 

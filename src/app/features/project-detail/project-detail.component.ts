@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProjectService } from '../../core/services/project.service';
 import { Project } from '../../shared/models/project.model';
-
 import { UserService } from '../../core/services/user.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { Comment } from '../../shared/models/comment.model';
@@ -30,7 +29,6 @@ export class ProjectDetailComponent implements OnInit {
   showCommentBox: boolean = false;
 
   @ViewChild('commentInput') commentInputRef!: ElementRef;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -121,7 +119,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   // Method to toggle the favorite status of the project
-
   toggleFavorite(): void {
     if (this.isFavorite) {
       this.removeFromFavorites();

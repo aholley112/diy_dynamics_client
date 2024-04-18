@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../shared/models/project.model';
 import { FormsModule } from '@angular/forms';
-
 import { ProjectService } from '../../core/services/project.service';
 import { Router, RouterModule } from '@angular/router';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
@@ -9,8 +8,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { Category } from '../../shared/models/category.model';
 import { CategoryService } from '../../core/services/category.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-
 
 @Component({
   selector: 'app-projects',
@@ -35,7 +32,7 @@ export class ProjectsComponent implements OnInit {
     this.loadProjects();
   }
 
-  // Method to load projects
+  // Method to load projects from the backend
   loadProjects(): void {
     this.projectService.getProjects().subscribe(
       (projects) => {
@@ -46,7 +43,7 @@ export class ProjectsComponent implements OnInit {
         }));
         console.log('Mapped Projects:', this.projects);
 
-        // apply filters to project list.
+        // Apply filters to project list
         this.applyFilters();
         this.estimatedTimes = ['1 hour', '2 hours', '3+ hours'];
       },
@@ -56,7 +53,7 @@ export class ProjectsComponent implements OnInit {
     );
   }
 
-  // Method to map numeric time to category string
+  // Method to map or convert numeric time to category string
   mapTimeToCategory(time: string): string {
     const hours = parseFloat(time);
     if (hours <= 1) {

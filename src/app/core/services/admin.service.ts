@@ -8,6 +8,7 @@ import { Category } from '../../shared/models/category.model';
   providedIn: 'root'
 })
 export class AdminService {
+  // API URL
   private apiUrl = `${environment.apiUrl}/categories`;
 
   constructor(private http: HttpClient) { }
@@ -15,11 +16,6 @@ export class AdminService {
   // Fetch all categories
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.apiUrl);
-  }
-
-  // Fetch category by ID
-  getCategoryById(id: string): Observable<Category> {
-    return this.http.get<Category>(`${this.apiUrl}/${id}`);
   }
 
   // Create a new category
@@ -35,5 +31,10 @@ export class AdminService {
   // Delete a category
   deleteCategory(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+   // Fetch category by ID
+   getCategoryById(id: string): Observable<Category> {
+    return this.http.get<Category>(`${this.apiUrl}/${id}`);
   }
 }

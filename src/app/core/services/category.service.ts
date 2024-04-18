@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CategoryService{
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {}
@@ -28,6 +29,8 @@ export class CategoryService{
     const searchUrl = `${environment.apiUrl}/categories/search?term=${term}`;
     return this.http.get<Category[]>(searchUrl);
   }
+
+   // Fetch a single category by ID
   getCategoryById(categoryId: number): Observable<Category> {
     const token = this.authService.getToken();
     const httpOptions = {

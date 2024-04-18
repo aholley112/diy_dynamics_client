@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ProjectService } from '../../core/services/project.service';
@@ -28,13 +27,12 @@ export class FavoritesBoardComponent implements OnInit {
     this.refreshFavoriteProjects();
   }
 
+  // Method to refresh the favorite projects
   refreshFavoriteProjects(): void {
     const userId = this.authenticationService.getCurrentUserId();
     console.log('Current User ID:', userId);
-
     if (userId) {
       this.favoritesBoardService.refreshFavorites(userId);
-
       this.favoritesBoardService.wantToDoProjects$.subscribe(projects => {
         console.log('Want To Do Projects:', projects);
         this.wantToDoProjects = projects;
@@ -46,6 +44,7 @@ export class FavoritesBoardComponent implements OnInit {
     }
   }
 
+  // Method to handle the drag start event
   onDragStart(event: DragEvent, project: any): void {
     console.log(`Dragging project with favoriteId: ${project.favorite_id}`);
     if (project.favorite_id) {
@@ -55,15 +54,16 @@ export class FavoritesBoardComponent implements OnInit {
     }
   }
 
+  // Method to handle the drag over event
   onDragOver(event: DragEvent) {
     event.preventDefault();
-}
+    }
 
+// Method to handle the drop event
 onDrop(event: DragEvent, newStatus: 'wantToDo' | 'done'): void {
   event.preventDefault();
   const favoriteId = event.dataTransfer?.getData('text/plain');
   console.log('Dropped favoriteId:', favoriteId);
-
   if (favoriteId) {
     console.log('Updating status for favoriteId:', favoriteId, 'to', newStatus);
     this.favoritesBoardService.categorizeFavorite(parseInt(favoriteId, 10), newStatus);
@@ -72,6 +72,7 @@ onDrop(event: DragEvent, newStatus: 'wantToDo' | 'done'): void {
   }
 }
 
+  // Method to navigate to the project details page
   goToProjectDetails(projectId: number): void {
     this.router.navigate(['/project-detail', projectId]);
   }

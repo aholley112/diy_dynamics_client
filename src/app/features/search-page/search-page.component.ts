@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../../shared/models/project.model';
 import { SearchService } from '../../core/services/search.service';
 import { Category } from '../../shared/models/category.model';
-
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
@@ -28,6 +27,7 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
+  // Method to perform the search
   performSearch(query: string): void {
     if (query) {
       if (this.filterOption === 'categories') {
@@ -63,17 +63,19 @@ export class SearchPageComponent implements OnInit {
     }
   }
 
+  // Method to handle the filter change
   onFilterChange(newFilter: string): void {
     this.filterOption = newFilter;
     this.performSearch(this.searchText);
   }
 
+  // Method to go to category
   goToCategory(categoryId: string): void {
     this.router.navigate(['/category-projects', categoryId]);
   }
 
+  // Method to go to project
   goToProject(projectId: number): void {
     this.router.navigate(['/project-detail', projectId]);
   }
-
 }

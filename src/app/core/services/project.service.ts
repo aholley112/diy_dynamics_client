@@ -10,7 +10,6 @@ import { Comment } from '../../shared/models/comment.model';
 })
 export class ProjectService {
 
-
   constructor(private http: HttpClient) {}
 
   // Method to get all projects
@@ -84,9 +83,9 @@ export class ProjectService {
     return this.http.delete(`${environment.apiUrl}/likes/${likeId}`);
   }
 
+  // Method update to add or remove from the project planner.
   updatePlannerStatus(projectId: number, isInPlanner: boolean): Observable<any> {
     const url = `${environment.apiUrl}/projects/${projectId}/${isInPlanner ? 'add_to_planner' : 'remove_from_planner'}`;
     return this.http.post(url, {});
   }
-
 }
