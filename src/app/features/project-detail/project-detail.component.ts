@@ -27,6 +27,8 @@ export class ProjectDetailComponent implements OnInit {
   currentlyEditingCommentText: string = '';
   likeIds: { [projectId: number]: number } = {};
   showCommentBox: boolean = false;
+  isAdmin: boolean = false;
+
 
   @ViewChild('commentInput') commentInputRef!: ElementRef;
 
@@ -40,6 +42,7 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUserId = this.authenticationService.getCurrentUserId();
+    this.isAdmin = this.authenticationService.isAdmin();
     this.route.params.subscribe(params => {
       const projectId = +params['id'];
       if (!isNaN(projectId)) {
@@ -48,6 +51,16 @@ export class ProjectDetailComponent implements OnInit {
       console.error('Invalid project ID');
     }
     });
+  }
+
+  deleteProject(projectId: number): void {
+    if (confirm('Are you sure you want to delete this project?')) {
+      this.projectService.deleteProject(projectId).subscribe({
+        next: () => {
+        },
+        error: (error) => console.error('Error deleting project', error)
+      });
+    }
   }
 
   // Method to fetch the project details
