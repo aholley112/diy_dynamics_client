@@ -55,3 +55,19 @@
   font-size: 2.5rem;
   color: #003C43;
 }
+
+@media (max-width: 768px) {
+  .category-list {
+    justify-content: space-around;
+  }
+
+  .category-card {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+  }
+
+  .categories-title {
+    font-size: 2rem;
+  }
+}
