@@ -88,4 +88,9 @@ export class ProjectService {
     const url = `${environment.apiUrl}/projects/${projectId}/${isInPlanner ? 'add_to_planner' : 'remove_from_planner'}`;
     return this.http.post(url, {});
   }
+
+  deleteProject(projectId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/admin/projects/${projectId}`);
+  }
+
 }
