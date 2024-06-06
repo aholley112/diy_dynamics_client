@@ -105,3 +105,33 @@ h1 {
     background-position: 200%;
   }
 }
+
+@media (max-width: 768px) {
+  .main-container {
+      padding-top: 10px;
+  }
+
+  h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 15px;
+  }
+
+  .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+  }
+
+  .project-card {
+      padding-bottom: 8px;
+  }
+
+  .project-thumbnail {
+      height: 120px;
+  }
+
+  .project-card h3 {
+      padding: 8px;
+      font-size: 1em;
+  }
+}
