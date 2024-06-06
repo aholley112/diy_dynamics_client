@@ -134,4 +134,12 @@ h1 {
       padding: 8px;
       font-size: 1em;
   }
+  .project-card p {
+    padding: 4px 8px;
+    font-size: 0.9em;
+}
+
+.project-image-loader, .custom-loader {
+    height: 120px;
+}
 }
