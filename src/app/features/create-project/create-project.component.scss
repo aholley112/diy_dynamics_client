@@ -97,14 +97,28 @@ padding: 20px;
         padding: 10px;
     }
     .form-title {
-      font-size: 20px; 
+      font-size: 20px;
   }
 
+  // Need to play around with more here.
   input[type="text"],
   textarea,
   select {
       padding: 6px;
   }
+  textarea {
+    min-height: 100px;
+}
+
+.btn-primary {
+    padding: 8px 16px;
+}
+
+.close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 18px;
+}
   }
 
 
