@@ -73,6 +73,42 @@
       border-radius: 50%;
     }
 
+    @media (max-width: 1024px) {
+      .edit-project-container {
+          max-width: 90%;
+          padding: 15px;
+      }
 
+      .card {
+          padding: 15px;
+      }
+
+      .form-title {
+          font-size: 36px; 
+          margin-bottom: 15px;
+      }
+
+      .form-group label {
+          margin-bottom: 3px;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+          padding: 6px;
+      }
+
+      textarea {
+          min-height: 120px;
+      }
+
+      .btn-primary {
+          padding: 8px 16px;
+      }
+
+      .close-button {
+          font-size: 18px;
+      }
+  }
 
 
