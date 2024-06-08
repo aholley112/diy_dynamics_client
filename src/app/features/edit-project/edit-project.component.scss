@@ -126,7 +126,22 @@
     }
 
     .button-container {
-        text-align: center; 
+        text-align: center;
     }
 }
 
+@media (max-width: 480px) {
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  .form-title,
+  .form-group label {
+      text-align: left;
+  }
+
+  .btn-primary {
+      width: 100%;
+      padding: 12px; 
+  }
+}
