@@ -95,3 +95,14 @@ h3 {
   overflow: hidden;
 
 }
+
+@media (min-width: 768px) {
+  .project-columns {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .project-card {
+    margin: 10px;
+  }
+}
